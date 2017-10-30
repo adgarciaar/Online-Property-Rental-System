@@ -9,14 +9,14 @@ package GUI;
  *
  * @author adrian
  */
-public class Principal {
+public class Start {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
-        VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
+        LoginWindow ventanaPrincipal = new LoginWindow();
         
         ventanaPrincipal.show();
         
