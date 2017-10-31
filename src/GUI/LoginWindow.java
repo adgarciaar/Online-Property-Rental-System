@@ -6,8 +6,10 @@
 package GUI;
 
 import World.Agent;
+import World.Customer;
 import World.ISystemFacade;
 import World.SystemFacade;
+import World.User;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,6 +34,10 @@ public class LoginWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jColorChooser1 = new javax.swing.JColorChooser();
+        jColorChooser2 = new javax.swing.JColorChooser();
+        jColorChooser3 = new javax.swing.JColorChooser();
+        jColorChooser4 = new javax.swing.JColorChooser();
         jLabel1 = new javax.swing.JLabel();
         SigninButton = new javax.swing.JButton();
         UsernameTextField = new javax.swing.JTextField();
@@ -129,8 +135,9 @@ public class LoginWindow extends javax.swing.JFrame {
 
     private void SigninButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SigninButtonActionPerformed
         String username = UsernameTextField.getText();
-        String password = PasswordTextField.getText();
-        this.login(username, password);
+        String password = PasswordTextField.getText();        
+        String userType = (String)UsertypeComboBox.getSelectedItem();
+        this.login(username, password, userType);
     }//GEN-LAST:event_SigninButtonActionPerformed
 
     private void UsernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameTextFieldActionPerformed
@@ -177,20 +184,43 @@ public class LoginWindow extends javax.swing.JFrame {
         });
     }
     
-    public void login(String username, String password){
-        Agent agent = new Agent();
+    public void login(String username, String password, String userType){
         
-        agent.setUsername(username);
-        agent.setPassword(password);
+        boolean access = false;        
+        ISystemFacade facade = new SystemFacade();  
         
-        ISystemFacade facade = new SystemFacade();        
-        boolean access = facade.searchAgent(agent);
+        User user = null;
+        
+        if ("Agent".equals(userType)){
+            user = new Agent();     
+            //access = facade.searchAgent(user);   
+        }else if ("Customer".equals(userType)){
+            //user = new Customer();
+        }else{
+            
+        }      
+        
+        
+        
+        if ("Agent".equals(userType)){
+                    
+        }else if ("Customer".equals(userType)){
+            //user = new Customer();
+        }else{
+            
+        }  
         
         if (access == true){
-            JOptionPane.showMessageDialog(null, "Agent was found");
+            JOptionPane.showMessageDialog(null, "User was found");
         }else{
-            JOptionPane.showMessageDialog(null, "Agent was not found");
+            JOptionPane.showMessageDialog(null, "User was not found");
         }
+    }
+    
+    public User stablishCredentials(User user, String username, String password){
+        user.setUsername(username);
+        user.setPassword(password);
+        return user;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -199,6 +229,10 @@ public class LoginWindow extends javax.swing.JFrame {
     private javax.swing.JButton SigninButton;
     private javax.swing.JTextField UsernameTextField;
     private javax.swing.JComboBox<String> UsertypeComboBox;
+    private javax.swing.JColorChooser jColorChooser1;
+    private javax.swing.JColorChooser jColorChooser2;
+    private javax.swing.JColorChooser jColorChooser3;
+    private javax.swing.JColorChooser jColorChooser4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
