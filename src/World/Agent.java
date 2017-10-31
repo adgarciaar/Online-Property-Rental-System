@@ -18,6 +18,19 @@ public class Agent {
     private String username;
     private String password;
 
+    public Agent() {
+        
+    }
+
+    public Agent(int id, String name, String lastname, String email, String username, String password) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }   
+
     public int getId() {
         return id;
     }

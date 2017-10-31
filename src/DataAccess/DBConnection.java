@@ -26,9 +26,9 @@ public class DBConnection {
         String thinConn = "jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDB";
         DriverManager.registerDriver (new OracleDriver());
         
-        Connection conn = DriverManager.getConnection(thinConn,username,password);
-        conn.setAutoCommit(false);
-        return conn;
+        Connection connection = DriverManager.getConnection(thinConn,username,password);
+        connection.setAutoCommit(false);
+        return connection;
     }
     
 }
