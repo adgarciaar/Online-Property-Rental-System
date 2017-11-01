@@ -8,6 +8,7 @@ package GUI;
 import World.Agent;
 import World.Customer;
 import World.ISystemFacade;
+import World.Owner;
 import World.SystemFacade;
 import World.Person;
 import javax.swing.JOptionPane;
@@ -188,35 +189,14 @@ public class LoginWindow extends javax.swing.JFrame {
         
         boolean access = false;        
         ISystemFacade facade = new SystemFacade();  
-        
-        Person user = null;
-        
-        if ("Agent".equals(userType)){
-            user = new Agent();                 
-        }else if ("Customer".equals(userType)){
-            /*user = new Customer();  
-            user = stablishCredentials(user, username, password);
-            access = facade.searchCustomer((Agent) user);   */
-        }else{
-            /*user = new Agent();  
-            user = stablishCredentials(user, username, password);
-            access = facade.searchAgent((Agent) user);   */
-        }  
-        
-        user = stablishCredentials(user, username, password);
-        access = facade.searchPerson(user, userType);
+       
+        access = facade.searchPerson(username, password, userType);
         
         if (access == true){
             JOptionPane.showMessageDialog(null, "User was found");
         }else{
             JOptionPane.showMessageDialog(null, "User was not found");
         }
-    }
-    
-    public Person stablishCredentials(Person user, String username, String password){
-        user.setUsername(username);
-        user.setPassword(password);
-        return user;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

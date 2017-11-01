@@ -11,6 +11,6 @@ package World;
  */
 public interface ISystemFacade {
     
-    public boolean searchPerson(Person person, String personType);
+    public boolean searchPerson(String username, String password, String personType);
     
 }

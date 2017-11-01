@@ -5,26 +5,23 @@
  */
 package DataAccess;
 
-import World.Agent;
+import World.Customer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author adrian
  */
-public class AgentDAO {
+public class CustomerDAO {
 
-    public AgentDAO() {
-    }   
+    public CustomerDAO() {
+    }
     
-    
-    public static boolean searchAgent(String username, String password){
+    public static boolean searchCustomer(String username, String password){
         
         Connection connection = null;       
         PreparedStatement ps = null;
@@ -33,7 +30,7 @@ public class AgentDAO {
         try{
             
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("select count(*) from OPR_Agent "
+            ps = connection.prepareStatement("select count(*) from Customer "
                     + "where username = ? and password = ?");
             ps.setString(1, username);
             ps.setString(2, password);

@@ -6,6 +6,8 @@
 package World;
 
 import DataAccess.AgentDAO;
+import DataAccess.CustomerDAO;
+import DataAccess.OwnerDAO;
 
 /**
  *
@@ -17,9 +19,18 @@ public class SystemFacade implements ISystemFacade{
     }   
     
     @Override
-    public boolean searchPerson(Person person, String personType) {
+    public boolean searchPerson(String username, String password, String personType) {
         
-        return AgentDAO.searchAgent((Agent) person);
+        boolean b = false;        
+        switch (personType) {
+            case "Agent":
+                return AgentDAO.searchAgent(username, password);
+            case "Customer":
+                return CustomerDAO.searchCustomer(username, password);
+            case "Owner":
+                return OwnerDAO.searchOwner(username, password);
+        }
+        return b;        
     }
     
 }
