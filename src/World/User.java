@@ -5,65 +5,60 @@
  */
 package World;
 
+import java.util.Date;
+
 /**
  *
  * @author adrian
  */
-public abstract class User {
+public abstract class User extends Person {
     
-    public int id;
-    public String name;
-    public String lastname;
-    public String email;
-    public String username;
-    public String password;
+    protected Date account_creation_datetime;
+    protected String deletionStatus;
+    protected int idAgent;
+    protected long maximumRent;
 
-    public int getId() {
-        return id;
+    public User() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public User(Date account_creation_datetime, String deletionStatus, int idAgent, long maximumRent, int id, String name, String lastname, String email, String username, String password) {
+        super(id, name, lastname, email, username, password);
+        this.account_creation_datetime = account_creation_datetime;
+        this.deletionStatus = deletionStatus;
+        this.idAgent = idAgent;
+        this.maximumRent = maximumRent;
     }
 
-    public String getName() {
-        return name;
+    public Date getAccount_creation_datetime() {
+        return account_creation_datetime;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAccount_creation_datetime(Date account_creation_datetime) {
+        this.account_creation_datetime = account_creation_datetime;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getDeletionStatus() {
+        return deletionStatus;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setDeletionStatus(String deletionStatus) {
+        this.deletionStatus = deletionStatus;
     }
 
-    public String getEmail() {
-        return email;
+    public int getIdAgent() {
+        return idAgent;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setIdAgent(int idAgent) {
+        this.idAgent = idAgent;
     }
 
-    public String getUsername() {
-        return username;
+    public long getMaximumRent() {
+        return maximumRent;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setMaximumRent(long maximumRent) {
+        this.maximumRent = maximumRent;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }   
     
 }

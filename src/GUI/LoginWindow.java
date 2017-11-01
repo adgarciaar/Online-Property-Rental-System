@@ -9,7 +9,7 @@ import World.Agent;
 import World.Customer;
 import World.ISystemFacade;
 import World.SystemFacade;
-import World.User;
+import World.Person;
 import javax.swing.JOptionPane;
 
 /**
@@ -189,26 +189,22 @@ public class LoginWindow extends javax.swing.JFrame {
         boolean access = false;        
         ISystemFacade facade = new SystemFacade();  
         
-        User user = null;
+        Person user = null;
         
         if ("Agent".equals(userType)){
-            user = new Agent();     
-            //access = facade.searchAgent(user);   
+            user = new Agent();                 
         }else if ("Customer".equals(userType)){
-            //user = new Customer();
+            /*user = new Customer();  
+            user = stablishCredentials(user, username, password);
+            access = facade.searchCustomer((Agent) user);   */
         }else{
-            
-        }      
-        
-        
-        
-        if ("Agent".equals(userType)){
-                    
-        }else if ("Customer".equals(userType)){
-            //user = new Customer();
-        }else{
-            
+            /*user = new Agent();  
+            user = stablishCredentials(user, username, password);
+            access = facade.searchAgent((Agent) user);   */
         }  
+        
+        user = stablishCredentials(user, username, password);
+        access = facade.searchPerson(user, userType);
         
         if (access == true){
             JOptionPane.showMessageDialog(null, "User was found");
@@ -217,7 +213,7 @@ public class LoginWindow extends javax.swing.JFrame {
         }
     }
     
-    public User stablishCredentials(User user, String username, String password){
+    public Person stablishCredentials(Person user, String username, String password){
         user.setUsername(username);
         user.setPassword(password);
         return user;

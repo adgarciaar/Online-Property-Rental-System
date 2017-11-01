@@ -11,6 +11,6 @@ package World;
  */
 public interface ISystemFacade {
     
-    public boolean searchAgent(Agent agent);
+    public boolean searchPerson(Person person, String personType);
     
 }

@@ -17,8 +17,9 @@ public class SystemFacade implements ISystemFacade{
     }   
     
     @Override
-    public boolean searchAgent(Agent agent) {
-        return AgentDAO.searchAgent(agent);
+    public boolean searchPerson(Person person, String personType) {
+        
+        return AgentDAO.searchAgent((Agent) person);
     }
     
 }

@@ -9,6 +9,6 @@ package World;
  *
  * @author adrian
  */
-public class Owner {
+public class Owner extends User{
     
 }
