@@ -23,7 +23,6 @@ public class AgentDAO {
     public AgentDAO() {
     }   
     
-    
     public static boolean searchAgent(String username, String password){
         
         Connection connection = null;       
@@ -67,6 +66,50 @@ public class AgentDAO {
             }            
         }       
        
+    }
+    
+    public static Agent LoadAgent(String username){
+        
+        Agent agent = null;
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try{
+            
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement("select idagent, name, last_name, "
+                    + "email_address, password from OPR_Agent where username = ?");
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            
+            while (rs.next()){           
+                
+                agent = new Agent(rs.getInt("idagent"), rs.getString("name"), 
+                        rs.getString("last_name"), rs.getString("email_address"), 
+                        username, rs.getString("password"));
+                        
+            }
+            
+            rs.close();
+            
+            return agent;
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error" + ex);
+            return null;    
+            
+        }finally{
+            try {
+                ps.close();
+                connection.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error" + ex);
+                return null;            
+            }            
+        }
+          
     }
     
 }

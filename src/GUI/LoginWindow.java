@@ -193,7 +193,21 @@ public class LoginWindow extends javax.swing.JFrame {
         access = facade.searchPerson(username, password, userType);
         
         if (access == true){
+            
             JOptionPane.showMessageDialog(null, "User was found");
+            
+            switch (userType) {
+            case "Agent":
+                this.setVisible(false);
+                Agent agent = new Agent();
+                agent = (Agent) facade.loadPerson(username, userType);
+                new AgentWindow(agent).setVisible(true);
+            case "Customer":
+                
+            case "Owner":
+                
+        }
+            
         }else{
             JOptionPane.showMessageDialog(null, "User was not found");
         }
