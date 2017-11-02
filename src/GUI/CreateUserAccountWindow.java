@@ -5,17 +5,25 @@
  */
 package GUI;
 
+import World.Agent;
+import javax.swing.JFrame;
+
 /**
  *
  * @author adrian
  */
 public class CreateUserAccountWindow extends javax.swing.JFrame {
+    
+    private final Agent agent;
+    private final JFrame AgentWindow;    
 
     /**
      * Creates new form CreateUserAccountWindow
      */
-    public CreateUserAccountWindow() {
+    public CreateUserAccountWindow(Agent agent, JFrame AgentWindow) {
         initComponents();
+        this.agent = agent;
+        this.AgentWindow = AgentWindow;
     }
 
     /**
@@ -162,7 +170,8 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_IdTextFieldActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        this.AgentWindow.setVisible(true);
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void CreateUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserButtonActionPerformed
@@ -199,7 +208,7 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateUserAccountWindow().setVisible(true);
+                //new CreateUserAccountWindow().setVisible(true);
             }
         });
     }

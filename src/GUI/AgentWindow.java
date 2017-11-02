@@ -89,7 +89,8 @@ public class AgentWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CreateAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateAccountButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new CreateUserAccountWindow(this.agent, this).setVisible(true);
     }//GEN-LAST:event_CreateAccountButtonActionPerformed
 
     private void SignOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignOutButtonActionPerformed
