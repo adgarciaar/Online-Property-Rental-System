@@ -16,8 +16,8 @@ public class Owner extends User{
     public Owner() {
     }
 
-    public Owner(Date account_creation_datetime, String deletionStatus, int idAgent, long maximumRent, int id, String name, String lastname, String email, String username, String password) {
-        super(account_creation_datetime, deletionStatus, idAgent, maximumRent, id, name, lastname, email, username, password);
+    public Owner(Date account_creation_datetime, String deletionStatus, int idAgent, int id, String name, String lastname, String email, String username, String password) {
+        super(account_creation_datetime, deletionStatus, idAgent, id, name, lastname, email, username, password);
     }
     
 }
