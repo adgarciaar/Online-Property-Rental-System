@@ -199,9 +199,8 @@ public class LoginWindow extends javax.swing.JFrame {
             switch (userType) {
             case "Agent":
                 this.setVisible(false);
-                Agent agent = new Agent();
-                agent = (Agent) facade.loadPerson(username, userType);
-                new AgentWindow(agent).setVisible(true);
+                Agent agent = agent = (Agent) facade.loadPerson(username, userType);
+                new AgentWindow(agent, this).setVisible(true);
             case "Customer":
                 
             case "Owner":

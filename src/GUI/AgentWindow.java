@@ -6,6 +6,7 @@
 package GUI;
 
 import World.Agent;
+import javax.swing.JFrame;
 
 /**
  *
@@ -14,14 +15,16 @@ import World.Agent;
 public class AgentWindow extends javax.swing.JFrame {
     
     private final Agent agent;
+    private final JFrame LoginWindow;
 
     /**
      * Creates new form AgentWindow
      * @param agent
      */
-    public AgentWindow(Agent agent) {
+    public AgentWindow(Agent agent, JFrame LoginWindow) {
         initComponents();
         this.agent = agent;
+        this.LoginWindow = LoginWindow;
         WelcomeLabel.setText("Welcome, agent "+this.agent.getName());
     }
 
@@ -90,7 +93,8 @@ public class AgentWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_CreateAccountButtonActionPerformed
 
     private void SignOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignOutButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        this.LoginWindow.setVisible(true);
     }//GEN-LAST:event_SignOutButtonActionPerformed
 
     /**
