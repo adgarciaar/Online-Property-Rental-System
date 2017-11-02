@@ -17,6 +17,11 @@ import javax.swing.JOptionPane;
  * @author adrian
  */
 public class CustomerDAO {
+    
+    public static final String SEARCH_CUSTOMER = "select count(*) from Customer "
+                                               + "where username = ? and password = ?";
+    
+    //public static final String LOAD_CUSTOMER = 
 
     public CustomerDAO() {
     }
@@ -30,8 +35,7 @@ public class CustomerDAO {
         try{
             
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("select count(*) from Customer "
-                    + "where username = ? and password = ?");
+            ps = connection.prepareStatement(SEARCH_CUSTOMER);
             ps.setString(1, username);
             ps.setString(2, password);
             rs = ps.executeQuery();
