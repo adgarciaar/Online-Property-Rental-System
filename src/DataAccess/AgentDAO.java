@@ -17,6 +17,11 @@ import javax.swing.JOptionPane;
  * @author adrian
  */
 public class AgentDAO {
+    
+    public static final String SEARCH_AGENT = "select count(*) from OPR_Agent "
+                                               + "where username = ? and password = ?";
+    public static final String LOAD_AGENT = "select idagent, name, last_name, "
+                                               + "email_address, password from OPR_Agent where username = ?";
 
     public AgentDAO() {
     }   
@@ -30,8 +35,7 @@ public class AgentDAO {
         try{
             
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("select count(*) from OPR_Agent "
-                    + "where username = ? and password = ?");
+            ps = connection.prepareStatement(SEARCH_AGENT);
             ps.setString(1, username);
             ps.setString(2, password);
             rs = ps.executeQuery();
@@ -77,8 +81,7 @@ public class AgentDAO {
         try{
             
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement("select idagent, name, last_name, "
-                    + "email_address, password from OPR_Agent where username = ?");
+            ps = connection.prepareStatement(LOAD_AGENT);
             ps.setString(1, username);
             rs = ps.executeQuery();
             
