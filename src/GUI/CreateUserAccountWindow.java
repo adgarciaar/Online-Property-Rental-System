@@ -43,13 +43,13 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         IdTextField = new javax.swing.JTextField();
-        UsernameTextField = new javax.swing.JTextField();
-        NameTextField = new javax.swing.JTextField();
-        LastNameTextField = new javax.swing.JTextField();
-        EmailTextField = new javax.swing.JTextField();
-        MaximumRentTextField = new javax.swing.JTextField();
         CancelButton = new javax.swing.JButton();
         CreateUserButton = new javax.swing.JButton();
+        NameTextField = new javax.swing.JTextField();
+        LastnameTextField = new javax.swing.JTextField();
+        EmailTextField = new javax.swing.JTextField();
+        MaximumRentTextField = new javax.swing.JTextField();
+        UsernameTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +87,36 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
             }
         });
 
+        NameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NameTextFieldActionPerformed(evt);
+            }
+        });
+
+        LastnameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LastnameTextFieldActionPerformed(evt);
+            }
+        });
+
+        EmailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmailTextFieldActionPerformed(evt);
+            }
+        });
+
+        MaximumRentTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MaximumRentTextFieldActionPerformed(evt);
+            }
+        });
+
+        UsernameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsernameTextFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,30 +130,22 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
                             .addComponent(CreateUserButton)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(CancelButton))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addGap(41, 41, 41)
-                            .addComponent(MaximumRentTextField))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel3)
-                                .addComponent(jLabel2))
-                            .addGap(67, 67, 67)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(IdTextField)
-                                .addComponent(UsernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(97, 97, 97)
-                            .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(66, 66, 66)
-                            .addComponent(LastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel6)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7))
                             .addGap(40, 40, 40)
-                            .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(MaximumRentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(LastnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -146,7 +168,7 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(LastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LastnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -177,6 +199,26 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
     private void CreateUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CreateUserButtonActionPerformed
+
+    private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NameTextFieldActionPerformed
+
+    private void LastnameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LastnameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LastnameTextFieldActionPerformed
+
+    private void EmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmailTextFieldActionPerformed
+
+    private void MaximumRentTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaximumRentTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MaximumRentTextFieldActionPerformed
+
+    private void UsernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UsernameTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,7 +260,7 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
     private javax.swing.JButton CreateUserButton;
     private javax.swing.JTextField EmailTextField;
     private javax.swing.JTextField IdTextField;
-    private javax.swing.JTextField LastNameTextField;
+    private javax.swing.JTextField LastnameTextField;
     private javax.swing.JTextField MaximumRentTextField;
     private javax.swing.JTextField NameTextField;
     private javax.swing.JTextField UsernameTextField;
