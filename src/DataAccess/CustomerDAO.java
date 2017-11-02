@@ -71,7 +71,8 @@ public class CustomerDAO {
             }            
         }       
        
-    }
+    }    
+    
     public static Customer LoadCustomer(String username){
         
         Customer customer = null;
@@ -89,9 +90,9 @@ public class CustomerDAO {
             
             while (rs.next()){           
                 
-                customer = new Customer(rs.getDate("account_creation_datetime"),
+                customer = new Customer(rs.getInt("maximum_rent"), rs.getDate("account_creation_datetime"),
                                         rs.getString("deletion_status"),rs.getInt("agent_idagent"),
-                                        rs.getInt("maximum_rent"),rs.getInt("iduser"),rs.getString("name"),
+                                        rs.getInt("iduser"),rs.getString("name"),
                                         rs.getString("last_name"),rs.getString("email_address"),
                                         username,rs.getString("password"));
                                              
