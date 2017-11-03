@@ -10,6 +10,7 @@ import World.Customer;
 import World.ISystemFacade;
 import World.Owner;
 import World.SystemFacade;
+import World.User;
 import javax.swing.JFrame;
 
 /**
@@ -241,22 +242,25 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void CreateUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserButtonActionPerformed
-        ISystemFacade facade = new SystemFacade();
+       
+       User user = null; 
+       String userType;
+       ISystemFacade facade = new SystemFacade();
         
        if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
-            //maximumRent, String deletionStatus, int idAgent, int id, 
-            //String name, String lastname, String email, String username, String password
-            Customer customer;
-            customer = new Customer(Long.parseLong(MaximumRentTextField1.getText()), "Active", 
+            userType = "Customer";
+            user = new Customer(Long.parseLong(MaximumRentTextField1.getText()), "Active", 
                     this.agent.getId(), Integer.parseInt(IdTextField.getText()), 
                     NameTextField.getText(), LastnameTextField.getText(), 
                     EmailTextField.getText(), UsernameTextField.getText(), 
                     PasswordTextField.getText());
         }else{
+            userType = "Owner";
             Owner owner;
             owner = new Owner();
         }
-        
+       
+        facade.createUser(user, userType);        
         
     }//GEN-LAST:event_CreateUserButtonActionPerformed
 
@@ -282,11 +286,11 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
 
     private void UserTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserTypeComboBoxActionPerformed
         if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
-            PasswordTextField.setEnabled(true);
+            MaximumRentTextField1.setEnabled(true);
         }
         if ((String)UserTypeComboBox.getSelectedItem() == "Owner"){
-            PasswordTextField.setEnabled(false);
-            PasswordTextField.setText("");
+            MaximumRentTextField1.setEnabled(false);
+            MaximumRentTextField1.setText("");
         }
     }//GEN-LAST:event_UserTypeComboBoxActionPerformed
 

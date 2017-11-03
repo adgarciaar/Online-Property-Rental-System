@@ -45,8 +45,13 @@ public class SystemFacade implements ISystemFacade{
     }
 
     @Override
-    public void createUser(User user) {
-        
+    public void createUser(User user, String userType) {
+        if (userType.compareTo("Customer") == 0){
+            CustomerDAO.createCustomer((Customer) user);
+        }else{
+            
+        }
+            
     }
     
 }
