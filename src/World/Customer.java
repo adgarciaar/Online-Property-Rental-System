@@ -23,5 +23,13 @@ public class Customer extends User {
         super(deletionStatus, idAgent, id, name, lastname, email, username, password);
         this.maximumRent = maximumRent;
     }
-       
+
+    public long getMaximumRent() {
+        return maximumRent;
+    }
+
+    public void setMaximumRent(long maximumRent) {
+        this.maximumRent = maximumRent;
+    }
+           
 }

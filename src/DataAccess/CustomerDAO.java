@@ -26,7 +26,9 @@ public class CustomerDAO {
                                                + "deletion_status, agent_idagent, maximum_rent"
                                                + "from OPR_Agent where username = ?";
     
-    
+    public static final String CREATE_CUSTOMER = "insert into customer (iduser, "
+            + "username, password, name, lastname, email_address, account_creation_datetime, "
+            + "deletion_status, agent_idagent, maximum_rent) values (?, ?, ?, ?, ?, ?, SYSDATE, ?, ?, ?)";
                   
     public CustomerDAO() {
     }
@@ -60,7 +62,7 @@ public class CustomerDAO {
             }
             
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error" + ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
             return false;    
             
         }finally{
@@ -68,7 +70,7 @@ public class CustomerDAO {
                 ps.close();
                 connection.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error" + ex);
+                JOptionPane.showMessageDialog(null, "Error: " + ex);
                 return false;            
             }            
         }       
@@ -105,7 +107,7 @@ public class CustomerDAO {
             return customer;
             
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error" + ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
             return null;    
             
         }finally{
@@ -113,14 +115,48 @@ public class CustomerDAO {
                 ps.close();
                 connection.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error" + ex);
+                JOptionPane.showMessageDialog(null, "Error: " + ex);
                 return null;            
             }            
         }          
     }
     
-    public static void createCustomer(){
+    public static void createCustomer(Customer customer){
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;   
         
+        try{
+            connection = DBConnection.getConnection();
+            
+            ps = connection.prepareStatement(CREATE_CUSTOMER);
+                      
+            ps.setInt(1, customer.getId());
+            ps.setString(2, customer.getUsername());
+            ps.setString(3, customer.getPassword());
+            ps.setString(4, customer.getName());
+            ps.setString(5, customer.getLastname());
+            ps.setString(6, customer.getEmail());
+            ps.setString(7, customer.getDeletionStatus());
+            ps.setInt(8, customer.getIdAgent());
+            ps.setLong(9, customer.getMaximumRent());            
+            
+            ps.executeUpdate();
+            
+            connection.commit();
+            
+            JOptionPane.showMessageDialog(null, "Customer was added successfully");
+                    
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex);     
+        }finally{
+            try{
+                ps.close();
+                connection.close();
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error: " + ex);              
+            }
+        }         
     }
     
 }
