@@ -6,7 +6,9 @@
 package GUI;
 
 import World.Agent;
+import World.Customer;
 import World.ISystemFacade;
+import World.Owner;
 import World.SystemFacade;
 import javax.swing.JFrame;
 
@@ -50,10 +52,12 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         NameTextField = new javax.swing.JTextField();
         LastnameTextField = new javax.swing.JTextField();
         EmailTextField = new javax.swing.JTextField();
-        MaximumRentTextField = new javax.swing.JTextField();
+        PasswordTextField = new javax.swing.JTextField();
         UsernameTextField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         UserTypeComboBox = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        MaximumRentTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,9 +113,9 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
             }
         });
 
-        MaximumRentTextField.addActionListener(new java.awt.event.ActionListener() {
+        PasswordTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MaximumRentTextFieldActionPerformed(evt);
+                PasswordTextFieldActionPerformed(evt);
             }
         });
 
@@ -130,6 +134,14 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("Password");
+
+        MaximumRentTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MaximumRentTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,16 +149,11 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
                     .addComponent(jLabel1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                            .addComponent(MaximumRentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
                             .addComponent(CreateUserButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                             .addComponent(CancelButton))
                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -161,16 +168,28 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
                                 .addComponent(LastnameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                 .addComponent(IdTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                 .addComponent(NameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addComponent(UsernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addComponent(UserTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(UsernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addGap(40, 40, 40)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(MaximumRentTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(UserTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(40, 40, 40)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -190,19 +209,23 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(UserTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(MaximumRentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                    .addComponent(MaximumRentTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CreateUserButton)
-                    .addComponent(CancelButton))
-                .addGap(39, 39, 39))
+                    .addComponent(jLabel9)
+                    .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CancelButton)
+                    .addComponent(CreateUserButton))
+                .addContainerGap())
         );
 
         pack();
@@ -218,7 +241,22 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void CreateUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserButtonActionPerformed
-        ISystemFacade facade = new SystemFacade();  
+        ISystemFacade facade = new SystemFacade();
+        
+       if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
+            //maximumRent, String deletionStatus, int idAgent, int id, 
+            //String name, String lastname, String email, String username, String password
+            Customer customer;
+            customer = new Customer(Long.parseLong(MaximumRentTextField1.getText()), "Active", 
+                    this.agent.getId(), Integer.parseInt(IdTextField.getText()), 
+                    NameTextField.getText(), LastnameTextField.getText(), 
+                    EmailTextField.getText(), UsernameTextField.getText(), 
+                    PasswordTextField.getText());
+        }else{
+            Owner owner;
+            owner = new Owner();
+        }
+        
         
     }//GEN-LAST:event_CreateUserButtonActionPerformed
 
@@ -234,9 +272,9 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EmailTextFieldActionPerformed
 
-    private void MaximumRentTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaximumRentTextFieldActionPerformed
+    private void PasswordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MaximumRentTextFieldActionPerformed
+    }//GEN-LAST:event_PasswordTextFieldActionPerformed
 
     private void UsernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameTextFieldActionPerformed
         // TODO add your handling code here:
@@ -244,13 +282,17 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
 
     private void UserTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserTypeComboBoxActionPerformed
         if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
-            MaximumRentTextField.setEnabled(true);
+            PasswordTextField.setEnabled(true);
         }
         if ((String)UserTypeComboBox.getSelectedItem() == "Owner"){
-            MaximumRentTextField.setEnabled(false);
-            MaximumRentTextField.setText("");
+            PasswordTextField.setEnabled(false);
+            PasswordTextField.setText("");
         }
     }//GEN-LAST:event_UserTypeComboBoxActionPerformed
+
+    private void MaximumRentTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaximumRentTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MaximumRentTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,8 +335,9 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
     private javax.swing.JTextField EmailTextField;
     private javax.swing.JTextField IdTextField;
     private javax.swing.JTextField LastnameTextField;
-    private javax.swing.JTextField MaximumRentTextField;
+    private javax.swing.JTextField MaximumRentTextField1;
     private javax.swing.JTextField NameTextField;
+    private javax.swing.JTextField PasswordTextField;
     private javax.swing.JComboBox<String> UserTypeComboBox;
     private javax.swing.JTextField UsernameTextField;
     private javax.swing.JLabel jLabel1;
@@ -305,5 +348,6 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }

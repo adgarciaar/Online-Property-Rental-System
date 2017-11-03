@@ -15,4 +15,6 @@ public interface ISystemFacade {
     
     public Person loadPerson(String username, String personType);
     
+    public void createUser(User user);
+    
 }

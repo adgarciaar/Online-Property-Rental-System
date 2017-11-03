@@ -25,6 +25,8 @@ public class CustomerDAO {
                                                + "email_address, password, account_creation_datetime"
                                                + "deletion_status, agent_idagent, maximum_rent"
                                                + "from OPR_Agent where username = ?";
+    
+    
                   
     public CustomerDAO() {
     }
@@ -90,7 +92,7 @@ public class CustomerDAO {
             
             while (rs.next()){           
                 
-                customer = new Customer(rs.getInt("maximum_rent"), rs.getDate("account_creation_datetime"),
+                customer = new Customer(rs.getLong("maximum_rent"),
                                         rs.getString("deletion_status"),rs.getInt("agent_idagent"),
                                         rs.getInt("iduser"),rs.getString("name"),
                                         rs.getString("last_name"),rs.getString("email_address"),
@@ -114,8 +116,11 @@ public class CustomerDAO {
                 JOptionPane.showMessageDialog(null, "Error" + ex);
                 return null;            
             }            
-        }
-          
+        }          
+    }
+    
+    public static void createCustomer(){
+        
     }
     
 }
