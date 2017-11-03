@@ -186,9 +186,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="MaximumRentTextField">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MaximumRentTextFieldActionPerformed"/>
       </Events>
@@ -207,8 +204,8 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
-            <StringItem index="0" value="Owner"/>
-            <StringItem index="1" value="Customer"/>
+            <StringItem index="0" value="Customer"/>
+            <StringItem index="1" value="Owner"/>
           </StringArray>
         </Property>
       </Properties>

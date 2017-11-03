@@ -109,7 +109,6 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
             }
         });
 
-        MaximumRentTextField.setEnabled(false);
         MaximumRentTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MaximumRentTextFieldActionPerformed(evt);
@@ -124,7 +123,7 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
 
         jLabel8.setText("User type");
 
-        UserTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Owner", "Customer" }));
+        UserTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Owner" }));
         UserTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UserTypeComboBoxActionPerformed(evt);
