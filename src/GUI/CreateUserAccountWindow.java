@@ -352,10 +352,11 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         
         boolean tested = true;
         
+        tested = testTextFields();
         
         
-        return tested;
-       
+        return tested;       
+
     }
     
     private boolean testTextFields(){
@@ -366,29 +367,29 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
             tested = false;
         }
         
-        if(UsernameTextField.getText().compareTo("") != 0){      
+        if(UsernameTextField.getText().compareTo("") == 0){      
             tested = false;
         }
         
-        if(NameTextField.getText().compareTo("") != 0){      
+        if(NameTextField.getText().compareTo("") == 0){      
             tested = false;
         }
         
-        if(LastnameTextField.getText().compareTo("") != 0){      
+        if(LastnameTextField.getText().compareTo("") == 0){      
             tested = false;
         }
         
-        if(EmailTextField.getText().compareTo("") != 0){      
+        if(EmailTextField.getText().compareTo("") == 0){      
             tested = false;
         }
         
         if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
-            
-        }else{
-        
+            if(MaximumRentTextField1.getText().compareTo("") == 0){      
+                tested = false;
+            }
         }
         
-        if(PasswordTextField.getText().compareTo("") != 0){      
+        if(PasswordTextField.getText().compareTo("") == 0){      
             tested = false;
         }
         
