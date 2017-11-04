@@ -352,6 +352,11 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         
         boolean tested = true;
         
+        ISystemFacade facade = new SystemFacade();
+        tested = facade.validateUsername(UsernameTextField.getText(), 
+                (String)UserTypeComboBox.getSelectedItem());
+        
+        
         tested = testTextFields();
         
         

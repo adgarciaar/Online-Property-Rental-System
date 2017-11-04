@@ -17,4 +17,6 @@ public interface ISystemFacade {
     
     public boolean createUser(User user, String userType);
     
+    public boolean validateUsername(String username, String userType);
+    
 }
