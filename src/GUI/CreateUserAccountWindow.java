@@ -12,6 +12,7 @@ import World.Owner;
 import World.SystemFacade;
 import World.User;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -243,7 +244,7 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
 
     private void CreateUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserButtonActionPerformed
        
-       if(this.testTextFieldRequirements() == true){
+       if(this.testRequirements() == true){
            
             boolean success;
 
@@ -347,9 +348,39 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         });
     }
     
-    private boolean testTextFieldRequirements(){
+    private boolean testRequirements(){
         
-        boolean tested = false;
+        boolean tested = true;
+        
+        
+        
+        return tested;
+       
+    }
+    
+    private boolean testTextFields(){
+        
+        boolean tested = true;
+        
+        if(IdTextField.getText().compareTo("") == 0){
+            tested = false;
+        }
+        
+        if(UsernameTextField.getText().compareTo("") != 0){      
+            tested = false;
+        }
+        
+        if(NameTextField.getText().compareTo("") != 0){      
+            tested = false;
+        }
+        
+        if(LastnameTextField.getText().compareTo("") != 0){      
+            tested = false;
+        }
+        
+        if(EmailTextField.getText().compareTo("") != 0){      
+            tested = false;
+        }
         
         if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
             
@@ -357,8 +388,15 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         
         }
         
+        if(PasswordTextField.getText().compareTo("") != 0){      
+            tested = false;
+        }
+        
+        if (tested == false){
+            JOptionPane.showMessageDialog(null, "Warning: you have to fill all the fields");
+        }
+        
         return tested;
-       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
