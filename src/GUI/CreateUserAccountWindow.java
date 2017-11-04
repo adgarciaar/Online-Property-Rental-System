@@ -243,6 +243,8 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
 
     private void CreateUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserButtonActionPerformed
        
+       boolean success;
+        
        User user = null; 
        String userType;
        ISystemFacade facade = new SystemFacade();
@@ -255,12 +257,20 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
                     EmailTextField.getText(), UsernameTextField.getText(), 
                     PasswordTextField.getText());
         }else{
-            userType = "Owner";
-            Owner owner;
-            owner = new Owner();
+            userType = "Owner";                    
+            user = new Owner("Active",this.agent.getId(), 
+                    Integer.parseInt(IdTextField.getText()), 
+                    NameTextField.getText(), LastnameTextField.getText(), 
+                    EmailTextField.getText(), UsernameTextField.getText(), 
+                    PasswordTextField.getText());
         }
        
-        facade.createUser(user, userType);        
+        success = facade.createUser(user, userType);
+         
+        if (success = true){
+            this.dispose();
+            this.AgentWindow.setVisible(true);
+        }
         
     }//GEN-LAST:event_CreateUserButtonActionPerformed
 

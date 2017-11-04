@@ -20,6 +20,10 @@ public class OwnerDAO {
     
     public static final String SEARCH_OWNER = "select count(*) from Property_Owner "
                     + "where username = ? and password = ?"; 
+    
+    public static final String CREATE_OWNER = "insert into Property_Owner (iduser, "
+            + "username, password, name, lastname, email_address, account_creation_datetime, "
+            + "deletion_status, agent_idagent) values (?, ?, ?, ?, ?, ?, SYSDATE, ?, ?)";
 
     public OwnerDAO() {
     }
@@ -61,57 +65,49 @@ public class OwnerDAO {
                 ps.close();
                 connection.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error" + ex);
-                return false;            
+                JOptionPane.showMessageDialog(null, "Error" + ex);                          
             }            
         }       
        
     }
     
-    /*
-    public static Owner LoadCustomer(String username){
-        
-        Owner owner = null;
-        
+    public static boolean createOwner(Owner owner){
         Connection connection = null;       
         PreparedStatement ps = null;
-        ResultSet rs = null;
-
+        ResultSet rs = null;   
+        
         try{
-            
             connection = DBConnection.getConnection();
-           // ps = connection.prepareStatement(LOAD_OWNER);
-            ps.setString(1, username);
-            rs = ps.executeQuery();
             
-            while (rs.next()){           
-                
-               owner = new Owner(rs.getDate("account_creation_datetime"),
-                                        rs.getString("deletion_status"),rs.getInt("agent_idagent"),
-                                        rs.getInt("maximum_rent"),rs.getInt("iduser"),rs.getString("name"),
-                                        rs.getString("last_name"),rs.getString("email_address"),
-                                        username,rs.getString("password"));
-                                             
-            }
+            ps = connection.prepareStatement(CREATE_OWNER);
+                      
+            ps.setInt(1, owner.getId());
+            ps.setString(2, owner.getUsername());
+            ps.setString(3, owner.getPassword());
+            ps.setString(4, owner.getName());
+            ps.setString(5, owner.getLastname());
+            ps.setString(6, owner.getEmail());
+            ps.setString(7, owner.getDeletionStatus());
+            ps.setInt(8, owner.getIdAgent());                        
             
-            rs.close();
+            ps.executeUpdate();
             
-            //return customer;
+            connection.commit();
             
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error" + ex);
-            return null;    
+            JOptionPane.showMessageDialog(null, "Owner was added successfully");
+            return true;
+                    
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex); 
+            return false;
             
         }finally{
-            try {
+            try{
                 ps.close();
                 connection.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error" + ex);
-                return null;            
-            }            
-        }
-          
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error: " + ex);               
+            }
+        }         
     }
-    */
 }

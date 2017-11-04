@@ -70,8 +70,7 @@ public class CustomerDAO {
                 ps.close();
                 connection.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error: " + ex);
-                return false;            
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                          
             }            
         }       
        
@@ -115,13 +114,12 @@ public class CustomerDAO {
                 ps.close();
                 connection.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error: " + ex);
-                return null;            
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                       
             }            
         }          
     }
     
-    public static void createCustomer(Customer customer){
+    public static boolean createCustomer(Customer customer){
         Connection connection = null;       
         PreparedStatement ps = null;
         ResultSet rs = null;   
@@ -146,15 +144,17 @@ public class CustomerDAO {
             connection.commit();
             
             JOptionPane.showMessageDialog(null, "Customer was added successfully");
+            return true;
                     
         }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: " + ex);     
+            JOptionPane.showMessageDialog(null, "Error: " + ex); 
+            return false;
         }finally{
             try{
                 ps.close();
                 connection.close();
             }catch(SQLException ex){
-                JOptionPane.showMessageDialog(null, "Error: " + ex);              
+                JOptionPane.showMessageDialog(null, "Error: " + ex);               
             }
         }         
     }
