@@ -6,11 +6,9 @@
 package GUI;
 
 import World.Agent;
-import World.Customer;
 import World.ISystemFacade;
-import World.Owner;
 import World.SystemFacade;
-import World.Person;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -185,7 +183,7 @@ public class LoginWindow extends javax.swing.JFrame {
         });
     }
     
-    public void login(String username, String password, String userType){
+    private void login(String username, String password, String userType){
         
         boolean access = false;        
         ISystemFacade facade = new SystemFacade();  

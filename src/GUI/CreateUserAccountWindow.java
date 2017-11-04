@@ -243,33 +243,37 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
 
     private void CreateUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserButtonActionPerformed
        
-       boolean success;
+       if(this.testTextFieldRequirements() == true){
+           
+            boolean success;
+
+            User user = null; 
+            String userType;
+            ISystemFacade facade = new SystemFacade();
+
+            if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
+                 userType = "Customer";
+                 user = new Customer(Long.parseLong(MaximumRentTextField1.getText()), "Active", 
+                         this.agent.getId(), Integer.parseInt(IdTextField.getText()), 
+                         NameTextField.getText(), LastnameTextField.getText(), 
+                         EmailTextField.getText(), UsernameTextField.getText(), 
+                         PasswordTextField.getText());
+             }else{
+                 userType = "Owner";                    
+                 user = new Owner("Active",this.agent.getId(), 
+                         Integer.parseInt(IdTextField.getText()), 
+                         NameTextField.getText(), LastnameTextField.getText(), 
+                         EmailTextField.getText(), UsernameTextField.getText(), 
+                         PasswordTextField.getText());
+             }
+
+             success = facade.createUser(user, userType);
+
+             if (success = true){
+                 this.dispose();
+                 this.AgentWindow.setVisible(true);
+             }
         
-       User user = null; 
-       String userType;
-       ISystemFacade facade = new SystemFacade();
-        
-       if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
-            userType = "Customer";
-            user = new Customer(Long.parseLong(MaximumRentTextField1.getText()), "Active", 
-                    this.agent.getId(), Integer.parseInt(IdTextField.getText()), 
-                    NameTextField.getText(), LastnameTextField.getText(), 
-                    EmailTextField.getText(), UsernameTextField.getText(), 
-                    PasswordTextField.getText());
-        }else{
-            userType = "Owner";                    
-            user = new Owner("Active",this.agent.getId(), 
-                    Integer.parseInt(IdTextField.getText()), 
-                    NameTextField.getText(), LastnameTextField.getText(), 
-                    EmailTextField.getText(), UsernameTextField.getText(), 
-                    PasswordTextField.getText());
-        }
-       
-        success = facade.createUser(user, userType);
-         
-        if (success = true){
-            this.dispose();
-            this.AgentWindow.setVisible(true);
         }
         
     }//GEN-LAST:event_CreateUserButtonActionPerformed
@@ -341,6 +345,20 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
                 //new CreateUserAccountWindow().setVisible(true);
             }
         });
+    }
+    
+    private boolean testTextFieldRequirements(){
+        
+        boolean tested = false;
+        
+        if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
+            
+        }else{
+        
+        }
+        
+        return tested;
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
