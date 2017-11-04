@@ -11,8 +11,11 @@ import World.ISystemFacade;
 import World.Owner;
 import World.SystemFacade;
 import World.User;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -246,7 +249,7 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
        
        if(this.testRequirements() == true){
            
-            boolean success;
+            boolean b;
 
             User user = null; 
             String userType;
@@ -268,9 +271,9 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
                          PasswordTextField.getText());
              }
 
-             success = facade.createUser(user, userType);
+             b = facade.createUser(user, userType);
 
-             if (success = true){
+             if (b = true){
                  this.dispose();
                  this.AgentWindow.setVisible(true);
              }
@@ -350,59 +353,83 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
     
     private boolean testRequirements(){
         
-        boolean tested = true;
+        boolean b = true;              
         
-        ISystemFacade facade = new SystemFacade();
-        tested = facade.validateUsername(UsernameTextField.getText(), 
-                (String)UserTypeComboBox.getSelectedItem());
+        //fill the fields
+        b = testFillTextFields();    
         
+        if (b == true){
         
-        tested = testTextFields();
+            //validate username rules
+            if (UsernameTextField.getText().matches("[a-zA-Z0-9]*") == false){            
+                b = false;
+                JOptionPane.showMessageDialog(null, "Username can only contain letters and numbers. Write another else");
+            }   
+
+            //validate unique username
+            ISystemFacade facade = new SystemFacade();
+            b = facade.validateUsername(UsernameTextField.getText(), 
+                    (String)UserTypeComboBox.getSelectedItem()); 
+
+            //validate email rules        
+            b = isValidEmailAddress(EmailTextField.getText());
         
+        }
         
-        return tested;       
+        return b;       
 
     }
     
-    private boolean testTextFields(){
+    private boolean testFillTextFields(){
         
-        boolean tested = true;
+        boolean b = true;
         
         if(IdTextField.getText().compareTo("") == 0){
-            tested = false;
+            b = false;
         }
         
         if(UsernameTextField.getText().compareTo("") == 0){      
-            tested = false;
+            b = false;
         }
         
         if(NameTextField.getText().compareTo("") == 0){      
-            tested = false;
+            b = false;
         }
         
         if(LastnameTextField.getText().compareTo("") == 0){      
-            tested = false;
+            b = false;
         }
         
         if(EmailTextField.getText().compareTo("") == 0){      
-            tested = false;
+            b = false;
         }
         
         if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
             if(MaximumRentTextField1.getText().compareTo("") == 0){      
-                tested = false;
+                b = false;
             }
         }
         
         if(PasswordTextField.getText().compareTo("") == 0){      
-            tested = false;
+            b = false;
         }
         
-        if (tested == false){
+        if (b == false){
             JOptionPane.showMessageDialog(null, "Warning: you have to fill all the fields");
         }
         
-        return tested;
+        return b;
+    }
+    
+    public boolean isValidEmailAddress(String email) {        
+        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        boolean b = matcher.matches();
+        if (b == false){
+            JOptionPane.showMessageDialog(null, "Email is incorrect");
+        }
+        return b;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

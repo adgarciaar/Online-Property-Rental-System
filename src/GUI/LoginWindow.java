@@ -185,12 +185,12 @@ public class LoginWindow extends javax.swing.JFrame {
     
     private void login(String username, String password, String userType){
         
-        boolean access = false;        
+        boolean b = false;        
         ISystemFacade facade = new SystemFacade();  
        
-        access = facade.searchPerson(username, password, userType);
+        b = facade.searchPerson(username, password, userType);
         
-        if (access == true){
+        if (b == true){
             
             JOptionPane.showMessageDialog(null, "User was found");
             
