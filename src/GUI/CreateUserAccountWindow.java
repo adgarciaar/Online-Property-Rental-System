@@ -331,132 +331,135 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
     
     private boolean testRequirements(){
         
-        boolean b = true;              
-        
-        //fill the fields       
-        b = testFillTextFields();
-        
-        if ( b == true){
-        
-            //validate username rules
-            if (UsernameTextField.getText().matches("[a-zA-Z0-9]*") == false){
-                JOptionPane.showMessageDialog(null, "Username can only contain letters and numbers. Write another else");
-                b = false;                
-            }else{  
-                //validate unique username
-                ISystemFacade facade = new SystemFacade();
-                if (facade.validateUsername(UsernameTextField.getText(),(String)UserTypeComboBox.getSelectedItem()) == false){ 
-                    b = false;
-                }
-            }
-
-            //validate email rules       
-            if (isValidEmailAddress(EmailTextField.getText()) == false){
-                b = false;
-            }
-            
-            //validate numeric rent
-            if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){            
-                if (isValidNumber(MaximumRentTextField.getText()) == false){
-                    b = false;
-                    JOptionPane.showMessageDialog(null, "Maximum rent can contain only numbers");
-                }else{
-                    if (Long.parseLong(MaximumRentTextField.getText()) > Long.MAX_VALUE){
-                        b = false;
-                        JOptionPane.showMessageDialog(null, "Maximum rent exceds the amount of money supported");
-                    }
-                }
-                
-            }
-        }
-        
-        return b;       
-
-    }
-    
-    private boolean testFillTextFields(){
-        
         boolean b = true;
+        boolean fill = true;
         
         if(UsernameTextField.getText().compareTo("") == 0){      
             b = false;
+            fill = false;
         }else{
             if(UsernameTextField.getText().length() > 25){ 
                 b = false;
                 JOptionPane.showMessageDialog(null, "Username has a maximum lenght of 25 characters");
+            }else{                
+                if (isValid(UsernameTextField.getText(),"alphanumeric") == false){
+                    JOptionPane.showMessageDialog(null, "Username can only contain letters and numbers. Write another else");
+                    b = false;                
+                }else{  
+                    //validate unique username
+                    ISystemFacade facade = new SystemFacade();
+                    if (facade.validateUsername(UsernameTextField.getText(),(String)UserTypeComboBox.getSelectedItem()) == false){ 
+                        b = false;
+                    }
+                }
             }
         }
         
         if(NameTextField.getText().compareTo("") == 0){      
             b = false;
+            fill = false;
         }else{
             if(NameTextField.getText().length() > 25){ 
                 b = false;
                 JOptionPane.showMessageDialog(null, "Name has a maximum lenght of 25 characters");
+            }else{
+                if (isValid(NameTextField.getText(),"letters") == false){
+                    b = false;
+                    JOptionPane.showMessageDialog(null, "Name can contain only letters");
+                }
             }
         }
         
         if(LastnameTextField.getText().compareTo("") == 0){      
             b = false;
+            fill = false;
         }else{
             if(LastnameTextField.getText().length() > 25){ 
                 b = false;
                 JOptionPane.showMessageDialog(null, "Lastname has a maximum lenght of 25 characters");
+            }else{
+                if (isValid(LastnameTextField.getText(),"letters") == false){
+                    b = false;
+                    JOptionPane.showMessageDialog(null, "Lastname can contain only letters");
+                }
             }
         }
         
         if(EmailTextField.getText().compareTo("") == 0){      
             b = false;
+            fill = false;
         }else{
             if(EmailTextField.getText().length() > 35){ 
                 b = false;
                 JOptionPane.showMessageDialog(null, "Email has a maximum lenght of 35 characters");
+            }else{
+                if (isValid(EmailTextField.getText(),"email") == false){
+                    b = false;
+                    JOptionPane.showMessageDialog(null, "Email is incorrect");
+                }
             }
         }
         
         if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
             if(MaximumRentTextField.getText().compareTo("") == 0){      
                 b = false;
+                fill = false;
             }else{
-                if(EmailTextField.getText().length() > 35){ 
+                if (isValid(MaximumRentTextField.getText(),"number") == false){
                     b = false;
-                    JOptionPane.showMessageDialog(null, "Maximum rent has a maximum lenght of 38 numbers");
-                }
+                    JOptionPane.showMessageDialog(null, "Maximum rent can contain only numbers");
+                }else{
+                    if(MaximumRentTextField.getText().length() > 38){ 
+                        b = false;
+                        JOptionPane.showMessageDialog(null, "Maximum rent has a maximum lenght of 38 numbers");
+                    }
+                }                
             }
         }
         
         if(PasswordTextField.getText().compareTo("") == 0){      
             b = false;
+            fill = false;
         }else{
-            if(UsernameTextField.getText().length() > 20){ 
+            if(PasswordTextField.getText().length() > 20){ 
                 b = false;
                 JOptionPane.showMessageDialog(null, "Password has a maximum lenght of 20 characters");
+            }else{
+                if (isValid(PasswordTextField.getText(),"alphanumeric") == false){
+                    JOptionPane.showMessageDialog(null, "Pasword can only contain letters and numbers. Write another else");
+                    b = false;   
+                }
             }
         }
         
-        if (b == false){
+        if (fill == false){
             JOptionPane.showMessageDialog(null, "Warning: you have to fill all the fields");
         }
         
         return b;
     }
     
-    private boolean isValidEmailAddress(String email) {        
-        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
-        boolean b = matcher.matches();
-        if (b == false){
-            JOptionPane.showMessageDialog(null, "Email is incorrect");
+    private boolean isValid (String toValid, String type){
+        String regex = null;
+        
+        switch (type) {
+            case "email":
+                regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+                break;
+            case "number":           
+                regex = "[0-9]+";
+                break;
+            case "letters":
+                regex = "[a-zA-Z ]+";
+                break;
+            case "alphanumeric":
+                regex = "[a-zA-Z0-9]*";
+                break;
         }
-        return b;
-    }
-    
-    private boolean isValidNumber(String number){
-        String regex = "[0-9]+";
+        
         Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(number);
-        return matcher.matches();             
+        Matcher matcher = pattern.matcher(toValid);
+        return matcher.matches();        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
