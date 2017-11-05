@@ -251,7 +251,7 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
 
              b = facade.createUser(user, userType);
 
-             if (b = true){
+             if (b == true){
                  this.dispose();
                  this.AgentWindow.setVisible(true);
              }
@@ -357,9 +357,11 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
             if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){            
                 if (isValidNumber(MaximumRentTextField.getText()) == false){
                     b = false;
+                    JOptionPane.showMessageDialog(null, "Maximum rent can contain only numbers");
                 }
                 if (Long.parseLong(MaximumRentTextField.getText()) > Long.MAX_VALUE){
                     b = false;
+                    JOptionPane.showMessageDialog(null, "Maximum rent exceds the amount of money supported");
                 }
             }
         }
@@ -420,10 +422,7 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         String regex = "[0-9]";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(number);
-        boolean b = matcher.matches();
-        if (b == false){
-            JOptionPane.showMessageDialog(null, "ID user can contain only numbers");
-        }
+        boolean b = matcher.matches();        
         return b;
     }
 
