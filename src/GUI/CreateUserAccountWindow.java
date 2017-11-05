@@ -421,9 +421,9 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
             b = false;
             fill = false;
         }else{
-            if(PasswordTextField.getText().length() > 20){ 
+            if(PasswordTextField.getText().length() > 16){ 
                 b = false;
-                JOptionPane.showMessageDialog(null, "Password has a maximum lenght of 20 characters");
+                JOptionPane.showMessageDialog(null, "Password has a maximum lenght of 16 characters");
             }else{
                 if (isValid(PasswordTextField.getText(),"alphanumeric") == false){
                     JOptionPane.showMessageDialog(null, "Pasword can only contain letters and numbers. Write another else");

@@ -189,7 +189,7 @@ public class LoginWindow extends javax.swing.JFrame {
         if(testTextFields() == true){
             
             boolean b = false;        
-            ISystemFacade facade = new SystemFacade();  
+            ISystemFacade facade = new SystemFacade();   
 
             b = facade.searchPerson(username, password, userType);
 
@@ -229,9 +229,9 @@ public class LoginWindow extends javax.swing.JFrame {
             b = false;
             JOptionPane.showMessageDialog(null, "You have to write the password");
         }else{
-            if(PasswordTextField.getText().length() > 20){ 
+            if(PasswordTextField.getText().length() > 16){ 
                 b = false;
-                JOptionPane.showMessageDialog(null, "Password has a maximum lenght of 20 characters");
+                JOptionPane.showMessageDialog(null, "Password has a maximum lenght of 16 characters");
             }
         }
         
