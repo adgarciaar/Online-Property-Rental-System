@@ -355,24 +355,25 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         
         boolean b = true;              
         
-        //fill the fields
-        b = testFillTextFields();    
-        
-        if (b == true){
+        //fill the fields       
+        if (testFillTextFields() == true){
         
             //validate username rules
-            if (UsernameTextField.getText().matches("[a-zA-Z0-9]*") == false){            
-                b = false;
+            if (UsernameTextField.getText().matches("[a-zA-Z0-9]*") == false){
                 JOptionPane.showMessageDialog(null, "Username can only contain letters and numbers. Write another else");
+                b = false;                
             }else{  
                 //validate unique username
                 ISystemFacade facade = new SystemFacade();
-                b = facade.validateUsername(UsernameTextField.getText(), 
-                        (String)UserTypeComboBox.getSelectedItem()); 
+                if (facade.validateUsername(UsernameTextField.getText(),(String)UserTypeComboBox.getSelectedItem()) == false){ 
+                    b = false;
+                }
             }
 
-            //validate email rules        
-            b = isValidEmailAddress(EmailTextField.getText());
+            //validate email rules       
+            if (isValidEmailAddress(EmailTextField.getText()) == false){
+                b = false;
+            }
         
         }
         

@@ -56,14 +56,12 @@ public class SystemFacade implements ISystemFacade{
     }
 
     @Override
-    public boolean validateUsername(String username, String userType) {
-        boolean validation = false;
+    public boolean validateUsername(String username, String userType) {       
         if (userType.compareTo("Customer") == 0){
-            validation = CustomerDAO.validateUsername(username);
+            return CustomerDAO.validateUsername(username);
         }else{
-            validation = OwnerDAO.validateUsername(username);
-        }
-        return validation;
+            return OwnerDAO.validateUsername(username);
+        }        
     }
     
 }
