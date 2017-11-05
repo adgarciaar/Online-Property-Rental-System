@@ -192,12 +192,10 @@ public class LoginWindow extends javax.swing.JFrame {
         
         if (b == true){
             
-            JOptionPane.showMessageDialog(null, "User was found");
-            
             switch (userType) {
             case "Agent":
                 this.setVisible(false);
-                Agent agent = agent = (Agent) facade.loadPerson(username, userType);
+                Agent agent = (Agent) facade.loadPerson(username, userType);
                 new AgentWindow(agent, this).setVisible(true);
             case "Customer":
                 

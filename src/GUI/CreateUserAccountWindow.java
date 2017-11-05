@@ -334,7 +334,9 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         boolean b = true;              
         
         //fill the fields       
-        if (testFillTextFields() == true){
+        b = testFillTextFields();
+        
+        if ( b == true){
         
             //validate username rules
             if (UsernameTextField.getText().matches("[a-zA-Z0-9]*") == false){
@@ -358,11 +360,13 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
                 if (isValidNumber(MaximumRentTextField.getText()) == false){
                     b = false;
                     JOptionPane.showMessageDialog(null, "Maximum rent can contain only numbers");
+                }else{
+                    if (Long.parseLong(MaximumRentTextField.getText()) > Long.MAX_VALUE){
+                        b = false;
+                        JOptionPane.showMessageDialog(null, "Maximum rent exceds the amount of money supported");
+                    }
                 }
-                if (Long.parseLong(MaximumRentTextField.getText()) > Long.MAX_VALUE){
-                    b = false;
-                    JOptionPane.showMessageDialog(null, "Maximum rent exceds the amount of money supported");
-                }
+                
             }
         }
         
@@ -419,11 +423,10 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
     }
     
     private boolean isValidNumber(String number){
-        String regex = "[0-9]";
+        String regex = "[0-9]+";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(number);
-        boolean b = matcher.matches();        
-        return b;
+        return matcher.matches();             
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
