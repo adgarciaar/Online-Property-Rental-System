@@ -364,12 +364,12 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
             if (UsernameTextField.getText().matches("[a-zA-Z0-9]*") == false){            
                 b = false;
                 JOptionPane.showMessageDialog(null, "Username can only contain letters and numbers. Write another else");
-            }   
-
-            //validate unique username
-            ISystemFacade facade = new SystemFacade();
-            b = facade.validateUsername(UsernameTextField.getText(), 
-                    (String)UserTypeComboBox.getSelectedItem()); 
+            }else{  
+                //validate unique username
+                ISystemFacade facade = new SystemFacade();
+                b = facade.validateUsername(UsernameTextField.getText(), 
+                        (String)UserTypeComboBox.getSelectedItem()); 
+            }
 
             //validate email rules        
             b = isValidEmailAddress(EmailTextField.getText());
