@@ -21,9 +21,9 @@ public class CustomerDAO {
     public static final String SEARCH_CUSTOMER = "select count(*) from Customer "
                                                + "where username = ? and password = ?";
     
-    public static final String LOAD_CUSTOMER = "select iduser, name, last_name, "
-                                               + "email_address, account_creation_datetime"
-                                               + "deletion_status, agent_idagent, maximum_rent"
+    public static final String LOAD_CUSTOMER = "select iduser, name, lastname, "
+                                               + "email_address, account_creation_datetime, "
+                                               + "deletion_status, agent_idagent, maximum_rent "
                                                + "from Customer where username = ?";
     
     public static final String CREATE_CUSTOMER = "insert into Customer ( "
@@ -99,7 +99,7 @@ public class CustomerDAO {
                 customer = new Customer(rs.getLong("maximum_rent"),
                                         rs.getString("deletion_status"),rs.getInt("agent_idagent"),
                                         rs.getInt("iduser"),rs.getString("name"),
-                                        rs.getString("last_name"),rs.getString("email_address"),
+                                        rs.getString("lastname"),rs.getString("email_address"),
                                         username,null);
                                              
             }

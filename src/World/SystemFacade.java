@@ -37,9 +37,9 @@ public class SystemFacade implements ISystemFacade{
         if (personType.compareTo("Agent") == 0){
             return AgentDAO.LoadAgent(username);
         }else if(personType.compareTo("Customer") == 0){
-            return null;
+            return CustomerDAO.LoadCustomer(username);
         }else{
-            return null;
+            return OwnerDAO.LoadOwner(username);
         }
        
     }

@@ -21,9 +21,9 @@ public class OwnerDAO {
     public static final String SEARCH_OWNER = "select count(*) from Property_Owner "
                     + "where username = ? and password = ?"; 
     
-    public static final String LOAD_OWNER = "select iduser, name, last_name, "
-                                               + "email_address, account_creation_datetime"
-                                               + "deletion_status, agent_idagent"
+    public static final String LOAD_OWNER = "select iduser, name, lastname, "
+                                               + "email_address, account_creation_datetime, "
+                                               + "deletion_status, agent_idagent "
                                                + "from Property_Owner where username = ?";
     
     public static final String CREATE_OWNER = "insert into Property_Owner ( "
@@ -98,7 +98,7 @@ public class OwnerDAO {
                 
                 owner = new Owner(rs.getString("deletion_status"),rs.getInt("agent_idagent"),
                                         rs.getInt("iduser"),rs.getString("name"),
-                                        rs.getString("last_name"),rs.getString("email_address"),
+                                        rs.getString("lastname"),rs.getString("email_address"),
                                         username,null);
                                              
             }

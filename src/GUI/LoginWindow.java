@@ -6,7 +6,9 @@
 package GUI;
 
 import World.Agent;
+import World.Customer;
 import World.ISystemFacade;
+import World.Owner;
 import World.SystemFacade;
 
 import javax.swing.JOptionPane;
@@ -201,10 +203,14 @@ public class LoginWindow extends javax.swing.JFrame {
                     Agent agent = (Agent) facade.loadPerson(username, userType);
                     new AgentWindow(agent, this).setVisible(true);
                 case "Customer":
-
+                    this.setVisible(false);
+                    Customer customer = (Customer) facade.loadPerson(username, userType);
+                    new CustomerWindow(customer, this).setVisible(true);
                 case "Owner":
+                    this.setVisible(false);
+                    //Owner owner = (Owner) facade.loadPerson(username, userType);
 
-            }
+                }
 
             }else{
                 JOptionPane.showMessageDialog(null, "User was not found");
