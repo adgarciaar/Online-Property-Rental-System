@@ -22,7 +22,7 @@ public class CustomerDAO {
                                                + "where username = ? and password = ?";
     
     public static final String LOAD_CUSTOMER = "select iduser, name, last_name, "
-                                               + "email_address, password, account_creation_datetime"
+                                               + "email_address, account_creation_datetime"
                                                + "deletion_status, agent_idagent, maximum_rent"
                                                + "from Customer where username = ?";
     
@@ -100,7 +100,7 @@ public class CustomerDAO {
                                         rs.getString("deletion_status"),rs.getInt("agent_idagent"),
                                         rs.getInt("iduser"),rs.getString("name"),
                                         rs.getString("last_name"),rs.getString("email_address"),
-                                        username,rs.getString("password"));
+                                        username,null);
                                              
             }
             
@@ -123,6 +123,7 @@ public class CustomerDAO {
     }
     
     public static boolean createCustomer(Customer customer){
+        
         Connection connection = null;       
         PreparedStatement ps = null;
         ResultSet rs = null;   
@@ -133,7 +134,7 @@ public class CustomerDAO {
             ps = connection.prepareStatement(CREATE_CUSTOMER);
                       
             ps.setString(1, customer.getUsername());
-            ps.setString(2, customer.getPassword());
+            ps.setString(2, Encryption.encrypt(customer.getPassword()));
             ps.setString(3, customer.getName());
             ps.setString(4, customer.getLastname());
             ps.setString(5, customer.getEmail());

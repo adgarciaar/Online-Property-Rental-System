@@ -21,6 +21,11 @@ public class OwnerDAO {
     public static final String SEARCH_OWNER = "select count(*) from Property_Owner "
                     + "where username = ? and password = ?"; 
     
+    public static final String LOAD_OWNER = "select iduser, name, last_name, "
+                                               + "email_address, account_creation_datetime"
+                                               + "deletion_status, agent_idagent"
+                                               + "from Property_Owner where username = ?";
+    
     public static final String CREATE_OWNER = "insert into Property_Owner ( "
             + "username, password, name, lastname, email_address, account_creation_datetime, "
             + "deletion_status, agent_idagent) values (?, ?, ?, ?, ?, SYSDATE, ?, ?)";
@@ -74,6 +79,48 @@ public class OwnerDAO {
        
     }
     
+    public static Owner LoadOwner(String username){
+        
+        Owner owner = null;
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try{
+            
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement(LOAD_OWNER);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            
+            while (rs.next()){           
+                
+                owner = new Owner(rs.getString("deletion_status"),rs.getInt("agent_idagent"),
+                                        rs.getInt("iduser"),rs.getString("name"),
+                                        rs.getString("last_name"),rs.getString("email_address"),
+                                        username,null);
+                                             
+            }
+            
+            rs.close();
+            
+            return owner;
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
+            return null;    
+            
+        }finally{
+            try {
+                ps.close();
+                connection.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                       
+            }            
+        }          
+    }
+    
     public static boolean createOwner(Owner owner){
         Connection connection = null;       
         PreparedStatement ps = null;
@@ -85,7 +132,7 @@ public class OwnerDAO {
             ps = connection.prepareStatement(CREATE_OWNER);
                       
             ps.setString(1, owner.getUsername());
-            ps.setString(2, owner.getPassword());
+            ps.setString(2, Encryption.encrypt(owner.getPassword()));
             ps.setString(3, owner.getName());
             ps.setString(4, owner.getLastname());
             ps.setString(5, owner.getEmail());
