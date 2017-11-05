@@ -218,11 +218,21 @@ public class LoginWindow extends javax.swing.JFrame {
         if(UsernameTextField.getText().compareTo("") == 0){      
             b = false;
             JOptionPane.showMessageDialog(null, "You have to write the username");
+        }else{
+            if(UsernameTextField.getText().length() > 25){ 
+                b = false;
+                JOptionPane.showMessageDialog(null, "Username has a maximum lenght of 25 characters");
+            }
         }
         
         if(PasswordTextField.getText().compareTo("") == 0){      
             b = false;
             JOptionPane.showMessageDialog(null, "You have to write the password");
+        }else{
+            if(PasswordTextField.getText().length() > 20){ 
+                b = false;
+                JOptionPane.showMessageDialog(null, "Password has a maximum lenght of 20 characters");
+            }
         }
         
         return b;

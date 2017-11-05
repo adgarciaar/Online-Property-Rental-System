@@ -380,28 +380,58 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         
         if(UsernameTextField.getText().compareTo("") == 0){      
             b = false;
+        }else{
+            if(UsernameTextField.getText().length() > 25){ 
+                b = false;
+                JOptionPane.showMessageDialog(null, "Username has a maximum lenght of 25 characters");
+            }
         }
         
         if(NameTextField.getText().compareTo("") == 0){      
             b = false;
+        }else{
+            if(NameTextField.getText().length() > 25){ 
+                b = false;
+                JOptionPane.showMessageDialog(null, "Name has a maximum lenght of 25 characters");
+            }
         }
         
         if(LastnameTextField.getText().compareTo("") == 0){      
             b = false;
+        }else{
+            if(LastnameTextField.getText().length() > 25){ 
+                b = false;
+                JOptionPane.showMessageDialog(null, "Lastname has a maximum lenght of 25 characters");
+            }
         }
         
         if(EmailTextField.getText().compareTo("") == 0){      
             b = false;
+        }else{
+            if(EmailTextField.getText().length() > 35){ 
+                b = false;
+                JOptionPane.showMessageDialog(null, "Email has a maximum lenght of 35 characters");
+            }
         }
         
         if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
             if(MaximumRentTextField.getText().compareTo("") == 0){      
                 b = false;
+            }else{
+                if(EmailTextField.getText().length() > 35){ 
+                    b = false;
+                    JOptionPane.showMessageDialog(null, "Maximum rent has a maximum lenght of 38 numbers");
+                }
             }
         }
         
         if(PasswordTextField.getText().compareTo("") == 0){      
             b = false;
+        }else{
+            if(UsernameTextField.getText().length() > 20){ 
+                b = false;
+                JOptionPane.showMessageDialog(null, "Password has a maximum lenght of 20 characters");
+            }
         }
         
         if (b == false){
