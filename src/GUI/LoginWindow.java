@@ -21,7 +21,8 @@ public class LoginWindow extends javax.swing.JFrame {
      * Creates new form VentanaPrincipal
      */
     public LoginWindow() {
-        initComponents();
+        initComponents();       
+        
     }
 
     /**
@@ -185,27 +186,46 @@ public class LoginWindow extends javax.swing.JFrame {
     
     private void login(String username, String password, String userType){
         
-        boolean b = false;        
-        ISystemFacade facade = new SystemFacade();  
-       
-        b = facade.searchPerson(username, password, userType);
+        if(testTextFields() == true){
+            
+            boolean b = false;        
+            ISystemFacade facade = new SystemFacade();  
+
+            b = facade.searchPerson(username, password, userType);
+
+            if (b == true){
+
+                switch (userType) {
+                case "Agent":
+                    this.setVisible(false);
+                    Agent agent = (Agent) facade.loadPerson(username, userType);
+                    new AgentWindow(agent, this).setVisible(true);
+                case "Customer":
+
+                case "Owner":
+
+            }
+
+            }else{
+                JOptionPane.showMessageDialog(null, "User was not found");
+            }
+        }
+    }
+    
+    private boolean testTextFields(){
+        boolean b = true;
         
-        if (b == true){
-            
-            switch (userType) {
-            case "Agent":
-                this.setVisible(false);
-                Agent agent = (Agent) facade.loadPerson(username, userType);
-                new AgentWindow(agent, this).setVisible(true);
-            case "Customer":
-                
-            case "Owner":
-                
+        if(UsernameTextField.getText().compareTo("") == 0){      
+            b = false;
+            JOptionPane.showMessageDialog(null, "You have to write the username");
         }
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "User was not found");
+        
+        if(PasswordTextField.getText().compareTo("") == 0){      
+            b = false;
+            JOptionPane.showMessageDialog(null, "You have to write the password");
         }
+        
+        return b;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

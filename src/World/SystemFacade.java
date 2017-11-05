@@ -45,14 +45,13 @@ public class SystemFacade implements ISystemFacade{
     }
 
     @Override
-    public boolean createUser(User user, String userType) {
-        boolean success = false;
+    public boolean createUser(User user, String userType) {        
         if (userType.compareTo("Customer") == 0){
-            success = CustomerDAO.createCustomer((Customer) user);
+            return CustomerDAO.createCustomer((Customer) user);
         }else{
-            success = OwnerDAO.createOwner((Owner) user);
+            return OwnerDAO.createOwner((Owner) user);        
         }
-        return success;
+       
     }
 
     @Override
