@@ -26,9 +26,9 @@ public class CustomerDAO {
                                                + "deletion_status, agent_idagent, maximum_rent"
                                                + "from Customer where username = ?";
     
-    public static final String CREATE_CUSTOMER = "insert into Customer (iduser, "
+    public static final String CREATE_CUSTOMER = "insert into Customer ( "
             + "username, password, name, lastname, email_address, account_creation_datetime, "
-            + "deletion_status, agent_idagent, maximum_rent) values (?, ?, ?, ?, ?, ?, SYSDATE, ?, ?, ?)";
+            + "deletion_status, agent_idagent, maximum_rent) values (?, ?, ?, ?, ?, SYSDATE, ?, ?, ?)";
     
     public static final String SEARCH_USERNAME = "select count(*) from Customer "
                     + "where username = ?";
@@ -132,15 +132,14 @@ public class CustomerDAO {
             
             ps = connection.prepareStatement(CREATE_CUSTOMER);
                       
-            ps.setInt(1, customer.getId());
-            ps.setString(2, customer.getUsername());
-            ps.setString(3, customer.getPassword());
-            ps.setString(4, customer.getName());
-            ps.setString(5, customer.getLastname());
-            ps.setString(6, customer.getEmail());
-            ps.setString(7, customer.getDeletionStatus());
-            ps.setInt(8, customer.getIdAgent());
-            ps.setLong(9, customer.getMaximumRent());            
+            ps.setString(1, customer.getUsername());
+            ps.setString(2, customer.getPassword());
+            ps.setString(3, customer.getName());
+            ps.setString(4, customer.getLastname());
+            ps.setString(5, customer.getEmail());
+            ps.setString(6, customer.getDeletionStatus());
+            ps.setInt(7, customer.getIdAgent());
+            ps.setLong(8, customer.getMaximumRent());            
             
             ps.executeUpdate();
             

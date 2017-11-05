@@ -25,6 +25,11 @@ public abstract class User extends Person {
         this.idAgent = idAgent;
     }
 
+    public User(String deletionStatus, int idAgent, String name, String lastname, String email, String username, String password) {
+        super(name, lastname, email, username, password);
+        this.deletionStatus = deletionStatus;
+        this.idAgent = idAgent;
+    }    
     
     public String getDeletionStatus() {
         return deletionStatus;

@@ -45,13 +45,11 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        IdTextField = new javax.swing.JTextField();
         CancelButton = new javax.swing.JButton();
         CreateUserButton = new javax.swing.JButton();
         NameTextField = new javax.swing.JTextField();
@@ -62,13 +60,11 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         UserTypeComboBox = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        MaximumRentTextField1 = new javax.swing.JTextField();
+        MaximumRentTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Create user account");
-
-        jLabel2.setText("ID user");
 
         jLabel3.setText("Username");
 
@@ -79,12 +75,6 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         jLabel6.setText("Email address");
 
         jLabel7.setText("Maximun rent");
-
-        IdTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IdTextFieldActionPerformed(evt);
-            }
-        });
 
         CancelButton.setText("Cancel");
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -141,9 +131,9 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
 
         jLabel9.setText("Password");
 
-        MaximumRentTextField1.addActionListener(new java.awt.event.ActionListener() {
+        MaximumRentTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MaximumRentTextField1ActionPerformed(evt);
+                MaximumRentTextFieldActionPerformed(evt);
             }
         });
 
@@ -155,23 +145,17 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(CreateUserButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                            .addComponent(CancelButton))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel3)
-                                .addComponent(jLabel2)
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel6))
                             .addGap(40, 40, 40)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(EmailTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                 .addComponent(LastnameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addComponent(IdTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                 .addComponent(NameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                 .addComponent(UsernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,8 +169,12 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addGap(40, 40, 40)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(MaximumRentTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(UserTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                                        .addComponent(MaximumRentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(UserTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(CreateUserButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                                    .addComponent(CancelButton))))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -194,11 +182,7 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -221,24 +205,20 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(MaximumRentTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MaximumRentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelButton)
                     .addComponent(CreateUserButton))
-                .addContainerGap())
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void IdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IdTextFieldActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         this.dispose();
@@ -257,15 +237,13 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
 
             if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
                  userType = "Customer";
-                 user = new Customer(Long.parseLong(MaximumRentTextField1.getText()), "Active", 
-                         this.agent.getId(), Integer.parseInt(IdTextField.getText()), 
-                         NameTextField.getText(), LastnameTextField.getText(), 
+                 user = new Customer(Long.parseLong(MaximumRentTextField.getText()), "Active", 
+                         this.agent.getId(), NameTextField.getText(), LastnameTextField.getText(), 
                          EmailTextField.getText(), UsernameTextField.getText(), 
                          PasswordTextField.getText());
              }else{
                  userType = "Owner";                    
-                 user = new Owner("Active",this.agent.getId(), 
-                         Integer.parseInt(IdTextField.getText()), 
+                 user = new Owner("Active",this.agent.getId(),                          
                          NameTextField.getText(), LastnameTextField.getText(), 
                          EmailTextField.getText(), UsernameTextField.getText(), 
                          PasswordTextField.getText());
@@ -304,17 +282,17 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
 
     private void UserTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserTypeComboBoxActionPerformed
         if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
-            MaximumRentTextField1.setEnabled(true);
+            MaximumRentTextField.setEnabled(true);
         }
         if ((String)UserTypeComboBox.getSelectedItem() == "Owner"){
-            MaximumRentTextField1.setEnabled(false);
-            MaximumRentTextField1.setText("");
+            MaximumRentTextField.setEnabled(false);
+            MaximumRentTextField.setText("");
         }
     }//GEN-LAST:event_UserTypeComboBoxActionPerformed
 
-    private void MaximumRentTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaximumRentTextField1ActionPerformed
+    private void MaximumRentTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaximumRentTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MaximumRentTextField1ActionPerformed
+    }//GEN-LAST:event_MaximumRentTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,7 +352,16 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
             if (isValidEmailAddress(EmailTextField.getText()) == false){
                 b = false;
             }
-        
+            
+            //validate numeric rent
+            if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){            
+                if (isValidNumber(MaximumRentTextField.getText()) == false){
+                    b = false;
+                }
+                if (Long.parseLong(MaximumRentTextField.getText()) > Long.MAX_VALUE){
+                    b = false;
+                }
+            }
         }
         
         return b;       
@@ -384,10 +371,6 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
     private boolean testFillTextFields(){
         
         boolean b = true;
-        
-        if(IdTextField.getText().compareTo("") == 0){
-            b = false;
-        }
         
         if(UsernameTextField.getText().compareTo("") == 0){      
             b = false;
@@ -406,7 +389,7 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         }
         
         if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
-            if(MaximumRentTextField1.getText().compareTo("") == 0){      
+            if(MaximumRentTextField.getText().compareTo("") == 0){      
                 b = false;
             }
         }
@@ -422,7 +405,7 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         return b;
     }
     
-    public boolean isValidEmailAddress(String email) {        
+    private boolean isValidEmailAddress(String email) {        
         String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
@@ -432,20 +415,29 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
         }
         return b;
     }
+    
+    private boolean isValidNumber(String number){
+        String regex = "[0-9]";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(number);
+        boolean b = matcher.matches();
+        if (b == false){
+            JOptionPane.showMessageDialog(null, "ID user can contain only numbers");
+        }
+        return b;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
     private javax.swing.JButton CreateUserButton;
     private javax.swing.JTextField EmailTextField;
-    private javax.swing.JTextField IdTextField;
     private javax.swing.JTextField LastnameTextField;
-    private javax.swing.JTextField MaximumRentTextField1;
+    private javax.swing.JTextField MaximumRentTextField;
     private javax.swing.JTextField NameTextField;
     private javax.swing.JTextField PasswordTextField;
     private javax.swing.JComboBox<String> UserTypeComboBox;
     private javax.swing.JTextField UsernameTextField;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

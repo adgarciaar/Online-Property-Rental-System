@@ -21,9 +21,9 @@ public class OwnerDAO {
     public static final String SEARCH_OWNER = "select count(*) from Property_Owner "
                     + "where username = ? and password = ?"; 
     
-    public static final String CREATE_OWNER = "insert into Property_Owner (iduser, "
+    public static final String CREATE_OWNER = "insert into Property_Owner ( "
             + "username, password, name, lastname, email_address, account_creation_datetime, "
-            + "deletion_status, agent_idagent) values (?, ?, ?, ?, ?, ?, SYSDATE, ?, ?)";
+            + "deletion_status, agent_idagent) values (?, ?, ?, ?, ?, SYSDATE, ?, ?)";
     
     public static final String SEARCH_USERNAME = "select count(*) from Property_Owner "
                     + "where username = ?";
@@ -84,14 +84,13 @@ public class OwnerDAO {
             
             ps = connection.prepareStatement(CREATE_OWNER);
                       
-            ps.setInt(1, owner.getId());
-            ps.setString(2, owner.getUsername());
-            ps.setString(3, owner.getPassword());
-            ps.setString(4, owner.getName());
-            ps.setString(5, owner.getLastname());
-            ps.setString(6, owner.getEmail());
-            ps.setString(7, owner.getDeletionStatus());
-            ps.setInt(8, owner.getIdAgent());                        
+            ps.setString(1, owner.getUsername());
+            ps.setString(2, owner.getPassword());
+            ps.setString(3, owner.getName());
+            ps.setString(4, owner.getLastname());
+            ps.setString(5, owner.getEmail());
+            ps.setString(6, owner.getDeletionStatus());
+            ps.setInt(7, owner.getIdAgent());                        
             
             ps.executeUpdate();
             
