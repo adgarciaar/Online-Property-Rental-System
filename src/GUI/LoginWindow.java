@@ -205,8 +205,8 @@ public class LoginWindow extends javax.swing.JFrame {
                     new CustomerWindow(customer, this).setVisible(true);
                 case "Owner":
                     this.setVisible(false);
-                    //Owner owner = (Owner) facade.loadPerson(username, userType);
-
+                    Owner owner = (Owner) facade.loadPerson(username, userType);
+                    new OwnerWindow(owner, this).setVisible(true);
                 }
 
             }else{
