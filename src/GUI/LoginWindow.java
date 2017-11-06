@@ -189,13 +189,10 @@ public class LoginWindow extends javax.swing.JFrame {
     private void login(String username, String password, String userType){
         
         if(testTextFields() == true){
-            
-            boolean b = false;        
-            ISystemFacade facade = new SystemFacade();   
+                
+            ISystemFacade facade = new SystemFacade(); 
 
-            b = facade.searchPerson(username, password, userType);
-
-            if (b == true){
+            if (facade.searchPerson(username, password, userType) == true){
 
                 switch (userType) {
                 case "Agent":
@@ -219,6 +216,7 @@ public class LoginWindow extends javax.swing.JFrame {
     }
     
     private boolean testTextFields(){
+        
         boolean b = true;
         
         if(UsernameTextField.getText().compareTo("") == 0){      

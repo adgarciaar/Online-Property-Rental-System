@@ -220,13 +220,9 @@ public class ViewAccountWindow extends javax.swing.JFrame {
         
         if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
         
-            ISystemFacade facade = new SystemFacade();   
+            ISystemFacade facade = new SystemFacade();
 
-            boolean b = false;  
-
-            b = facade.deleteUser(this.user);
-
-            if (b == true){
+            if (facade.deleteUser(this.user) == true){
                 this.dispose();
                 this.PreviousWindow.dispose();
                 new LoginWindow().setVisible(true);
