@@ -36,9 +36,6 @@ public class OwnerDAO {
     
     public static final String DELETE_OWNER = "update Property_Owner set "
             + "deletion_status = 'Deleted' where iduser = ?";
-
-    public OwnerDAO() {
-    }
     
     public static boolean searchOwner(String username, String password){
         
@@ -214,7 +211,10 @@ public class OwnerDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;   
         
+        PropertyDAO.deletePropertiesByOwner(owner.getId());
+        
         try{
+            
             connection = DBConnection.getConnection();
             
             ps = connection.prepareStatement(DELETE_OWNER);

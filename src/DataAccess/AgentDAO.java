@@ -22,9 +22,6 @@ public class AgentDAO {
                                                + "where username = ? and password = ?";
     public static final String LOAD_AGENT = "select idagent, name, last_name, "
                                                + "email_address, password from OPR_Agent where username = ?";
-
-    public AgentDAO() {
-    }   
     
     public static boolean searchAgent(String username, String password){
         

@@ -36,9 +36,6 @@ public class CustomerDAO {
     
     public static final String DELETE_CUSTOMER = "update Customer set "
             + "deletion_status = 'Deleted' where iduser = ?";
-                  
-    public CustomerDAO() {
-    }
     
     public static boolean searchCustomer(String username, String password){
         
