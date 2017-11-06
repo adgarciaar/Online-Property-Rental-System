@@ -5,26 +5,25 @@
  */
 package GUI;
 
-import World.Customer;
+import World.Owner;
 import javax.swing.JFrame;
 
 /**
  *
  * @author adrian
  */
-public class CustomerWindow extends javax.swing.JFrame {
+public class OwnerWindow extends javax.swing.JFrame {
     
-    private final Customer customer;
+    private final Owner owner;
     private final JFrame LoginWindow;
 
     /**
-     * Creates new form UserWindow
+     * Creates new form OwnerWindow
      */
-    public CustomerWindow(Customer customer, JFrame LoginWindow) {
+    public OwnerWindow(Owner owner, JFrame LoginWindow) {
         initComponents();
-        this.customer = customer;
+        this.owner = owner;
         this.LoginWindow = LoginWindow;
-        WelcomeLabel.setText("Welcome, "+this.customer.getName());
     }
 
     /**
@@ -38,23 +37,16 @@ public class CustomerWindow extends javax.swing.JFrame {
 
         WelcomeLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        AddToVisitingListButton = new javax.swing.JButton();
         ViewAccountButton = new javax.swing.JButton();
         SignOutButton = new javax.swing.JButton();
-        ViewVisitingListButton = new javax.swing.JButton();
+        AddPropertyButton = new javax.swing.JButton();
+        ViewPropertiesButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         WelcomeLabel.setText("Welcome, ");
 
         jLabel1.setText("What do you want to do?");
-
-        AddToVisitingListButton.setText("Add property to visiting list");
-        AddToVisitingListButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddToVisitingListButtonActionPerformed(evt);
-            }
-        });
 
         ViewAccountButton.setText("View my account");
         ViewAccountButton.addActionListener(new java.awt.event.ActionListener() {
@@ -70,10 +62,17 @@ public class CustomerWindow extends javax.swing.JFrame {
             }
         });
 
-        ViewVisitingListButton.setText("View Visiting List");
-        ViewVisitingListButton.addActionListener(new java.awt.event.ActionListener() {
+        AddPropertyButton.setText("Add property");
+        AddPropertyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ViewVisitingListButtonActionPerformed(evt);
+                AddPropertyButtonActionPerformed(evt);
+            }
+        });
+
+        ViewPropertiesButton.setText("View Properties");
+        ViewPropertiesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewPropertiesButtonActionPerformed(evt);
             }
         });
 
@@ -82,61 +81,62 @@ public class CustomerWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(AddToVisitingListButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ViewAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(SignOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ViewVisitingListButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(WelcomeLabel)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(WelcomeLabel))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(AddPropertyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ViewAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ViewPropertiesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SignOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(27, 27, 27)
                 .addComponent(WelcomeLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(39, 39, 39)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ViewVisitingListButton)
-                    .addComponent(AddToVisitingListButton))
-                .addGap(29, 29, 29)
+                    .addComponent(AddPropertyButton)
+                    .addComponent(ViewPropertiesButton))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ViewAccountButton)
                     .addComponent(SignOutButton))
-                .addGap(24, 24, 24))
+                .addGap(29, 29, 29))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AddToVisitingListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToVisitingListButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AddToVisitingListButtonActionPerformed
+    private void ViewAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAccountButtonActionPerformed
+        this.dispose();
+        new ViewAccountWindow(this.owner, this).setVisible(true);
+    }//GEN-LAST:event_ViewAccountButtonActionPerformed
 
     private void SignOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignOutButtonActionPerformed
         this.dispose();
         this.LoginWindow.setVisible(true);
     }//GEN-LAST:event_SignOutButtonActionPerformed
 
-    private void ViewVisitingListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewVisitingListButtonActionPerformed
+    private void AddPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddPropertyButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ViewVisitingListButtonActionPerformed
+    }//GEN-LAST:event_AddPropertyButtonActionPerformed
 
-    private void ViewAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAccountButtonActionPerformed
-        this.dispose();
-        new ViewAccountWindow(this.customer, this).setVisible(true);
-    }//GEN-LAST:event_ViewAccountButtonActionPerformed
+    private void ViewPropertiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPropertiesButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ViewPropertiesButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,30 +155,29 @@ public class CustomerWindow extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OwnerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OwnerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OwnerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OwnerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new CustomerWindow().setVisible(true);
+                //new OwnerWindow().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddToVisitingListButton;
+    private javax.swing.JButton AddPropertyButton;
     private javax.swing.JButton SignOutButton;
     private javax.swing.JButton ViewAccountButton;
-    private javax.swing.JButton ViewVisitingListButton;
+    private javax.swing.JButton ViewPropertiesButton;
     private javax.swing.JLabel WelcomeLabel;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
