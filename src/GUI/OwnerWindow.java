@@ -24,6 +24,7 @@ public class OwnerWindow extends javax.swing.JFrame {
         initComponents();
         this.owner = owner;
         this.LoginWindow = LoginWindow;
+        WelcomeLabel.setText("Welcome "+this.owner.getName());
     }
 
     /**

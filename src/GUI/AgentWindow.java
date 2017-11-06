@@ -25,7 +25,7 @@ public class AgentWindow extends javax.swing.JFrame {
         initComponents();
         this.agent = agent;
         this.LoginWindow = LoginWindow;
-        WelcomeLabel.setText("Welcome, agent "+this.agent.getName());
+        WelcomeLabel.setText("Welcome agent "+this.agent.getName());
     }
 
     /**

@@ -24,7 +24,7 @@ public class CustomerWindow extends javax.swing.JFrame {
         initComponents();
         this.customer = customer;
         this.LoginWindow = LoginWindow;
-        WelcomeLabel.setText("Welcome, "+this.customer.getName());
+        WelcomeLabel.setText("Welcome "+this.customer.getName());
     }
 
     /**
