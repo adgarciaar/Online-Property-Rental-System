@@ -14,10 +14,7 @@ import java.util.Date;
 public abstract class User extends Person {
     
     protected String deletionStatus;
-    protected int idAgent;
-
-    public User() {
-    }
+    protected int idAgent;    
 
     public User(String deletionStatus, int idAgent, int id, String name, String lastname, String email, String username, String password) {
         super(id, name, lastname, email, username, password);

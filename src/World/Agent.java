@@ -11,9 +11,6 @@ package World;
  */
 public class Agent extends Person{ 
 
-    public Agent() {
-    }
-
     public Agent(int id, String name, String lastname, String email, String username, String password) {
         super(id, name, lastname, email, username, password);
     }   

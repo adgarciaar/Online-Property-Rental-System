@@ -15,9 +15,6 @@ public class Customer extends User {
     
     private long maximumRent;
 
-    public Customer() {
-    }
-
     public Customer(long maximumRent, String deletionStatus, int idAgent, int id, 
             String name, String lastname, String email, String username, String password) {
         super(deletionStatus, idAgent, id, name, lastname, email, username, password);
