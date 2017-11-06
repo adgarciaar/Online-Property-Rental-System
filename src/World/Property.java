@@ -5,8 +5,6 @@
  */
 package World;
 
-import java.math.BigInteger;
-
 /**
  *
  * @author adrian
@@ -17,6 +15,6 @@ public class Property {
     private String type;
     private String address;
     private int number_rooms;
-    private BigInteger rent;
+    private long rent;
     
 }

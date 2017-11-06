@@ -409,9 +409,9 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
                     b = false;
                     JOptionPane.showMessageDialog(null, "Maximum rent can contain only numbers");
                 }else{
-                    if(MaximumRentTextField.getText().length() > 19){ 
+                    if(MaximumRentTextField.getText().length() > 18){ 
                         b = false;
-                        JOptionPane.showMessageDialog(null, "Maximum rent has a maximum lenght of 19 numbers");
+                        JOptionPane.showMessageDialog(null, "Maximum rent has a maximum lenght of 18 numbers");
                     }
                 }                
             }
