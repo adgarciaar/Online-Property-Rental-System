@@ -137,9 +137,8 @@ public class LoginWindow extends javax.swing.JFrame {
 
     private void SigninButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SigninButtonActionPerformed
         String username = UsernameTextField.getText();
-        String password = PasswordTextField.getText();        
-        String userType = (String)UsertypeComboBox.getSelectedItem();
-        this.login(username, password, userType);
+        String password = PasswordTextField.getText(); 
+        this.login(username, password, (String)UsertypeComboBox.getSelectedItem());
     }//GEN-LAST:event_SigninButtonActionPerformed
 
     private void UsernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameTextFieldActionPerformed
@@ -193,17 +192,21 @@ public class LoginWindow extends javax.swing.JFrame {
             ISystemFacade facade = new SystemFacade(); 
 
             if (facade.searchPerson(username, password, userType) == true){
-
-                switch (userType) {
-                case "Agent":
+                
+                if (userType.compareTo("Agent") == 0){
+                    
                     this.setVisible(false);
                     Agent agent = (Agent) facade.loadPerson(username, userType);
-                    new AgentWindow(agent, this).setVisible(true);
-                case "Customer":
-                    this.setVisible(false);
+                    new AgentWindow(agent, this).setVisible(true); 
+                    
+                }else if(userType.compareTo("Customer") == 0){
+                    
+                    this.setVisible(false);                    
                     Customer customer = (Customer) facade.loadPerson(username, userType);
                     new CustomerWindow(customer, this).setVisible(true);
-                case "Owner":
+
+                }else{
+                    
                     this.setVisible(false);
                     Owner owner = (Owner) facade.loadPerson(username, userType);
                     new OwnerWindow(owner, this).setVisible(true);
