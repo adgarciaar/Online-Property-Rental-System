@@ -228,7 +228,8 @@ public class ViewAccountWindow extends javax.swing.JFrame {
 
             if (b == true){
                 this.dispose();
-                this.PreviousWindow.setVisible(true);
+                this.PreviousWindow.dispose();
+                new LoginWindow().setVisible(true);
             }
         }
     }//GEN-LAST:event_DeleteAccountButtonActionPerformed
