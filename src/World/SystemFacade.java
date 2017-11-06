@@ -45,8 +45,8 @@ public class SystemFacade implements ISystemFacade{
     }
 
     @Override
-    public boolean createUser(User user, String userType) {        
-        if (userType.compareTo("Customer") == 0){
+    public boolean createUser(User user) {        
+        if (user instanceof Customer){
             return CustomerDAO.createCustomer((Customer) user);
         }else{
             return OwnerDAO.createOwner((Owner) user);        
@@ -61,6 +61,15 @@ public class SystemFacade implements ISystemFacade{
         }else{
             return OwnerDAO.validateUsername(username);
         }        
+    }
+
+    @Override
+    public boolean deleteUser(User user) {
+        if (user instanceof Customer){
+            return CustomerDAO.deleteCustomer((Customer) user);
+        }else{
+            return OwnerDAO.deleteOwner((Owner) user);     
+        }
     }
     
 }

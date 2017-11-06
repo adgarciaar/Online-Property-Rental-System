@@ -6,8 +6,11 @@
 package GUI;
 
 import World.Customer;
+import World.ISystemFacade;
+import World.SystemFacade;
 import World.User;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -214,9 +217,20 @@ public class ViewAccountWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void DeleteAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteAccountButtonActionPerformed
-
         
+        if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        
+            ISystemFacade facade = new SystemFacade();   
 
+            boolean b = false;  
+
+            b = facade.deleteUser(this.user);
+
+            if (b == true){
+                this.dispose();
+                this.PreviousWindow.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_DeleteAccountButtonActionPerformed
 
     private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed

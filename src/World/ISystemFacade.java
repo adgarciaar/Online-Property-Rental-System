@@ -15,8 +15,10 @@ public interface ISystemFacade {
     
     public Person loadPerson(String username, String personType);
     
-    public boolean createUser(User user, String userType);
+    public boolean createUser(User user);
     
     public boolean validateUsername(String username, String userType);
+    
+    public boolean deleteUser(User user);
     
 }

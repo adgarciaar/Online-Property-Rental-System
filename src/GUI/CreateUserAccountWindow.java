@@ -232,24 +232,24 @@ public class CreateUserAccountWindow extends javax.swing.JFrame {
             boolean b;
 
             User user = null; 
-            String userType;
+            
             ISystemFacade facade = new SystemFacade();
 
             if ((String)UserTypeComboBox.getSelectedItem() == "Customer"){
-                 userType = "Customer";
+                
                  user = new Customer(Long.parseLong(MaximumRentTextField.getText()), "Active", 
                          this.agent.getId(), NameTextField.getText(), LastnameTextField.getText(), 
                          EmailTextField.getText(), UsernameTextField.getText(), 
                          PasswordTextField.getText());
              }else{
-                 userType = "Owner";                    
+                                
                  user = new Owner("Active",this.agent.getId(),                          
                          NameTextField.getText(), LastnameTextField.getText(), 
                          EmailTextField.getText(), UsernameTextField.getText(), 
                          PasswordTextField.getText());
              }
 
-             b = facade.createUser(user, userType);
+             b = facade.createUser(user);
 
              if (b == true){
                  this.dispose();

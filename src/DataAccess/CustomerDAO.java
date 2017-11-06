@@ -19,7 +19,8 @@ import javax.swing.JOptionPane;
 public class CustomerDAO {
     
     public static final String SEARCH_CUSTOMER = "select count(*) from Customer "
-                                               + "where username = ? and password = ?";
+            + "where username = ? and password = ? "
+            + "and deletion_status = 'Active'";
     
     public static final String LOAD_CUSTOMER = "select iduser, name, lastname, "
                                                + "email_address, account_creation_datetime, "
@@ -32,6 +33,9 @@ public class CustomerDAO {
     
     public static final String SEARCH_USERNAME = "select count(*) from Customer "
                     + "where username = ?";
+    
+    public static final String DELETE_CUSTOMER = "update Customer set "
+            + "deletion_status = 'Deleted' where iduser = ?";
                   
     public CustomerDAO() {
     }
@@ -204,6 +208,39 @@ public class CustomerDAO {
             }
         }
         
+    }
+    
+    public static boolean deleteCustomer(Customer customer){
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;   
+        
+        try{
+            connection = DBConnection.getConnection();
+            
+            ps = connection.prepareStatement(DELETE_CUSTOMER);
+                      
+            ps.setInt(1, customer.getId());                
+            
+            ps.executeUpdate();
+            
+            connection.commit();
+            
+            JOptionPane.showMessageDialog(null, "The account was deleted successfully");
+            return true;
+                    
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex); 
+            return false;
+        }finally{
+            try{
+                ps.close();
+                connection.close();
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error: " + ex);               
+            }
+        }         
     }
     
 }

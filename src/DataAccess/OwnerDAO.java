@@ -19,7 +19,8 @@ import javax.swing.JOptionPane;
 public class OwnerDAO {
     
     public static final String SEARCH_OWNER = "select count(*) from Property_Owner "
-                    + "where username = ? and password = ?"; 
+                    + "where username = ? and password = ? "
+                    + "and deletion_status = 'Active'";
     
     public static final String LOAD_OWNER = "select iduser, name, lastname, "
                                                + "email_address, account_creation_datetime, "
@@ -32,6 +33,9 @@ public class OwnerDAO {
     
     public static final String SEARCH_USERNAME = "select count(*) from Property_Owner "
                     + "where username = ?";
+    
+    public static final String DELETE_OWNER = "update Property_Owner set "
+            + "deletion_status = 'Deleted' where iduser = ?";
 
     public OwnerDAO() {
     }
@@ -202,5 +206,38 @@ public class OwnerDAO {
             }
         }
         
+    }
+    
+    public static boolean deleteOwner(Owner owner){
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;   
+        
+        try{
+            connection = DBConnection.getConnection();
+            
+            ps = connection.prepareStatement(DELETE_OWNER);
+                      
+            ps.setInt(1, owner.getId());                
+            
+            ps.executeUpdate();
+            
+            connection.commit();
+            
+            JOptionPane.showMessageDialog(null, "The account was deleted successfully");
+            return true;
+                    
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex); 
+            return false;
+        }finally{
+            try{
+                ps.close();
+                connection.close();
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error: " + ex);               
+            }
+        }         
     }
 }
