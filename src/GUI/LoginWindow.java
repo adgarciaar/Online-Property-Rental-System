@@ -24,8 +24,7 @@ public class LoginWindow extends javax.swing.JFrame {
      * Creates new form VentanaPrincipal
      */
     public LoginWindow() {
-        initComponents();       
-        
+        initComponents();        
     }
 
     /**
@@ -197,6 +196,9 @@ public class LoginWindow extends javax.swing.JFrame {
             person = facade.searchPerson(username, password, userType);
 
             if ( person != null){
+                
+                UsernameTextField.setText("");
+                PasswordTextField.setText("");
                 
                 if (userType.compareTo("Agent") == 0){
                     
