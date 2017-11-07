@@ -132,7 +132,8 @@ public class OwnerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_SignOutButtonActionPerformed
 
     private void AddPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddPropertyButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new AddPropertyWindow(this.owner, this).setVisible(true);
     }//GEN-LAST:event_AddPropertyButtonActionPerformed
 
     private void ViewPropertiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPropertiesButtonActionPerformed
