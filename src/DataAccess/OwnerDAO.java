@@ -37,7 +37,7 @@ public class OwnerDAO {
     public static final String DELETE_OWNER = "update Property_Owner set "
             + "deletion_status = 'Deleted' where iduser = ?";
     
-    public static boolean searchOwner(String username, String password){
+    public static Owner searchOwner(String username, String password){
         
         Connection connection = null;       
         PreparedStatement ps = null;
@@ -60,14 +60,27 @@ public class OwnerDAO {
             rs.close();
             
             if(number == 0){
-                return false;
-            }else{
-                return true;
+                return null;
+            }else{                
+                Owner owner = null;
+                ps = connection.prepareStatement(LOAD_OWNER);
+                ps.setString(1, username);
+                rs = ps.executeQuery();
+                while (rs.next()){           
+
+                    owner = new Owner(rs.getString("deletion_status"),rs.getInt("agent_idagent"),
+                                            rs.getInt("iduser"),rs.getString("name"),
+                                            rs.getString("lastname"),rs.getString("email_address"),
+                                            username,null);
+
+                }
+                rs.close();            
+            return owner;
             }
             
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error" + ex);
-            return false;    
+            return null;    
             
         }finally{
             try {
@@ -78,48 +91,6 @@ public class OwnerDAO {
             }            
         }       
        
-    }
-    
-    public static Owner LoadOwner(String username){
-        
-        Owner owner = null;
-        
-        Connection connection = null;       
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        try{
-            
-            connection = DBConnection.getConnection();
-            ps = connection.prepareStatement(LOAD_OWNER);
-            ps.setString(1, username);
-            rs = ps.executeQuery();
-            
-            while (rs.next()){           
-                
-                owner = new Owner(rs.getString("deletion_status"),rs.getInt("agent_idagent"),
-                                        rs.getInt("iduser"),rs.getString("name"),
-                                        rs.getString("lastname"),rs.getString("email_address"),
-                                        username,null);
-                                             
-            }
-            
-            rs.close();
-            
-            return owner;
-            
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error: " + ex);
-            return null;    
-            
-        }finally{
-            try {
-                ps.close();
-                connection.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error: " + ex);                       
-            }            
-        }          
     }
     
     public static boolean createOwner(Owner owner){

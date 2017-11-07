@@ -9,6 +9,7 @@ import World.Agent;
 import World.Customer;
 import World.ISystemFacade;
 import World.Owner;
+import World.Person;
 import World.SystemFacade;
 
 import javax.swing.JOptionPane;
@@ -190,26 +191,27 @@ public class LoginWindow extends javax.swing.JFrame {
         if(testTextFields() == true){
                 
             ISystemFacade facade = new SystemFacade(); 
+            
+            Person person = null;
+            
+            person = facade.searchPerson(username, password, userType);
 
-            if (facade.searchPerson(username, password, userType) == true){
+            if ( person != null){
                 
                 if (userType.compareTo("Agent") == 0){
                     
-                    this.setVisible(false);
-                    Agent agent = (Agent) facade.loadPerson(username, userType);
-                    new AgentWindow(agent, this).setVisible(true); 
+                    this.setVisible(false);                   
+                    new AgentWindow((Agent) person, this).setVisible(true); 
                     
                 }else if(userType.compareTo("Customer") == 0){
                     
-                    this.setVisible(false);                    
-                    Customer customer = (Customer) facade.loadPerson(username, userType);
-                    new CustomerWindow(customer, this).setVisible(true);
+                    this.setVisible(false);                   
+                    new CustomerWindow((Customer) person, this).setVisible(true);
 
                 }else{
                     
                     this.setVisible(false);
-                    Owner owner = (Owner) facade.loadPerson(username, userType);
-                    new OwnerWindow(owner, this).setVisible(true);
+                    new OwnerWindow((Owner) person, this).setVisible(true);
                 }
 
             }else{

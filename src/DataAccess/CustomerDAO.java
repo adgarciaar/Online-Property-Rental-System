@@ -37,7 +37,7 @@ public class CustomerDAO {
     public static final String DELETE_CUSTOMER = "update Customer set "
             + "deletion_status = 'Deleted' where iduser = ?";
     
-    public static boolean searchCustomer(String username, String password){
+    public static Customer searchCustomer(String username, String password){
         
         Connection connection = null;       
         PreparedStatement ps = null;
@@ -60,14 +60,28 @@ public class CustomerDAO {
             rs.close();
             
             if(number == 0){
-                return false;
+                return null;
             }else{
-                return true;
+                Customer customer = null;
+                ps = connection.prepareStatement(LOAD_CUSTOMER);
+                ps.setString(1, username);
+                rs = ps.executeQuery();
+
+                while (rs.next()){
+                    customer = new Customer(rs.getLong("maximum_rent"),
+                                            rs.getString("deletion_status"),rs.getInt("agent_idagent"),
+                                            rs.getInt("iduser"),rs.getString("name"),
+                                            rs.getString("lastname"),rs.getString("email_address"),
+                                            username,null);
+
+                }
+                rs.close();
+                return customer;                
             }
             
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error: " + ex);
-            return false;    
+            return null;    
             
         }finally{
             try {
@@ -80,7 +94,7 @@ public class CustomerDAO {
        
     }    
     
-    public static Customer LoadCustomer(String username){
+    /*public static Customer LoadCustomer(String username){
         
         Customer customer = null;
         
@@ -121,7 +135,7 @@ public class CustomerDAO {
                 JOptionPane.showMessageDialog(null, "Error: " + ex);                       
             }            
         }          
-    }
+    }*/
     
     public static boolean createCustomer(Customer customer){
         

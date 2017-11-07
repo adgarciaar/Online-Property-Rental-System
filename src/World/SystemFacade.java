@@ -19,7 +19,7 @@ public class SystemFacade implements ISystemFacade{
     }   
     
     @Override
-    public boolean searchPerson(String username, String password, String personType) {
+    public Person searchPerson(String username, String password, String personType) {
           
         if (personType.compareTo("Agent") == 0){
             return AgentDAO.searchAgent(username, password);
@@ -29,19 +29,6 @@ public class SystemFacade implements ISystemFacade{
             return OwnerDAO.searchOwner(username, password);
         }
         
-    }
-
-    @Override
-    public Person loadPerson(String username, String personType) {
-        
-        if (personType.compareTo("Agent") == 0){
-            return AgentDAO.LoadAgent(username);
-        }else if(personType.compareTo("Customer") == 0){
-            return CustomerDAO.LoadCustomer(username);
-        }else{
-            return OwnerDAO.LoadOwner(username);
-        }
-       
     }
 
     @Override
