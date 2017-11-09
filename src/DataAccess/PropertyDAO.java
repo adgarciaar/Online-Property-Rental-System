@@ -20,7 +20,7 @@ public class PropertyDAO {
     public static final String DELETE_PROPERTIES = "update Property set deletion_status"
             + " = 'Deleted' where owner_iduser = ?";
     
-    public static void deletePropertiesByOwner(int idOwner){
+    public static boolean deletePropertiesByOwner(int idOwner){
         
         Connection connection = null;       
         PreparedStatement ps = null;
@@ -37,11 +37,12 @@ public class PropertyDAO {
             
             connection.commit();
             
-            JOptionPane.showMessageDialog(null, "The properties related to this account were deleted successfully");            
+            JOptionPane.showMessageDialog(null, "The properties related to this account were deleted successfully"); 
+            return true;
                     
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex);             
-            
+            return false;
         }finally{
             try{
                 ps.close();

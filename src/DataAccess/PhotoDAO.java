@@ -1,0 +1,134 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package DataAccess;
+
+import World.Photo;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author adrian
+ */
+public class PhotoDAO {
+    
+    public static final String UPLOAD_PHOTO = "insert into photo (filename,image,"
+            + "description,datephoto,country_idcountry,property_idproperty) values "
+            + "(?, ?, ?, ?, ?, ?);";
+    
+    public static boolean uploadPhoto(Photo photo, File image){
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try{
+           
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement(UPLOAD_PHOTO);
+            
+            rs = ps.executeQuery();
+            
+            FileInputStream fis = new FileInputStream(image);
+            ps.setString(1, photo.getFilename());            
+            ps.setBinaryStream(2, fis, fis.available());
+            ps.setString(3, photo.getDescription());
+            ps.setDate(4, (Date) photo.getDatephoto());
+            ps.setInt(5, photo.getCountryId());
+            ps.setInt(6, photo.getPropertyId());
+            
+            rs.close();
+            
+            return true;
+            
+        }catch(IOException | SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error" + ex);
+            return false;   
+        
+        }finally{
+            try {
+                ps.close();
+                connection.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error" + ex);                           
+            }            
+        }
+        
+    }
+    
+    public static HashMap<Integer, Photo> retrievePhoto(){
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        HashMap<Integer,Photo> listPhotos = new HashMap<Integer,Photo>();
+        
+        try{
+           
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement(UPLOAD_PHOTO);            
+            
+            rs = ps.executeQuery();
+
+            Photo photo = new Photo();            
+            
+            while (rs.next()){
+                
+                photo.setFilename(rs.getString("filename"));
+                
+                Blob b = rs.getBlob(2);
+		byte[] bt = new byte[(int) b.length()];
+                bt = b.getBytes(1, (int)b.length());
+                InputStream is = new ByteArrayInputStream(bt);
+                BufferedImage bufImage = null;
+                bufImage = ImageIO.read(is);
+                
+                photo.setImage(bufImage);
+                
+                photo.setDescription(rs.getString("description"));
+                photo.setDatephoto(rs.getDate("datephoto"));
+                photo.setCountryId(rs.getInt("country_idcountry"));
+                photo.setPropertyId(rs.getInt("property_idproperty"));
+                
+                listPhotos.put(photo.getId(), photo);
+                
+            }   
+            
+            rs.close();     
+            
+            return listPhotos;
+            
+        }catch(IOException | SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error" + ex);
+            return null;
+        }finally{
+            try {
+                ps.close();
+                connection.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error" + ex);                           
+            }            
+        }
+    }
+    
+}
