@@ -5,6 +5,8 @@
  */
 package World;
 
+import java.util.HashMap;
+
 /**
  *
  * @author adrian
@@ -19,6 +21,7 @@ public class Property {
     private String deletion_status;
     private int idLocation;
     private int idOwner;
+    private HashMap<Integer, Photo> photos;
 
     public Property(int id, String type, String address, int number_rooms, long rent, String deletion_status, int idLocation, int idOwner) {
         this.id = id;
