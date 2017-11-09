@@ -31,22 +31,23 @@ import javax.swing.JOptionPane;
  */
 public class PhotoDAO {
     
-    public static final String UPLOAD_PHOTO = "insert into photo (filename,image,"
+    public static final String UPLOAD_PHOTO = "insert into photo (filename,image, "
             + "description,datephoto,country_idcountry,property_idproperty) values "
-            + "(?, ?, ?, ?, ?, ?);";
+            + "(?, ?, ?, ?, ?, ?)";
+    
+    public static final String RETRIEVE_PHOTOS = "select id,filename,image, "
+            + "description,datephoto,country_idcountry,property_idproperty from "
+            + "Photo where property_idproperty = ?";
     
     public static boolean uploadPhoto(Photo photo, File image){
         
         Connection connection = null;       
         PreparedStatement ps = null;
-        ResultSet rs = null;
         
         try{
            
             connection = DBConnection.getConnection();
             ps = connection.prepareStatement(UPLOAD_PHOTO);
-            
-            rs = ps.executeQuery();
             
             FileInputStream fis = new FileInputStream(image);
             ps.setString(1, photo.getFilename());            
@@ -56,7 +57,9 @@ public class PhotoDAO {
             ps.setInt(5, photo.getCountryId());
             ps.setInt(6, photo.getPropertyId());
             
-            rs.close();
+            ps.executeUpdate();
+            
+            connection.commit();
             
             return true;
             
@@ -75,7 +78,7 @@ public class PhotoDAO {
         
     }
     
-    public static HashMap<Integer, Photo> retrievePhoto(){
+    public static HashMap<Integer, Photo> retrievePhotos(int propertyId){
         
         Connection connection = null;       
         PreparedStatement ps = null;
@@ -86,7 +89,8 @@ public class PhotoDAO {
         try{
            
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement(UPLOAD_PHOTO);            
+            ps = connection.prepareStatement(UPLOAD_PHOTO);        
+            ps.setInt(1, propertyId);
             
             rs = ps.executeQuery();
 

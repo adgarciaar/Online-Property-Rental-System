@@ -94,9 +94,9 @@ public class OwnerDAO {
     }
     
     public static boolean createOwner(Owner owner){
+        
         Connection connection = null;       
         PreparedStatement ps = null;
-        ResultSet rs = null;   
         
         try{
             connection = DBConnection.getConnection();
@@ -180,7 +180,6 @@ public class OwnerDAO {
         
         Connection connection = null;       
         PreparedStatement ps = null;
-        ResultSet rs = null;   
         
         if (PropertyDAO.deletePropertiesByOwner(owner.getId()) == true){
         

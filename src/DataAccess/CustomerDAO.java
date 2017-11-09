@@ -92,56 +92,13 @@ public class CustomerDAO {
             }            
         }       
        
-    }    
+    } 
     
-    /*public static Customer LoadCustomer(String username){
-        
-        Customer customer = null;
-        
-        Connection connection = null;       
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        try{
-            
-            connection = DBConnection.getConnection();
-            ps = connection.prepareStatement(LOAD_CUSTOMER);
-            ps.setString(1, username);
-            rs = ps.executeQuery();
-            
-            while (rs.next()){           
-                
-                customer = new Customer(rs.getLong("maximum_rent"),
-                                        rs.getString("deletion_status"),rs.getInt("agent_idagent"),
-                                        rs.getInt("iduser"),rs.getString("name"),
-                                        rs.getString("lastname"),rs.getString("email_address"),
-                                        username,null);
-                                             
-            }
-            
-            rs.close();
-            
-            return customer;
-            
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error: " + ex);
-            return null;    
-            
-        }finally{
-            try {
-                ps.close();
-                connection.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error: " + ex);                       
-            }            
-        }          
-    }*/
     
     public static boolean createCustomer(Customer customer){
         
         Connection connection = null;       
         PreparedStatement ps = null;
-        ResultSet rs = null;   
         
         try{
             connection = DBConnection.getConnection();
@@ -225,7 +182,6 @@ public class CustomerDAO {
         
         Connection connection = null;       
         PreparedStatement ps = null;
-        ResultSet rs = null;   
         
         try{
             connection = DBConnection.getConnection();
