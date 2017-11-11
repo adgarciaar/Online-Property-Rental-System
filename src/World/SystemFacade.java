@@ -6,8 +6,11 @@
 package World;
 
 import DataAccess.AgentDAO;
+import DataAccess.CountryDAO;
 import DataAccess.CustomerDAO;
+import DataAccess.LocationDAO;
 import DataAccess.OwnerDAO;
+import java.util.HashMap;
 
 /**
  *
@@ -57,6 +60,21 @@ public class SystemFacade implements ISystemFacade{
         }else{
             return OwnerDAO.deleteOwner((Owner) user);     
         }
+    }
+
+    @Override
+    public boolean createProperty(Property property) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public HashMap<Integer, Location> retrieveLocations() {
+        return LocationDAO.retrieveLocations();
+    }
+
+    @Override
+    public HashMap<Integer, Country> retrieveCountries() {
+        return CountryDAO.retrieveCountries();
     }
     
 }

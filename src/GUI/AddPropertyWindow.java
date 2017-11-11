@@ -5,16 +5,17 @@
  */
 package GUI;
 
-import DataAccess.LocationDAO;
+import World.ISystemFacade;
 import World.Location;
 import World.Owner;
 import World.Property;
+import World.SystemFacade;
 import javax.swing.JFrame;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -36,19 +37,19 @@ public class AddPropertyWindow extends javax.swing.JFrame {
         this.owner = owner;
         this.OwnerWindow = OwnerWindow;
         
+        ISystemFacade facade = new SystemFacade(); 
+        
         HashMap<Integer,Location> listLocations;
-        listLocations = LocationDAO.retrieveLocations();
+        listLocations = facade.retrieveLocations();
         Location location;
         
         Set set = listLocations.entrySet();        
         Iterator iterator = set.iterator();
 
         while(iterator.hasNext()) {
-               
             Map.Entry mentry = (Map.Entry)iterator.next();               
             location = (Location) mentry.getValue();
-            LocationComboBox.addItem(location.getId()+". "+location.getName());
-            
+            LocationComboBox.addItem(location.getId()+". "+location.getName());            
         }
         
     }
@@ -174,17 +175,23 @@ public class AddPropertyWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
-        Property property; 
         
-        String location = (String)LocationComboBox.getSelectedItem();   
-        int idLocation = Integer.parseInt(location.substring(0, 1));        
+        if(validateFields() == true){
         
-        /*property = new Property((String)TypeComboBox.getSelectedItem(),AddressTextField.getText(),
-                Integer.parseInt(NumberRoomsTextField.getText()),Long.parseLong(RentTextField.getText()),"Active",
-                1,this.owner.getId());
-        
-        new AddPhotoWindow(property, this.OwnerWindow).setVisible(true);
-        this.dispose();*/
+            Property property; 
+
+            String location = (String)LocationComboBox.getSelectedItem();   
+            int idLocation = Integer.parseInt(location.substring(0, 1));        
+
+            property = new Property((String)TypeComboBox.getSelectedItem(),
+                    AddressTextField.getText(),
+                    Integer.parseInt(NumberRoomsTextField.getText()),
+                    Long.parseLong(RentTextField.getText()),"Active",
+                    idLocation,this.owner.getId());
+
+            new AddPhotoWindow(property, this.OwnerWindow).setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_NextButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
@@ -228,7 +235,53 @@ public class AddPropertyWindow extends javax.swing.JFrame {
     }
     
     private boolean validateFields(){
-        boolean b = false;
+        
+        boolean b = true;
+        boolean fill = true;
+        
+        if(AddressTextField.getText().compareTo("") == 0){      
+            b = false;
+            fill = false;
+        }else{
+            if(AddressTextField.getText().length() > 50){ 
+                b = false;
+                JOptionPane.showMessageDialog(null, "Address has a maximum lenght of 50 characters");
+            }
+        }
+        
+        if(NumberRoomsTextField.getText().compareTo("") == 0){      
+            b = false;
+            fill = false;
+        }else{
+            if (NumberRoomsTextField.getText().matches("[0-9]+") == false){
+                b = false;
+                JOptionPane.showMessageDialog(null, "Number of rooms can contain only numbers");
+            }else{
+                if(NumberRoomsTextField.getText().length() > 9){ 
+                    b = false;
+                    JOptionPane.showMessageDialog(null, "Number of rooms has a maximum lenght of 9 numbers");
+                }
+            }
+        }
+        
+        if(RentTextField.getText().compareTo("") == 0){      
+            b = false;
+            fill = false;
+        }else{
+            if (RentTextField.getText().matches("[0-9]+") == false){
+                b = false;
+                JOptionPane.showMessageDialog(null, "Rent can contain only numbers");
+            }else{
+                if(RentTextField.getText().length() > 18){ 
+                    b = false;
+                    JOptionPane.showMessageDialog(null, "Rent has a maximum lenght of 18 numbers");
+                }
+            }                
+        }
+        
+        if (fill == false){
+            JOptionPane.showMessageDialog(null, "Warning: you have to fill all the fields");
+        }
         
         return b;
     }

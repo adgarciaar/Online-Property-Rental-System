@@ -5,6 +5,8 @@
  */
 package World;
 
+import java.util.HashMap;
+
 /**
  *
  * @author adrian
@@ -18,5 +20,11 @@ public interface ISystemFacade {
     public boolean validateUsername(String username, String userType);
     
     public boolean deleteUser(User user);
+    
+    public boolean createProperty(Property property);
+    
+    public HashMap<Integer, Location> retrieveLocations();
+    
+    public HashMap<Integer, Country> retrieveCountries();
     
 }
