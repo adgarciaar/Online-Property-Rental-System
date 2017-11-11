@@ -42,7 +42,7 @@ public class CountryDAO {
                 
                 country = new Country();      
                 
-                country.setId(rs.getInt("idlocation"));
+                country.setId(rs.getInt("idcountry"));
                 country.setName(rs.getString("name"));                
                 
                 listCountries.put(country.getId(), country);
@@ -54,14 +54,14 @@ public class CountryDAO {
             return listCountries;
             
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error" + ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
             return null;
         }finally{
             try {
                 ps.close();
                 connection.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error" + ex);                           
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                           
             }            
         }
     }

@@ -55,14 +55,14 @@ public class LocationDAO {
             return listLocations;
             
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error" + ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
             return null;
         }finally{
             try {
                 ps.close();
                 connection.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error" + ex);                           
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                           
             }            
         }
     }
