@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -65,12 +66,12 @@ public class AddPhotoWindow extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        FilenameTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         UploadButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        DescriptionTextArea = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         CancelButton = new javax.swing.JButton();
         NextButton = new javax.swing.JButton();
@@ -95,9 +96,9 @@ public class AddPhotoWindow extends javax.swing.JFrame {
 
         jLabel4.setText("Description");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        DescriptionTextArea.setColumns(20);
+        DescriptionTextArea.setRows(5);
+        jScrollPane1.setViewportView(DescriptionTextArea);
 
         jLabel5.setText("Date (dd/mm/yyyy)");
 
@@ -134,7 +135,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
+                    .addComponent(FilenameTextField)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                     .addComponent(UploadButton)
                     .addComponent(DateTextField, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -154,7 +155,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FilenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,8 +197,9 @@ public class AddPhotoWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
-        // https://www.mkyong.com/java/how-to-compare-dates-in-java/
-        // https://www.mkyong.com/java/how-to-check-if-date-is-valid-in-java/
+        if(validateFields() == true){
+            
+        }
     }//GEN-LAST:event_NextButtonActionPerformed
 
     /**
@@ -234,11 +236,50 @@ public class AddPhotoWindow extends javax.swing.JFrame {
             }
         });
     }
+    
+    private boolean validateFields(){
+        
+        boolean b = true;
+        boolean fill = true;
+        
+        if(FilenameTextField.getText().compareTo("") == 0){      
+            b = false;
+            fill = false;
+        }else{
+            if (FilenameTextField.getText().matches("[a-zA-Z0-9]*") == false){
+                b = false;
+                JOptionPane.showMessageDialog(null, "Filename can contain only letters and numbers");
+            }else{
+                if(FilenameTextField.getText().length() > 35){ 
+                    b = false;
+                    JOptionPane.showMessageDialog(null, "Filename has a maximum lenght of 35 characters");
+                }
+            }
+        }
+        
+        if(DescriptionTextArea.getText().compareTo("") == 0){      
+            b = false;
+            fill = false;
+        }else{
+            if(DescriptionTextArea.getText().length() > 100){ 
+                b = false;
+                JOptionPane.showMessageDialog(null, "Description has a maximum lenght of 100 characters");
+            }
+        }
+        
+        if (fill == false){
+            JOptionPane.showMessageDialog(null, "Warning: you have to fill all the fields");
+        }
+        
+        return b;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
     private javax.swing.JComboBox<String> CountryComboBox;
     private javax.swing.JTextField DateTextField;
+    private javax.swing.JTextArea DescriptionTextArea;
+    private javax.swing.JTextField FilenameTextField;
     private javax.swing.JButton NextButton;
     private javax.swing.JButton UploadButton;
     private javax.swing.JLabel jLabel1;
@@ -248,7 +289,5 @@ public class AddPhotoWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
