@@ -42,20 +42,15 @@ public class AddPropertyWindow extends javax.swing.JFrame {
         
         Set set = listLocations.entrySet();        
         Iterator iterator = set.iterator();
-        
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
 
-        int i = 0;
         while(iterator.hasNext()) {
                
             Map.Entry mentry = (Map.Entry)iterator.next();               
             location = (Location) mentry.getValue();
-            
-            model.addElement(location);
+            LocationComboBox.addItem(location.getId()+". "+location.getName());
             
         }
         
-        LocationComboBox.setModel(model);
     }
 
     /**
@@ -181,14 +176,15 @@ public class AddPropertyWindow extends javax.swing.JFrame {
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
         Property property; 
         
-        String location = (String)LocationComboBox.getSelectedItem();       
+        String location = (String)LocationComboBox.getSelectedItem();   
+        int idLocation = Integer.parseInt(location.substring(0, 1));        
         
-        property = new Property((String)TypeComboBox.getSelectedItem(),AddressTextField.getText(),
+        /*property = new Property((String)TypeComboBox.getSelectedItem(),AddressTextField.getText(),
                 Integer.parseInt(NumberRoomsTextField.getText()),Long.parseLong(RentTextField.getText()),"Active",
                 1,this.owner.getId());
         
         new AddPhotoWindow(property, this.OwnerWindow).setVisible(true);
-        this.dispose();
+        this.dispose();*/
     }//GEN-LAST:event_NextButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
@@ -229,6 +225,12 @@ public class AddPropertyWindow extends javax.swing.JFrame {
                 //new AddPropertyWindow().setVisible(true);
             }
         });
+    }
+    
+    private boolean validateFields(){
+        boolean b = false;
+        
+        return b;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

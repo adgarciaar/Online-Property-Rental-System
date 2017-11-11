@@ -36,9 +36,11 @@ public class LocationDAO {
             
             rs = ps.executeQuery();
 
-            Location location = new Location();            
+            Location location;      
             
             while (rs.next()){
+                
+                location = new Location();      
                 
                 location.setId(rs.getInt("idlocation"));
                 location.setName(rs.getString("name"));
