@@ -16,12 +16,14 @@ import javax.swing.JFrame;
  */
 public class AddPhotoWindow extends javax.swing.JFrame {
     
-    private Property property;
-    private JFrame previousWindow;
+    private final Property property;
+    private final JFrame previousWindow;
     
 
     /**
      * Creates new form AddPhotoWindow
+     * @param property
+     * @param previousWindow
      */
     public AddPhotoWindow(Property property, JFrame previousWindow) {
         initComponents();

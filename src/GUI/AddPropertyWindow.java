@@ -6,18 +6,16 @@
 package GUI;
 
 import DataAccess.LocationDAO;
-import World.KeyValue;
 import World.Location;
 import World.Owner;
 import World.Property;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
 
 /**
  *
@@ -30,6 +28,8 @@ public class AddPropertyWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form AddPropertyWindow
+     * @param owner
+     * @param OwnerWindow
      */
     public AddPropertyWindow(Owner owner, JFrame OwnerWindow) {
         initComponents();
@@ -42,6 +42,8 @@ public class AddPropertyWindow extends javax.swing.JFrame {
         
         Set set = listLocations.entrySet();        
         Iterator iterator = set.iterator();
+        
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
 
         int i = 0;
         while(iterator.hasNext()) {
@@ -49,8 +51,11 @@ public class AddPropertyWindow extends javax.swing.JFrame {
             Map.Entry mentry = (Map.Entry)iterator.next();               
             location = (Location) mentry.getValue();
             
-            //LocationComboBox.addItem(new KeyValue (location.getName(), (String) mentry.getKey()));
+            model.addElement(location);
+            
         }
+        
+        LocationComboBox.setModel(model);
     }
 
     /**
@@ -62,6 +67,7 @@ public class AddPropertyWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         TypeComboBox = new javax.swing.JComboBox<>();
@@ -239,5 +245,6 @@ public class AddPropertyWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
