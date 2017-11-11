@@ -5,10 +5,19 @@
  */
 package GUI;
 
+import DataAccess.LocationDAO;
+import World.KeyValue;
+import World.Location;
 import World.Owner;
+import World.Property;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -26,6 +35,22 @@ public class AddPropertyWindow extends javax.swing.JFrame {
         initComponents();
         this.owner = owner;
         this.OwnerWindow = OwnerWindow;
+        
+        HashMap<Integer,Location> listLocations;
+        listLocations = LocationDAO.retrieveLocations();
+        Location location;
+        
+        Set set = listLocations.entrySet();        
+        Iterator iterator = set.iterator();
+
+        int i = 0;
+        while(iterator.hasNext()) {
+               
+            Map.Entry mentry = (Map.Entry)iterator.next();               
+            location = (Location) mentry.getValue();
+            
+            //LocationComboBox.addItem(new KeyValue (location.getName(), (String) mentry.getKey()));
+        }
     }
 
     /**
@@ -121,16 +146,16 @@ public class AddPropertyWindow extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(41, 41, 41)
                         .addComponent(jLabel3)
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel4)
-                        .addGap(43, 43, 43)
+                        .addGap(110, 110, 110)
                         .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(TypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(AddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
-                        .addComponent(LocationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LocationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addGap(40, 40, 40)
                         .addComponent(NumberRoomsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
@@ -148,7 +173,16 @@ public class AddPropertyWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
-        // TODO add your handling code here:
+        Property property; 
+        
+        String location = (String)LocationComboBox.getSelectedItem();       
+        
+        property = new Property((String)TypeComboBox.getSelectedItem(),AddressTextField.getText(),
+                Integer.parseInt(NumberRoomsTextField.getText()),Long.parseLong(RentTextField.getText()),"Active",
+                1,this.owner.getId());
+        
+        new AddPhotoWindow(property, this.OwnerWindow).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_NextButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed

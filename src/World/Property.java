@@ -23,7 +23,20 @@ public class Property {
     private int idOwner;
     private HashMap<Integer, Photo> photos;
 
-    public Property(int id, String type, String address, int number_rooms, long rent, String deletion_status, int idLocation, int idOwner) {
+    public Property() {
+    }
+
+    public Property(String type, String address, int number_rooms, long rent, String deletion_status, int idLocation, int idOwner) {
+        this.type = type;
+        this.address = address;
+        this.number_rooms = number_rooms;
+        this.rent = rent;
+        this.deletion_status = deletion_status;
+        this.idLocation = idLocation;
+        this.idOwner = idOwner;
+    }
+
+    public Property(int id, String type, String address, int number_rooms, long rent, String deletion_status, int idLocation, int idOwner, HashMap<Integer, Photo> photos) {
         this.id = id;
         this.type = type;
         this.address = address;
@@ -32,6 +45,7 @@ public class Property {
         this.deletion_status = deletion_status;
         this.idLocation = idLocation;
         this.idOwner = idOwner;
+        this.photos = photos;
     }
 
     public int getId() {
@@ -96,6 +110,14 @@ public class Property {
 
     public void setIdOwner(int idOwner) {
         this.idOwner = idOwner;
+    }
+
+    public HashMap<Integer, Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(HashMap<Integer, Photo> photos) {
+        this.photos = photos;
     }
         
 }

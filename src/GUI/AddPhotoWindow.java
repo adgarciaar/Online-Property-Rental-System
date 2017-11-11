@@ -168,7 +168,8 @@ public class AddPhotoWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
-        // TODO add your handling code here:
+        // https://www.mkyong.com/java/how-to-compare-dates-in-java/
+        // https://www.mkyong.com/java/how-to-check-if-date-is-valid-in-java/
     }//GEN-LAST:event_NextButtonActionPerformed
 
     /**
