@@ -78,7 +78,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
             }
 
             this.listPhotos = new HashMap<Integer,Photo>();
-            
+            this.file = null;
         }
         
     }
@@ -143,8 +143,6 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                 NextButtonActionPerformed(evt);
             }
         });
-
-        DateTextField.setText("dd/mm/yyyy");
 
         jLabel6.setText("Country");
 
@@ -249,10 +247,12 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                     this.listPhotos.put(this.i, photo);
                     
                     this.i = this.i+1;
+                    
                     FilenameTextField.setText("");
                     DescriptionTextArea.setText("");
-                    DateTextField.setText("dd/mm/yyyy");
+                    DateTextField.setText("");
                     CountryComboBox.setSelectedIndex(0);
+                    
                     this.file = null;
                 }
                 
@@ -345,6 +345,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                     
                     if (dateText.compareTo(dateobj) > 0) {
                         System.out.println("Date is incorrect");
+                        b = false;
                     }
                 } catch (ParseException ex) {
                     Logger.getLogger(AddPhotoWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -352,6 +353,10 @@ public class AddPhotoWindow extends javax.swing.JFrame {
             }
         }
         
+        if (this.file == null){
+            b = false;
+            JOptionPane.showMessageDialog(null, "You have to select an image");
+        }        
         
         if (fill == false){
             JOptionPane.showMessageDialog(null, "Warning: you have to fill all the fields");
