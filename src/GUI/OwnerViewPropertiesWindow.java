@@ -8,12 +8,18 @@ package GUI;
 import DataAccess.LocationDAO;
 import World.ISystemFacade;
 import World.Owner;
+import World.Photo;
 import World.Property;
 import World.SystemFacade;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -25,7 +31,7 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
     private final Owner owner;
     private HashMap<Integer,Property> listProperties;
     private final JFrame OwnerWindow;
-    private Property property;
+    private Property property;   
 
     /**
      * Creates new form OwnerViewProperties
@@ -39,6 +45,7 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
         this.owner = owner;
         this.listProperties = listProperties;
         this.OwnerWindow = OwnerWindow;
+        ImageLabel.setText("");
         
         this.stablishListProperties();        
     }
@@ -75,9 +82,11 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
         PhotosComboBox = new javax.swing.JComboBox<>();
         ShowPhotoButton = new javax.swing.JButton();
         FilenameTextField = new javax.swing.JTextField();
-        ImageLabel = new javax.swing.JLabel();
         DeletePropertyButton = new javax.swing.JButton();
         BackButton = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        DeletionStatusTextField = new javax.swing.JTextField();
+        ImageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,8 +155,6 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
 
         FilenameTextField.setEnabled(false);
 
-        ImageLabel.setText("theImage");
-
         DeletePropertyButton.setText("Delete property");
         DeletePropertyButton.setEnabled(false);
         DeletePropertyButton.addActionListener(new java.awt.event.ActionListener() {
@@ -163,77 +170,78 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setText("Deletion status");
+
+        DeletionStatusTextField.setEnabled(false);
+
+        ImageLabel.setText("theImage");
+        ImageLabel.setMaximumSize(new java.awt.Dimension(389, 215));
+        ImageLabel.setPreferredSize(new java.awt.Dimension(350, 200));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(DeletePropertyButton, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(DeletePropertyButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(2, 2, 2)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel6)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(jLabel3))))
-                                            .addComponent(jLabel2))
-                                        .addGap(57, 57, 57)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(TypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(RentTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                                                .addComponent(NumberRoomsTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                                                .addComponent(LocationComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(AddressTextField)))))
-                                .addGap(110, 110, 110)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(124, 124, 124)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(FilenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(ShowPhotoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(PhotosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(ImageLabel)
-                                            .addGap(217, 217, 217)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel16))
-                                        .addGap(230, 230, 230))))
+                                            .addComponent(jLabel6)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel3))
+                                            .addComponent(jLabel11)))
+                                    .addComponent(jLabel2))
+                                .addGap(57, 57, 57)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(RentTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                                    .addComponent(NumberRoomsTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                                    .addComponent(LocationComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(AddressTextField)
+                                    .addComponent(DeletionStatusTextField))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(38, 38, 38)
+                                .addGap(137, 137, 137)
+                                .addComponent(BackButton))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(110, 110, 110)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel8))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ShowPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(OrderByNumberRoomsButton)
-                                        .addGap(33, 33, 33)
+                                        .addGap(37, 37, 37)
                                         .addComponent(OrderByRentButton))
-                                    .addComponent(PropertiesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(38, 38, 38)
+                                        .addComponent(PropertiesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(30, 30, 30)
-                                .addComponent(ShowPropertyButton)))
-                        .addGap(0, 59, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(584, 584, 584)
-                .addComponent(BackButton)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(ShowPropertyButton))
+                            .addComponent(PhotosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FilenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 35, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,22 +257,23 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(OrderByNumberRoomsButton)
                     .addComponent(OrderByRentButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGap(18, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(PhotosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
+                        .addGap(26, 26, 26)
                         .addComponent(ShowPhotoButton)
-                        .addGap(44, 44, 44)
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(FilenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
                         .addGap(29, 29, 29)
                         .addComponent(jLabel16)
-                        .addGap(11, 11, 11)
-                        .addComponent(ImageLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(80, 80, 80)
@@ -286,12 +295,16 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(RentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
-                .addGap(66, 66, 66)
+                            .addComponent(jLabel6))
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(DeletionStatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DeletePropertyButton)
                     .addComponent(BackButton))
-                .addGap(41, 41, 41))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -300,6 +313,8 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
     private void ShowPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPropertyButtonActionPerformed
         
         LocationComboBox.removeAllItems();
+        PhotosComboBox.removeAllItems();
+        
         TypeComboBox.addItem("Apartment");
         TypeComboBox.addItem("House");        
         
@@ -307,15 +322,34 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
         int idProperty = Integer.parseInt(propertyData.substring(0, 1));
         
         this.property = this.listProperties.get(idProperty);
+        
         TypeComboBox.setSelectedItem(this.property.getType());
         AddressTextField.setText(this.property.getAddress());
         LocationComboBox.addItem(LocationDAO.retrieveNameLocation(this.property.getIdLocation()));        
         NumberRoomsTextField.setText(Integer.toString(this.property.getNumber_rooms()));
         RentTextField.setText(Long.toString(this.property.getRent()));
+        DeletionStatusTextField.setText(this.property.getDeletion_status());
         
         DeletePropertyButton.setEnabled(true);
         
-        ShowPhotoButton.setEnabled(true);
+        
+        LinkedHashMap<Integer, Photo> listPhotos;
+        listPhotos = this.property.getPhotos();
+        
+        Set set = listPhotos.entrySet();        
+        Iterator iterator = set.iterator();
+        
+        Photo photo;
+
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();               
+            photo = (Photo) mentry.getValue();  
+            PhotosComboBox.addItem(photo.getId()+". "+photo.getFilename());
+        }
+        
+        PhotosComboBox.setEnabled(true);
+        
+        ShowPhotoButton.setEnabled(true);       
                 
     }//GEN-LAST:event_ShowPropertyButtonActionPerformed
 
@@ -332,7 +366,19 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_OrderByRentButtonActionPerformed
 
     private void ShowPhotoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPhotoButtonActionPerformed
-        // TODO add your handling code here:
+        
+        String photoData = (String)PhotosComboBox.getSelectedItem();   
+        int idPhoto = Integer.parseInt(photoData.substring(0, 1));
+        
+        LinkedHashMap<Integer, Photo> listPhotos;
+        listPhotos = this.property.getPhotos();
+        
+        Photo photo = listPhotos.get(idPhoto);
+        
+        BufferedImage bufImage = (BufferedImage) photo.getImage();
+        Icon icono = new ImageIcon(bufImage.getScaledInstance(389, 215, Image.SCALE_DEFAULT));        
+        ImageLabel.setIcon(icono);   
+        
     }//GEN-LAST:event_ShowPhotoButtonActionPerformed
 
     private void DeletePropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletePropertyButtonActionPerformed
@@ -403,6 +449,7 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
     private javax.swing.JTextField AddressTextField;
     private javax.swing.JButton BackButton;
     private javax.swing.JButton DeletePropertyButton;
+    private javax.swing.JTextField DeletionStatusTextField;
     private javax.swing.JTextField FilenameTextField;
     private javax.swing.JLabel ImageLabel;
     private javax.swing.JComboBox<String> LocationComboBox;
@@ -417,6 +464,7 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> TypeComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

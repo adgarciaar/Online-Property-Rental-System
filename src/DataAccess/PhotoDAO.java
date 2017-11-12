@@ -96,6 +96,7 @@ public class PhotoDAO {
                 
                 photo = new Photo();
                 
+                photo.setId(rs.getInt("idphoto"));
                 photo.setFilename(rs.getString("filename"));
                 
                 Blob b = rs.getBlob(3);
