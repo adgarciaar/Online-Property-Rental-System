@@ -229,6 +229,19 @@ public class AddPhotoWindow extends javax.swing.JFrame {
 
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
         if(validateFields() == true){
+            
+            Photo photo;
+                
+            String country = (String)CountryComboBox.getSelectedItem();
+            int idCountry = Integer.parseInt(country.substring(0, 1));
+                
+            photo = new Photo(FilenameTextField.getText(),this.file,
+                        DescriptionTextArea.getText(),
+                        DateTextField.getText(),
+                        idCountry);
+                
+            this.listPhotos.put(this.i, photo);
+            
             if(this.i == 5){
                 
                 this.property.setPhotos(this.listPhotos);
@@ -241,18 +254,6 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                 }
                 
             }else{
-                 
-                Photo photo;
-                
-                String country = (String)CountryComboBox.getSelectedItem();
-                int idCountry = Integer.parseInt(country.substring(0, 1));
-                
-                photo = new Photo(FilenameTextField.getText(),this.file,
-                        DescriptionTextArea.getText(),
-                        DateTextField.getText(),
-                        idCountry);
-                
-                this.listPhotos.put(this.i, photo);
                 
                 this.i = this.i+1;
                 
