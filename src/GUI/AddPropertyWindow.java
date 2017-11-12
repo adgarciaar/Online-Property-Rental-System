@@ -41,15 +41,25 @@ public class AddPropertyWindow extends javax.swing.JFrame {
         
         HashMap<Integer,Location> listLocations;
         listLocations = facade.retrieveLocations();
-        Location location;
         
-        Set set = listLocations.entrySet();        
-        Iterator iterator = set.iterator();
+        if (listLocations == null || listLocations.isEmpty() == true){     
+            
+            JOptionPane.showMessageDialog(null, "There is not locations registered. Properties can not be added");
+            this.dispose();
+            this.OwnerWindow.setVisible(true);
+            
+        }else{  
+            
+            Location location;
+        
+            Set set = listLocations.entrySet();        
+            Iterator iterator = set.iterator();
 
-        while(iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry)iterator.next();               
-            location = (Location) mentry.getValue();
-            LocationComboBox.addItem(location.getId()+". "+location.getName());            
+            while(iterator.hasNext()) {
+                Map.Entry mentry = (Map.Entry)iterator.next();               
+                location = (Location) mentry.getValue();
+                LocationComboBox.addItem(location.getId()+". "+location.getName());            
+            }
         }
         
     }

@@ -55,20 +55,32 @@ public class AddPhotoWindow extends javax.swing.JFrame {
         
         HashMap<Integer,Country> listCountries;
         listCountries = facade.retrieveCountries();
-        Country country;
         
-        Set set = listCountries.entrySet();        
-        Iterator iterator = set.iterator();
+        if (listCountries == null || listCountries.isEmpty() == true){
+            
+            JOptionPane.showMessageDialog(null, "There is not countries registered. Photos can not be added");
+            this.dispose();
+            this.previousWindow.setVisible(true);
+            
+        }else{
+            
+            Country country;
+        
+            Set set = listCountries.entrySet();        
+            Iterator iterator = set.iterator();
 
-        while(iterator.hasNext()) {
-               
-            Map.Entry mentry = (Map.Entry)iterator.next();               
-            country = (Country) mentry.getValue();
-            CountryComboBox.addItem(country.getId()+". "+country.getName());
+            while(iterator.hasNext()) {
+
+                Map.Entry mentry = (Map.Entry)iterator.next();               
+                country = (Country) mentry.getValue();
+                CountryComboBox.addItem(country.getId()+". "+country.getName());
+
+            }
+
+            this.listPhotos = new HashMap<Integer,Photo>();
             
         }
         
-        this.listPhotos = new HashMap<Integer,Photo>();
     }
 
     /**

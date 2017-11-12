@@ -49,7 +49,7 @@ public class CountryDAO {
                 
             }   
             
-            rs.close();     
+            rs.close();   
             
             return listCountries;
             
