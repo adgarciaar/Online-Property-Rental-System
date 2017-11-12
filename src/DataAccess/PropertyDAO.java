@@ -76,11 +76,12 @@ public class PropertyDAO {
             ps.setString(1, property.getType());
             ps.setString(2, property.getAddress());
             ps.setInt(3, property.getNumber_rooms());
-            ps.setLong(4, property.getRent());
+            ps.setLong(4, property.getRent());           
             ps.setInt(5, property.getIdLocation());
-            ps.setInt(6, property.getIdOwner());                            
+            ps.setInt(6, property.getIdOwner());   
             
             ps.executeUpdate();
+            
             
             HashMap<Integer,Photo> listLocations;
             listLocations = property.getPhotos();
