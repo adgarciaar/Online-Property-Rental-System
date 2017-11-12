@@ -342,7 +342,12 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_ShowPhotoButtonActionPerformed
 
     private void DeletePropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletePropertyButtonActionPerformed
-        // TODO add your handling code here:
+        this.property.setDeletion_status("Deleted");
+        ISystemFacade facade = new SystemFacade();   
+        boolean b;
+        b = facade.deleteProperty(this.property.getId());
+        this.clean();        
+        PropertiesComboBox.setSelectedIndex(0);
     }//GEN-LAST:event_DeletePropertyButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
@@ -431,6 +436,7 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
         NumberRoomsTextField.setText("");
         RentTextField.setText("");
         DeletionStatusTextField.setText("");
+        ImageLabel.setIcon(null);  
     }
     
     private void showProperty(){
@@ -481,6 +487,8 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
     }
     
     private void showPhoto(){
+        
+        ImageLabel.setIcon(null); 
         
         FilenameTextField.setText("");
         

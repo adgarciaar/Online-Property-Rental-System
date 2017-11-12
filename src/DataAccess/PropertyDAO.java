@@ -7,6 +7,7 @@ package DataAccess;
 
 import World.Photo;
 import World.Property;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,6 +37,9 @@ public class PropertyDAO {
     public static final String SEARCH_PROPERTIES_BY_OWNER = "select idproperty, "
             + "type,address,number_rooms,rent,deletion_status,location_idlocation "
             + "from Property where owner_iduser = ? ";
+    
+    public static final String DELETE_PROPERTY = "update Property set deletion_status"
+            + " = 'Deleted' where idproperty = ?";
     
     public static boolean deletePropertiesByOwner(int idOwner){
         
@@ -143,7 +147,7 @@ public class PropertyDAO {
         }         
     }
     
-    public static LinkedHashMap<Integer,Property> searchPropertiesByOwner(int idOwner, String order){
+    public static LinkedHashMap<Integer,Property> searchPropertiesByOwner(int idOwner, String order) throws IOException{
         
         Connection connection = null;       
         PreparedStatement ps = null;
@@ -214,6 +218,39 @@ public class PropertyDAO {
             }            
         }       
        
+    }
+    
+    public static boolean deleteProperty(int idProperty){
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;   
+        
+        try{
+            connection = DBConnection.getConnection();
+            
+            ps = connection.prepareStatement(DELETE_PROPERTY);
+                      
+            ps.setInt(1, idProperty);                
+            
+            ps.executeUpdate();
+            
+            connection.commit();
+            
+            JOptionPane.showMessageDialog(null, "The property was deleted successfully"); 
+            return true;
+                    
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex);             
+            return false;
+        }finally{
+            try{
+                ps.close();
+                connection.close();
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error: " + ex);               
+            }
+        }
     }
     
 }

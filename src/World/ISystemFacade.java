@@ -29,4 +29,6 @@ public interface ISystemFacade {
     
     public LinkedHashMap<Integer,Property> propertiesByOwner(int idOwner, String order);
     
+    public boolean deleteProperty(int idProperty);
+    
 }
