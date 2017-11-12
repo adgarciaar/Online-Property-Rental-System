@@ -33,6 +33,10 @@ public class PropertyDAO {
     public static final String SEARCH_LAST_ADDED_PROPERTY = "select MAX(idproperty) "
             + "from Property";
     
+    public static final String SEARCH_PROPERTIES_BY_OWNER = "select idproperty, "
+            + "type,address,number_rooms,rent,deletion_status,location_idlocation "
+            + "from Property where owner_iduser = ?";
+    
     public static boolean deletePropertiesByOwner(int idOwner){
         
         Connection connection = null;       
@@ -137,6 +141,65 @@ public class PropertyDAO {
                 JOptionPane.showMessageDialog(null, "Error: " + ex);               
             }
         }         
+    }
+    
+    public static HashMap<Integer,Property> searchPropertiesByOwner(int idOwner){
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try{
+           
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement(SEARCH_PROPERTIES_BY_OWNER);
+            ps.setInt(1, idOwner);
+            
+            rs = ps.executeQuery();
+            
+            HashMap<Integer,Property> listProperties = new HashMap<>();
+            
+            Property property;
+            
+            while (rs.next()){
+                
+                property = new Property();
+                
+                property.setId(rs.getInt("idproperty"));
+                property.setType(rs.getString("type"));
+                property.setAddress(rs.getString("address"));
+                property.setNumber_rooms(rs.getInt("number_rooms"));
+                property.setRent(rs.getLong("rent"));
+                property.setDeletion_status(rs.getString("deletion_status"));
+                property.setIdLocation(rs.getInt("location_idlocation"));
+                property.setIdOwner(idOwner);
+                
+                HashMap<Integer, Photo> listPhotos = new HashMap<>();
+                listPhotos = PhotoDAO.retrievePhotos(property.getId());
+                
+                property.setPhotos(listPhotos);
+                
+                listProperties.put(property.getId(), property);
+                
+            }  
+            
+            rs.close();
+            
+            return listProperties;            
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
+            return null;    
+            
+        }finally{
+            try {
+                ps.close();
+                connection.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                           
+            }            
+        }       
+       
     }
     
 }

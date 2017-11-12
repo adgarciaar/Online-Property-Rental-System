@@ -77,5 +77,10 @@ public class SystemFacade implements ISystemFacade{
     public HashMap<Integer, Country> retrieveCountries() {
         return CountryDAO.retrieveCountries();
     }
+
+    @Override
+    public HashMap<Integer,Property> propertiesByOwner(int idOwner) {
+        return PropertyDAO.searchPropertiesByOwner(idOwner);
+    }
     
 }

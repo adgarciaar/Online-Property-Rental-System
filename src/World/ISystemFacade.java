@@ -27,4 +27,6 @@ public interface ISystemFacade {
     
     public HashMap<Integer, Country> retrieveCountries();
     
+    public HashMap<Integer,Property> propertiesByOwner(int idOwner);
+    
 }

@@ -14,13 +14,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -83,7 +80,7 @@ public class PhotoDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        HashMap<Integer,Photo> listPhotos = new HashMap<Integer,Photo>();
+        HashMap<Integer,Photo> listPhotos = new HashMap<>();
         
         try{
            
@@ -93,9 +90,11 @@ public class PhotoDAO {
             
             rs = ps.executeQuery();
 
-            Photo photo = new Photo();            
+            Photo photo;            
             
             while (rs.next()){
+                
+                photo = new Photo();
                 
                 photo.setFilename(rs.getString("filename"));
                 

@@ -27,7 +27,7 @@ public class LocationDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        HashMap<Integer,Location> listLocations = new HashMap<Integer,Location>();
+        HashMap<Integer,Location> listLocations = new HashMap<>();
         
         try{
            

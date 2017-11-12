@@ -27,7 +27,7 @@ public class CountryDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        HashMap<Integer,Country> listCountries = new HashMap<Integer,Country>();
+        HashMap<Integer,Country> listCountries = new HashMap<>();
         
         try{
            
