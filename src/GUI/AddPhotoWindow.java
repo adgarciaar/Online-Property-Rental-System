@@ -47,9 +47,11 @@ public class AddPhotoWindow extends javax.swing.JFrame {
     public AddPhotoWindow(Property property, JFrame previousWindow, int i) {
         initComponents();
         this.property = property;
-        this.previousWindow = previousWindow;        
+        this.previousWindow = previousWindow;
+
+        this.i = i;
         
-        AddPhotoLabel.setText("Add photo "+i);
+        AddPhotoLabel.setText("Add photo "+this.i);
         
         ISystemFacade facade = new SystemFacade(); 
         
@@ -254,6 +256,8 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                     CountryComboBox.setSelectedIndex(0);
                     
                     this.file = null;
+                    
+                    AddPhotoLabel.setText("Add photo "+this.i);
                 }
                 
             } catch (ParseException ex) {
@@ -343,9 +347,9 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                     
                     Date dateText=new SimpleDateFormat("dd/MM/yyyy").parse(DateTextField.getText());
                     
-                    if (dateText.compareTo(dateobj) > 0) {
-                        System.out.println("Date is incorrect");
+                    if (dateText.compareTo(dateobj) > 0) {                                         
                         b = false;
+                        JOptionPane.showMessageDialog(null, "Date is incorrect");       
                     }
                 } catch (ParseException ex) {
                     Logger.getLogger(AddPhotoWindow.class.getName()).log(Level.SEVERE, null, ex);
