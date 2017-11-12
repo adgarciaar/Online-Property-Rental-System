@@ -486,7 +486,6 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
     
     private void showPhoto(){
         
-        ImageLabel.setVisible(false);
         FilenameTextField.setText("");
         
         String photoData = (String)PhotosComboBox.getSelectedItem();
@@ -511,7 +510,7 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
         }
         Icon icon = new ImageIcon(bufImage.getScaledInstance(389, 215, Image.SCALE_DEFAULT));        
         ImageLabel.setIcon(icon);   
-        ImageLabel.setVisible(true);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
