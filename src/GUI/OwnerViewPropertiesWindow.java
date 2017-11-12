@@ -21,6 +21,7 @@ import java.util.Set;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -342,12 +343,17 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_ShowPhotoButtonActionPerformed
 
     private void DeletePropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletePropertyButtonActionPerformed
-        this.property.setDeletion_status("Deleted");
-        ISystemFacade facade = new SystemFacade();   
-        boolean b;
-        b = facade.deleteProperty(this.property.getId());
-        this.clean();        
-        PropertiesComboBox.setSelectedIndex(0);
+        
+        if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        
+            this.property.setDeletion_status("Deleted");
+            ISystemFacade facade = new SystemFacade();   
+            boolean b;
+            b = facade.deleteProperty(this.property.getId());
+            this.clean();        
+            PropertiesComboBox.setSelectedIndex(0);
+        
+        }
     }//GEN-LAST:event_DeletePropertyButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
