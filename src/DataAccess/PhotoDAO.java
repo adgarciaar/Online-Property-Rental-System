@@ -39,7 +39,7 @@ public class PhotoDAO {
             + "description,datephoto,country_idcountry,property_idproperty from "
             + "Photo where property_idproperty = ?";
     
-    public static boolean uploadPhoto(Photo photo, File image){
+    public static boolean uploadPhoto(Photo photo){
         
         Connection connection = null;       
         PreparedStatement ps = null;
@@ -49,7 +49,7 @@ public class PhotoDAO {
             connection = DBConnection.getConnection();
             ps = connection.prepareStatement(UPLOAD_PHOTO);
             
-            FileInputStream fis = new FileInputStream(image);
+            FileInputStream fis = new FileInputStream((File) photo.getImage());
             ps.setString(1, photo.getFilename());            
             ps.setBinaryStream(2, fis, fis.available());
             ps.setString(3, photo.getDescription());
@@ -59,12 +59,10 @@ public class PhotoDAO {
             
             ps.executeUpdate();
             
-            connection.commit();
-            
             return true;
             
         }catch(IOException | SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error" + ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
             return false;   
         
         }finally{
@@ -72,7 +70,7 @@ public class PhotoDAO {
                 ps.close();
                 connection.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error" + ex);                           
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                           
             }            
         }
         
@@ -123,14 +121,14 @@ public class PhotoDAO {
             return listPhotos;
             
         }catch(IOException | SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error" + ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
             return null;
         }finally{
             try {
                 ps.close();
                 connection.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error" + ex);                           
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                           
             }            
         }
     }

@@ -21,7 +21,7 @@ public interface ISystemFacade {
     
     public boolean deleteUser(User user);
     
-    public boolean createProperty(Property property);
+    public boolean addProperty(Property property);
     
     public HashMap<Integer, Location> retrieveLocations();
     

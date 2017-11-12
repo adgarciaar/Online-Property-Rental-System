@@ -10,6 +10,7 @@ import DataAccess.CountryDAO;
 import DataAccess.CustomerDAO;
 import DataAccess.LocationDAO;
 import DataAccess.OwnerDAO;
+import DataAccess.PropertyDAO;
 import java.util.HashMap;
 
 /**
@@ -63,8 +64,8 @@ public class SystemFacade implements ISystemFacade{
     }
 
     @Override
-    public boolean createProperty(Property property) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addProperty(Property property) {
+        return PropertyDAO.addProperty(property);
     }
 
     @Override

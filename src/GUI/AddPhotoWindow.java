@@ -233,9 +233,13 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                 if(this.i == 5){
                     
                     this.property.setPhotos(this.listPhotos);
-                    //add property
-                    this.dispose();
-                    this.previousWindow.setVisible(true);
+                    
+                    ISystemFacade facade = new SystemFacade(); 
+                    
+                    if(facade.addProperty(this.property) == true){
+                        this.dispose();
+                        this.previousWindow.setVisible(true);
+                    }                  
                     
                 }else{
                     

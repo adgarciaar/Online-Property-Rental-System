@@ -79,7 +79,7 @@ public class OwnerDAO {
             }
             
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error" + ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
             return null;    
             
         }finally{
@@ -87,7 +87,7 @@ public class OwnerDAO {
                 ps.close();
                 connection.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error" + ex);                          
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                          
             }            
         }       
        
