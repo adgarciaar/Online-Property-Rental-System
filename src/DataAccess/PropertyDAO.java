@@ -28,7 +28,7 @@ public class PropertyDAO {
     
     public static final String ADD_PROPERTY = "insert into property (type,address,"
             + "number_rooms,rent,deletion_status,location_idlocation,owner_iduser) "
-            + "values (?, ?, ?, ?, 'Active', ?, ?);";
+            + "values (?, ?, ?, ?, 'Active', ?, ?)";
     
     public static boolean deletePropertiesByOwner(int idOwner){
         
