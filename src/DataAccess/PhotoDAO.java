@@ -6,7 +6,6 @@
 package DataAccess;
 
 import World.Photo;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,7 +17,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
-import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
@@ -103,8 +101,6 @@ public class PhotoDAO {
 		byte[] bt = new byte[(int) b.length()];
                 bt = b.getBytes(1, (int)b.length());
                 InputStream is = new ByteArrayInputStream(bt);
-                //BufferedImage bufImage = null;
-                //bufImage = ImageIO.read(is);
                 
                 photo.setImage(is);
                 
