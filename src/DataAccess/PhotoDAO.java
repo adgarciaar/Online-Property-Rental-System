@@ -32,7 +32,7 @@ public class PhotoDAO {
     
     public static final String UPLOAD_PHOTO = "insert into photo (filename,image, "
             + "description,datephoto,country_idcountry,property_idproperty) values "
-            + "(?, ?, ?, ?, ?, ?)";
+            + "(?, ?, ?, TO_DATE(?, 'dd/mm/yyyy'), ?, ?)";
     
     public static final String RETRIEVE_PHOTOS = "select id,filename,image, "
             + "description,datephoto,country_idcountry,property_idproperty from "
@@ -52,7 +52,7 @@ public class PhotoDAO {
             ps.setString(1, photo.getFilename());            
             ps.setBinaryStream(2, fis, fis.available());
             ps.setString(3, photo.getDescription());
-            ps.setDate(4, (Date) photo.getDatephoto());
+            ps.setString(4, photo.getDatephoto());
             ps.setInt(5, photo.getCountryId());
             ps.setInt(6, photo.getPropertyId());
             
@@ -107,7 +107,7 @@ public class PhotoDAO {
                 photo.setImage(bufImage);
                 
                 photo.setDescription(rs.getString("description"));
-                photo.setDatephoto(rs.getDate("datephoto"));
+                photo.setDatephoto(rs.getString("datephoto"));
                 photo.setCountryId(rs.getInt("country_idcountry"));
                 photo.setPropertyId(rs.getInt("property_idproperty"));
                 

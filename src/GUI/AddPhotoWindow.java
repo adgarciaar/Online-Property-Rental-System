@@ -229,47 +229,41 @@ public class AddPhotoWindow extends javax.swing.JFrame {
 
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
         if(validateFields() == true){
-            try {
+            if(this.i == 5){
                 
-                if(this.i == 5){
-                    
-                    this.property.setPhotos(this.listPhotos);
-                    
-                    ISystemFacade facade = new SystemFacade(); 
-                    
-                    if(facade.addProperty(this.property) == true){
-                        this.dispose();
-                        this.previousWindow.setVisible(true);
-                    }                  
-                    
-                }else{
-                    
-                    Photo photo;
-                    
-                    String country = (String)CountryComboBox.getSelectedItem();
-                    int idCountry = Integer.parseInt(country.substring(0, 1));
-
-                    photo = new Photo(FilenameTextField.getText(),this.file,
-                            DescriptionTextArea.getText(),
-                            new SimpleDateFormat("dd/MM/yyyy").parse(DateTextField.getText()),
-                            idCountry,this.property.getId());
-                    
-                    this.listPhotos.put(this.i, photo);
-                    
-                    this.i = this.i+1;
-                    
-                    FilenameTextField.setText("");
-                    DescriptionTextArea.setText("");
-                    DateTextField.setText("");
-                    CountryComboBox.setSelectedIndex(0);
-                    
-                    this.file = null;
-                    
-                    AddPhotoLabel.setText("Add photo "+this.i);
+                this.property.setPhotos(this.listPhotos);
+                
+                ISystemFacade facade = new SystemFacade();
+                
+                if(facade.addProperty(this.property) == true){
+                    this.dispose();
+                    this.previousWindow.setVisible(true);
                 }
                 
-            } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(null, "Error: " + ex); 
+            }else{
+                 
+                Photo photo;
+                
+                String country = (String)CountryComboBox.getSelectedItem();
+                int idCountry = Integer.parseInt(country.substring(0, 1));
+                
+                photo = new Photo(FilenameTextField.getText(),this.file,
+                        DescriptionTextArea.getText(),
+                        DateTextField.getText(),
+                        idCountry,this.property.getId());
+                
+                this.listPhotos.put(this.i, photo);
+                
+                this.i = this.i+1;
+                
+                FilenameTextField.setText("");
+                DescriptionTextArea.setText("");
+                DateTextField.setText("");
+                CountryComboBox.setSelectedIndex(0);
+                
+                this.file = null;
+                
+                AddPhotoLabel.setText("Add photo "+this.i);
             }
         }
     }//GEN-LAST:event_NextButtonActionPerformed
