@@ -11,12 +11,11 @@ import World.Owner;
 import World.Property;
 import World.SystemFacade;
 import javax.swing.JFrame;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -33,13 +32,14 @@ public class AddPropertyWindow extends javax.swing.JFrame {
      * @param OwnerWindow
      */
     public AddPropertyWindow(Owner owner, JFrame OwnerWindow) {
+        
         initComponents();
         this.owner = owner;
         this.OwnerWindow = OwnerWindow;
         
         ISystemFacade facade = new SystemFacade(); 
         
-        HashMap<Integer,Location> listLocations;
+        LinkedHashMap<Integer,Location> listLocations;
         listLocations = facade.retrieveLocations();
         
         if (listLocations == null || listLocations.isEmpty() == true){ 

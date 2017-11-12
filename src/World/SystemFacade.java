@@ -11,7 +11,7 @@ import DataAccess.CustomerDAO;
 import DataAccess.LocationDAO;
 import DataAccess.OwnerDAO;
 import DataAccess.PropertyDAO;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -69,17 +69,17 @@ public class SystemFacade implements ISystemFacade{
     }
 
     @Override
-    public HashMap<Integer, Location> retrieveLocations() {
+    public LinkedHashMap<Integer, Location> retrieveLocations() {
         return LocationDAO.retrieveLocations();
     }
 
     @Override
-    public HashMap<Integer, Country> retrieveCountries() {
+    public LinkedHashMap<Integer, Country> retrieveCountries() {
         return CountryDAO.retrieveCountries();
     }
 
     @Override
-    public HashMap<Integer,Property> propertiesByOwner(int idOwner) {
+    public LinkedHashMap<Integer,Property> propertiesByOwner(int idOwner) {
         return PropertyDAO.searchPropertiesByOwner(idOwner);
     }
     

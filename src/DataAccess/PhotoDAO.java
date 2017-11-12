@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -74,13 +75,13 @@ public class PhotoDAO {
         
     }
     
-    public static HashMap<Integer, Photo> retrievePhotos(int propertyId){
+    public static LinkedHashMap<Integer, Photo> retrievePhotos(int propertyId){
         
         Connection connection = null;       
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        HashMap<Integer,Photo> listPhotos = new HashMap<>();
+        LinkedHashMap<Integer,Photo> listPhotos = new LinkedHashMap<>();
         
         try{
            

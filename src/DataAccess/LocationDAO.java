@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,15 +19,16 @@ import javax.swing.JOptionPane;
  */
 public class LocationDAO {
     
-    public static final String SEARCH_LOCATIONS = "select idlocation, name, zipcode from Map_Location";
+    public static final String SEARCH_LOCATIONS = "select idlocation, name, "
+            + "zipcode from Map_Location order by idlocation asc";
     
-    public static HashMap<Integer, Location> retrieveLocations(){
+    public static LinkedHashMap<Integer, Location> retrieveLocations(){
         
         Connection connection = null;       
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        HashMap<Integer,Location> listLocations = new HashMap<>();
+        LinkedHashMap<Integer,Location> listLocations = new LinkedHashMap<>();
         
         try{
            

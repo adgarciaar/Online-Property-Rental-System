@@ -5,7 +5,7 @@
  */
 package World;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -23,10 +23,10 @@ public interface ISystemFacade {
     
     public boolean addProperty(Property property);
     
-    public HashMap<Integer, Location> retrieveLocations();
+    public LinkedHashMap<Integer, Location> retrieveLocations();
     
-    public HashMap<Integer, Country> retrieveCountries();
+    public LinkedHashMap<Integer, Country> retrieveCountries();
     
-    public HashMap<Integer,Property> propertiesByOwner(int idOwner);
+    public LinkedHashMap<Integer,Property> propertiesByOwner(int idOwner);
     
 }

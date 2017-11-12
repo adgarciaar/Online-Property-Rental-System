@@ -19,8 +19,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -39,7 +39,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
     private final JFrame previousWindow;
     private int i;
     private File file;
-    private HashMap<Integer,Photo> listPhotos;
+    private LinkedHashMap<Integer,Photo> listPhotos;
 
     /**
      * Creates new form AddPhotoWindow
@@ -58,7 +58,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
         
         ISystemFacade facade = new SystemFacade(); 
         
-        HashMap<Integer,Country> listCountries;
+        LinkedHashMap<Integer,Country> listCountries;
         listCountries = facade.retrieveCountries();
         
         if (listCountries == null || listCountries.isEmpty() == true){
@@ -87,7 +87,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
 
             }
 
-            this.listPhotos = new HashMap<Integer,Photo>();
+            this.listPhotos = new LinkedHashMap<>();
             this.file = null;
         }
         
@@ -233,6 +233,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
+        
         if(validateFields() == true){
             
             Photo photo;

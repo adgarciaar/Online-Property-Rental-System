@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,15 +19,16 @@ import javax.swing.JOptionPane;
  */
 public class CountryDAO {
     
-    public static final String SEARCH_COUNTRIES = "select idcountry, name from Country";
+    public static final String SEARCH_COUNTRIES = "select idcountry, name from "
+            + "Country order by idcountry asc";
     
-    public static HashMap<Integer, Country> retrieveCountries(){
+    public static LinkedHashMap<Integer, Country> retrieveCountries(){
         
         Connection connection = null;       
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        HashMap<Integer,Country> listCountries = new HashMap<>();
+        LinkedHashMap<Integer,Country> listCountries = new LinkedHashMap<>();
         
         try{
            

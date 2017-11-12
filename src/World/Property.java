@@ -5,7 +5,7 @@
  */
 package World;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -21,7 +21,7 @@ public class Property {
     private String deletion_status;
     private int idLocation;
     private int idOwner;
-    private HashMap<Integer, Photo> photos;
+    private LinkedHashMap<Integer, Photo> photos;
 
     public Property() {
     }
@@ -36,7 +36,7 @@ public class Property {
         this.idOwner = idOwner;
     }
 
-    public Property(int id, String type, String address, int number_rooms, long rent, String deletion_status, int idLocation, int idOwner, HashMap<Integer, Photo> photos) {
+    public Property(int id, String type, String address, int number_rooms, long rent, String deletion_status, int idLocation, int idOwner, LinkedHashMap<Integer, Photo> photos) {
         this.id = id;
         this.type = type;
         this.address = address;
@@ -112,11 +112,11 @@ public class Property {
         this.idOwner = idOwner;
     }
 
-    public HashMap<Integer, Photo> getPhotos() {
+    public LinkedHashMap<Integer, Photo> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(HashMap<Integer, Photo> photos) {
+    public void setPhotos(LinkedHashMap<Integer, Photo> photos) {
         this.photos = photos;
     }
         

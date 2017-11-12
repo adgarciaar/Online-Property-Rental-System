@@ -11,8 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.JOptionPane;
@@ -35,7 +35,7 @@ public class PropertyDAO {
     
     public static final String SEARCH_PROPERTIES_BY_OWNER = "select idproperty, "
             + "type,address,number_rooms,rent,deletion_status,location_idlocation "
-            + "from Property where owner_iduser = ?";
+            + "from Property where owner_iduser = ? order by idproperty asc";
     
     public static boolean deletePropertiesByOwner(int idOwner){
         
@@ -101,7 +101,7 @@ public class PropertyDAO {
             rs.close();
             
             
-            HashMap<Integer,Photo> listLocations;
+            LinkedHashMap<Integer,Photo> listLocations;
             listLocations = property.getPhotos();
             
             Photo photo;
@@ -143,7 +143,7 @@ public class PropertyDAO {
         }         
     }
     
-    public static HashMap<Integer,Property> searchPropertiesByOwner(int idOwner){
+    public static LinkedHashMap<Integer,Property> searchPropertiesByOwner(int idOwner){
         
         Connection connection = null;       
         PreparedStatement ps = null;
@@ -157,7 +157,7 @@ public class PropertyDAO {
             
             rs = ps.executeQuery();
             
-            HashMap<Integer,Property> listProperties = new HashMap<>();
+            LinkedHashMap<Integer,Property> listProperties = new LinkedHashMap<>();
             
             Property property;
             
@@ -174,7 +174,7 @@ public class PropertyDAO {
                 property.setIdLocation(rs.getInt("location_idlocation"));
                 property.setIdOwner(idOwner);
                 
-                HashMap<Integer, Photo> listPhotos = new HashMap<>();
+                LinkedHashMap<Integer, Photo> listPhotos;
                 listPhotos = PhotoDAO.retrievePhotos(property.getId());
                 
                 property.setPhotos(listPhotos);
