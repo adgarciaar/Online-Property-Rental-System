@@ -318,8 +318,11 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
         TypeComboBox.addItem("Apartment");
         TypeComboBox.addItem("House");        
         
-        String propertyData = (String)PropertiesComboBox.getSelectedItem();   
-        int idProperty = Integer.parseInt(propertyData.substring(0, 1));
+        String propertyData = (String)PropertiesComboBox.getSelectedItem(); 
+        
+        int pointIndex = propertyData.indexOf(".");        
+        
+        int idProperty = Integer.parseInt(propertyData.substring(0, pointIndex));
         
         this.property = this.listProperties.get(idProperty);
         

@@ -239,7 +239,10 @@ public class AddPhotoWindow extends javax.swing.JFrame {
             Photo photo;
                 
             String country = (String)CountryComboBox.getSelectedItem();
-            int idCountry = Integer.parseInt(country.substring(0, 1));
+            
+            int pointIndex = country.indexOf("."); 
+            
+            int idCountry = Integer.parseInt(country.substring(0, pointIndex));
                 
             photo = new Photo(FilenameTextField.getText(),this.file,
                         DescriptionTextArea.getText(),

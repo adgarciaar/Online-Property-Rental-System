@@ -193,8 +193,11 @@ public class AddPropertyWindow extends javax.swing.JFrame {
         
             Property property; 
 
-            String location = (String)LocationComboBox.getSelectedItem();   
-            int idLocation = Integer.parseInt(location.substring(0, 1));        
+            String location = (String)LocationComboBox.getSelectedItem();  
+            
+            int pointIndex = location.indexOf("."); 
+            
+            int idLocation = Integer.parseInt(location.substring(0, pointIndex));        
 
             property = new Property((String)TypeComboBox.getSelectedItem(),
                     AddressTextField.getText(),
