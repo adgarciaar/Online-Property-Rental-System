@@ -230,6 +230,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
         if(validateFields() == true){
             try {
+                
                 if(this.i == 5){
                     
                     this.property.setPhotos(this.listPhotos);
@@ -268,7 +269,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                 }
                 
             } catch (ParseException ex) {
-                Logger.getLogger(AddPhotoWindow.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error: " + ex); 
             }
         }
     }//GEN-LAST:event_NextButtonActionPerformed
