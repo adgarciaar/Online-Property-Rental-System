@@ -99,14 +99,14 @@ public class PhotoDAO {
                 photo.setId(rs.getInt("idphoto"));
                 photo.setFilename(rs.getString("filename"));
                 
-                Blob b = rs.getBlob(3);
+                Blob b = rs.getBlob("image");
 		byte[] bt = new byte[(int) b.length()];
                 bt = b.getBytes(1, (int)b.length());
                 InputStream is = new ByteArrayInputStream(bt);
-                BufferedImage bufImage = null;
-                bufImage = ImageIO.read(is);
+                //BufferedImage bufImage = null;
+                //bufImage = ImageIO.read(is);
                 
-                photo.setImage(bufImage);
+                photo.setImage(is);
                 
                 photo.setDescription(rs.getString("description"));
                 photo.setDatephoto(rs.getString("datephoto"));
@@ -121,7 +121,7 @@ public class PhotoDAO {
             
             return listPhotos;
             
-        }catch(IOException | SQLException ex){
+        }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error: " + ex);
             return null;
         }finally{

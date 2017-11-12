@@ -13,11 +13,16 @@ import World.Property;
 import World.SystemFacade;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -370,15 +375,24 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
 
     private void ShowPhotoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPhotoButtonActionPerformed
         
-        String photoData = (String)PhotosComboBox.getSelectedItem();   
-        int idPhoto = Integer.parseInt(photoData.substring(0, 1));
+        String photoData = (String)PhotosComboBox.getSelectedItem();
+        
+        int pointIndex = photoData.indexOf("."); 
+        
+        int idPhoto = Integer.parseInt(photoData.substring(0, pointIndex));
         
         LinkedHashMap<Integer, Photo> listPhotos;
         listPhotos = this.property.getPhotos();
         
         Photo photo = listPhotos.get(idPhoto);
         
-        BufferedImage bufImage = (BufferedImage) photo.getImage();
+        InputStream is = (InputStream) photo.getImage();
+        BufferedImage bufImage = null;
+        try {
+            bufImage = ImageIO.read(is);
+        } catch (IOException ex) {
+            Logger.getLogger(OwnerViewPropertiesWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Icon icono = new ImageIcon(bufImage.getScaledInstance(389, 215, Image.SCALE_DEFAULT));        
         ImageLabel.setIcon(icono);   
         
