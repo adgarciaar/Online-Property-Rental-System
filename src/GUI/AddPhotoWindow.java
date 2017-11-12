@@ -11,7 +11,10 @@ import World.ISystemFacade;
 import World.Photo;
 import World.Property;
 import World.SystemFacade;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -343,7 +346,6 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                 try {
                     DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                     Date dateobj = new Date();
-                    System.out.println(dateobj);
                     
                     Date dateText=new SimpleDateFormat("dd/MM/yyyy").parse(DateTextField.getText());
                     
@@ -360,13 +362,36 @@ public class AddPhotoWindow extends javax.swing.JFrame {
         if (this.file == null){
             b = false;
             JOptionPane.showMessageDialog(null, "You have to select an image");
-        }        
+        }else{            
+            try {
+                if (this.isJPEG() == false){
+                    b = false;
+                    JOptionPane.showMessageDialog(null, "Image must be .jpg");
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(AddPhotoWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+         }        
         
         if (fill == false){
             JOptionPane.showMessageDialog(null, "Warning: you have to fill all the fields");
         }
         
         return b;
+    }
+    
+    
+    private boolean isJPEG() throws Exception {
+        DataInputStream ins = new DataInputStream(new BufferedInputStream(new FileInputStream(this.file)));
+        try {
+            if (ins.readInt() == 0xffd8ffe0) {
+                return true;
+            } else {                
+                return false;
+            }
+        } finally {
+            ins.close();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
