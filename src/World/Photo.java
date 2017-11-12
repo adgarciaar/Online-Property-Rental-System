@@ -16,7 +16,7 @@ public class Photo {
     
     private int id;
     private String filename;
-    BufferedImage image;
+    Object image;
     private String description;
     private Date datephoto;
     private int countryId;
@@ -25,8 +25,7 @@ public class Photo {
     public Photo() {
     }
 
-    public Photo(int id, String filename, BufferedImage image, String description, Date datephoto, int countryId, int propertyId) {
-        this.id = id;
+    public Photo(String filename, Object image, String description, Date datephoto, int countryId, int propertyId) {
         this.filename = filename;
         this.image = image;
         this.description = description;
@@ -35,9 +34,10 @@ public class Photo {
         this.propertyId = propertyId;
     }
 
-    public Photo(int id, String filename, String description, Date datephoto, int countryId, int propertyId) {
+    public Photo(int id, String filename, Object image, String description, Date datephoto, int countryId, int propertyId) {
         this.id = id;
         this.filename = filename;
+        this.image = image;
         this.description = description;
         this.datephoto = datephoto;
         this.countryId = countryId;
@@ -60,11 +60,11 @@ public class Photo {
         this.filename = filename;
     }
 
-    public BufferedImage getImage() {
+    public Object getImage() {
         return image;
     }
 
-    public void setImage(BufferedImage image) {
+    public void setImage(Object image) {
         this.image = image;
     }
 
@@ -99,5 +99,6 @@ public class Photo {
     public void setPropertyId(int propertyId) {
         this.propertyId = propertyId;
     }
-    
+
+        
 }

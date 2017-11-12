@@ -6,14 +6,22 @@
 package GUI;
 
 import World.Country;
+import World.DateValidator;
 import World.ISystemFacade;
+import World.Photo;
 import World.Property;
 import World.SystemFacade;
 import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -25,17 +33,23 @@ import javax.swing.JOptionPane;
 public class AddPhotoWindow extends javax.swing.JFrame {
     
     private final Property property;
-    private final JFrame previousWindow;    
+    private final JFrame previousWindow;
+    private int i;
+    private File file;
+    private HashMap<Integer,Photo> listPhotos;
 
     /**
      * Creates new form AddPhotoWindow
      * @param property
      * @param previousWindow
+     * @param i
      */
-    public AddPhotoWindow(Property property, JFrame previousWindow) {
+    public AddPhotoWindow(Property property, JFrame previousWindow, int i) {
         initComponents();
         this.property = property;
-        this.previousWindow = previousWindow;
+        this.previousWindow = previousWindow;        
+        
+        AddPhotoLabel.setText("Add photo "+i);
         
         ISystemFacade facade = new SystemFacade(); 
         
@@ -53,6 +67,8 @@ public class AddPhotoWindow extends javax.swing.JFrame {
             CountryComboBox.addItem(country.getId()+". "+country.getName());
             
         }
+        
+        this.listPhotos = new HashMap<Integer,Photo>();
     }
 
     /**
@@ -64,7 +80,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        AddPhotoLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         FilenameTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -81,7 +97,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Add photo n");
+        AddPhotoLabel.setText("Add photo n");
 
         jLabel2.setText("Filename");
 
@@ -127,7 +143,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(AddPhotoLabel)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
@@ -152,7 +168,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel1)
+                .addComponent(AddPhotoLabel)
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FilenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,7 +204,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
     private void UploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadButtonActionPerformed
         JFileChooser fc = new JFileChooser(System.getProperty("user.dir"));
         fc.showOpenDialog(fc);
-        File f = fc.getSelectedFile();
+        this.file = fc.getSelectedFile();
     }//GEN-LAST:event_UploadButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
@@ -198,7 +214,29 @@ public class AddPhotoWindow extends javax.swing.JFrame {
 
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonActionPerformed
         if(validateFields() == true){
-            
+            try {
+                Photo photo;
+                
+                String country = (String)CountryComboBox.getSelectedItem();
+                int idCountry = Integer.parseInt(country.substring(0, 1));
+                
+                photo = new Photo(FilenameTextField.getText(),this.file,
+                        DescriptionTextArea.getText(),
+                        new SimpleDateFormat("dd/MM/yyyy").parse(DateTextField.getText()),
+                        idCountry,this.property.getId());
+                
+                
+                
+                
+                if(this.i == 5){
+                    this.property.setPhotos(this.listPhotos);
+                }else{
+                    this.i = this.i+1;
+                }
+                
+            } catch (ParseException ex) {
+                Logger.getLogger(AddPhotoWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_NextButtonActionPerformed
 
@@ -267,6 +305,32 @@ public class AddPhotoWindow extends javax.swing.JFrame {
             }
         }
         
+        if(DateTextField.getText().compareTo("") == 0){      
+            b = false;
+            fill = false;
+        }else{
+            DateValidator dateValidator = new DateValidator();
+            if (dateValidator.validate(DateTextField.getText()) == false){
+                b = false;
+                JOptionPane.showMessageDialog(null, "Incorrect date");            
+            }else{
+                try {
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                    Date dateobj = new Date();
+                    System.out.println(dateobj);
+                    
+                    Date dateText=new SimpleDateFormat("dd/MM/yyyy").parse(DateTextField.getText());
+                    
+                    if (dateText.compareTo(dateobj) > 0) {
+                        System.out.println("Date is incorrect");
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(AddPhotoWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+        
         if (fill == false){
             JOptionPane.showMessageDialog(null, "Warning: you have to fill all the fields");
         }
@@ -275,6 +339,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AddPhotoLabel;
     private javax.swing.JButton CancelButton;
     private javax.swing.JComboBox<String> CountryComboBox;
     private javax.swing.JTextField DateTextField;
@@ -282,7 +347,6 @@ public class AddPhotoWindow extends javax.swing.JFrame {
     private javax.swing.JTextField FilenameTextField;
     private javax.swing.JButton NextButton;
     private javax.swing.JButton UploadButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

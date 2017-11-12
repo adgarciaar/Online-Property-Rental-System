@@ -187,7 +187,7 @@ public class AddPropertyWindow extends javax.swing.JFrame {
                     Long.parseLong(RentTextField.getText()),"Active",
                     idLocation,this.owner.getId());
 
-            new AddPhotoWindow(property, this.OwnerWindow).setVisible(true);
+            new AddPhotoWindow(property, this.OwnerWindow, 1).setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_NextButtonActionPerformed
