@@ -144,8 +144,8 @@ public class OwnerWindow extends javax.swing.JFrame {
     private void ViewPropertiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPropertiesButtonActionPerformed
        
         ISystemFacade facade = new SystemFacade(); 
-        HashMap<Integer,Property> listProperties = new HashMap<>();
-        listProperties = facade.propertiesByOwner(this.owner.getId());
+        HashMap<Integer,Property> listProperties;
+        listProperties = facade.propertiesByOwner(this.owner.getId(),"Owner");
         
         if (listProperties == null){  
             JOptionPane.showMessageDialog(null, "Problem retrieving the properties"); 
@@ -153,7 +153,7 @@ public class OwnerWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "You have no properties registered"); 
         }else{  
             this.dispose();
-            new OwnerViewProperties(this.owner,listProperties,this).setVisible(true);
+            new OwnerViewPropertiesWindow(this.owner,listProperties,this).setVisible(true);
         }
         
     }//GEN-LAST:event_ViewPropertiesButtonActionPerformed

@@ -79,8 +79,8 @@ public class SystemFacade implements ISystemFacade{
     }
 
     @Override
-    public LinkedHashMap<Integer,Property> propertiesByOwner(int idOwner) {
-        return PropertyDAO.searchPropertiesByOwner(idOwner);
+    public LinkedHashMap<Integer,Property> propertiesByOwner(int idOwner, String order) {
+        return PropertyDAO.searchPropertiesByOwner(idOwner, order);
     }
     
 }

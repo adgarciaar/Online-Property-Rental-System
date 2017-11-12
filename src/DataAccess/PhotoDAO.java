@@ -17,7 +17,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -32,9 +31,9 @@ public class PhotoDAO {
             + "description,datephoto,country_idcountry,property_idproperty) values "
             + "(?, ?, ?, TO_DATE(?, 'dd/mm/yyyy'), ?, ?)";
     
-    public static final String RETRIEVE_PHOTOS = "select id,filename,image, "
+    public static final String RETRIEVE_PHOTOS = "select idphoto,filename,image, "
             + "description,datephoto,country_idcountry,property_idproperty from "
-            + "Photo where property_idproperty = ?";
+            + "Photo where property_idproperty = ? order by idphoto asc";
     
     public static boolean uploadPhoto(Photo photo){
         
@@ -86,7 +85,7 @@ public class PhotoDAO {
         try{
            
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement(UPLOAD_PHOTO);        
+            ps = connection.prepareStatement(RETRIEVE_PHOTOS);        
             ps.setInt(1, propertyId);
             
             rs = ps.executeQuery();
@@ -99,7 +98,7 @@ public class PhotoDAO {
                 
                 photo.setFilename(rs.getString("filename"));
                 
-                Blob b = rs.getBlob(2);
+                Blob b = rs.getBlob(3);
 		byte[] bt = new byte[(int) b.length()];
                 bt = b.getBytes(1, (int)b.length());
                 InputStream is = new ByteArrayInputStream(bt);

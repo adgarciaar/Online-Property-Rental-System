@@ -35,7 +35,7 @@ public class PropertyDAO {
     
     public static final String SEARCH_PROPERTIES_BY_OWNER = "select idproperty, "
             + "type,address,number_rooms,rent,deletion_status,location_idlocation "
-            + "from Property where owner_iduser = ? order by idproperty asc";
+            + "from Property where owner_iduser = ? ";
     
     public static boolean deletePropertiesByOwner(int idOwner){
         
@@ -143,7 +143,7 @@ public class PropertyDAO {
         }         
     }
     
-    public static LinkedHashMap<Integer,Property> searchPropertiesByOwner(int idOwner){
+    public static LinkedHashMap<Integer,Property> searchPropertiesByOwner(int idOwner, String order){
         
         Connection connection = null;       
         PreparedStatement ps = null;
@@ -152,7 +152,21 @@ public class PropertyDAO {
         try{
            
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement(SEARCH_PROPERTIES_BY_OWNER);
+            
+            String query = null;
+            
+            if (order.compareTo("Owner") == 0){
+                query = SEARCH_PROPERTIES_BY_OWNER + "order by idproperty asc";
+            }else{
+                if (order.compareTo("NumberRooms") == 0){
+                    query = SEARCH_PROPERTIES_BY_OWNER + "order by number_rooms asc";
+                }else{
+                    query = SEARCH_PROPERTIES_BY_OWNER + "order by rent asc";
+                }                   
+            }
+            
+            ps = connection.prepareStatement(query);
+            
             ps.setInt(1, idOwner);
             
             rs = ps.executeQuery();

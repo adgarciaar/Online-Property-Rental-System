@@ -5,16 +5,20 @@
  */
 package GUI;
 
+import DataAccess.LocationDAO;
 import World.Owner;
 import World.Property;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import javax.swing.JFrame;
 
 /**
  *
  * @author adrian
  */
-public class OwnerViewProperties extends javax.swing.JFrame {
+public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
     
     private final Owner owner;
     private final HashMap<Integer,Property> listProperties;
@@ -26,12 +30,24 @@ public class OwnerViewProperties extends javax.swing.JFrame {
      * @param listProperties
      * @param OwnerWindow
      */
-    public OwnerViewProperties(Owner owner, HashMap<Integer,Property> listProperties, JFrame OwnerWindow) {
+    public OwnerViewPropertiesWindow(Owner owner, HashMap<Integer,Property> listProperties, JFrame OwnerWindow) {
         
         initComponents();
         this.owner = owner;
         this.listProperties = listProperties;
         this.OwnerWindow = OwnerWindow;
+        
+        Property property;
+        
+        Set set = this.listProperties.entrySet();        
+        Iterator iterator = set.iterator();
+
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();               
+            property = (Property) mentry.getValue();
+            PropertiesComboBox.addItem(property.getId()+". "+property.getType()
+                    +" in "+LocationDAO.retrieveNameLocation(property.getIdLocation()));            
+        }
         
     }
 
@@ -332,14 +348,15 @@ public class OwnerViewProperties extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OwnerViewProperties.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OwnerViewPropertiesWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OwnerViewProperties.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OwnerViewPropertiesWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OwnerViewProperties.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OwnerViewPropertiesWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OwnerViewProperties.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OwnerViewPropertiesWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

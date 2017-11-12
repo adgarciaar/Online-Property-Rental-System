@@ -27,6 +27,6 @@ public interface ISystemFacade {
     
     public LinkedHashMap<Integer, Country> retrieveCountries();
     
-    public LinkedHashMap<Integer,Property> propertiesByOwner(int idOwner);
+    public LinkedHashMap<Integer,Property> propertiesByOwner(int idOwner, String order);
     
 }

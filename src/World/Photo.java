@@ -5,9 +5,6 @@
  */
 package World;
 
-import java.awt.image.BufferedImage;
-import java.util.Date;
-
 /**
  *
  * @author adrian
