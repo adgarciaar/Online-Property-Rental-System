@@ -30,6 +30,9 @@ public class PropertyDAO {
             + "number_rooms,rent,deletion_status,location_idlocation,owner_iduser) "
             + "values (?, ?, ?, ?, 'Active', ?, ?)";
     
+    public static final String SEARCH_LAST_ADDED_PROPERTY = "select MAX(idproperty) "
+            + "from Property";
+    
     public static boolean deletePropertiesByOwner(int idOwner){
         
         Connection connection = null;       
@@ -82,6 +85,17 @@ public class PropertyDAO {
             
             ps.executeUpdate();
             
+            connection.commit();
+            
+            
+            ps = connection.prepareStatement(SEARCH_LAST_ADDED_PROPERTY);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){            
+                property.setId(rs.getInt("MAX(idproperty)"));
+            } 
+            rs.close();
+            
             
             HashMap<Integer,Photo> listLocations;
             listLocations = property.getPhotos();
@@ -96,6 +110,7 @@ public class PropertyDAO {
             while(iterator.hasNext()) {
                 Map.Entry mentry = (Map.Entry)iterator.next();               
                 photo = (Photo) mentry.getValue();
+                photo.setPropertyId(property.getId());
                 
                 if (PhotoDAO.uploadPhoto(photo) == false){
                     b = false;                    
@@ -106,7 +121,6 @@ public class PropertyDAO {
                 JOptionPane.showMessageDialog(null, "Problem with image uploading");
                 return false;
             }else{
-                connection.commit();            
                 JOptionPane.showMessageDialog(null, "Property was added successfully");
                 return true;
             }

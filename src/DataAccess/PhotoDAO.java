@@ -58,6 +58,8 @@ public class PhotoDAO {
             
             ps.executeUpdate();
             
+            connection.commit();
+            
             return true;
             
         }catch(IOException | SQLException ex){

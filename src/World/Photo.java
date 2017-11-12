@@ -35,13 +35,12 @@ public class Photo {
         this.propertyId = propertyId;
     }
 
-    public Photo(String filename, Object image, String description, String datephoto, int countryId, int propertyId) {
+    public Photo(String filename, Object image, String description, String datephoto, int countryId) {
         this.filename = filename;
         this.image = image;
         this.description = description;
         this.datephoto = datephoto;
         this.countryId = countryId;
-        this.propertyId = propertyId;
     }
 
     public int getId() {

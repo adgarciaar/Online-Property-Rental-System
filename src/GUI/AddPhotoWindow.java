@@ -250,7 +250,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                 photo = new Photo(FilenameTextField.getText(),this.file,
                         DescriptionTextArea.getText(),
                         DateTextField.getText(),
-                        idCountry,this.property.getId());
+                        idCountry);
                 
                 this.listPhotos.put(this.i, photo);
                 
