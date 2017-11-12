@@ -5,8 +5,13 @@
  */
 package GUI;
 
+import World.ISystemFacade;
 import World.Owner;
+import World.Property;
+import World.SystemFacade;
+import java.util.HashMap;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -137,7 +142,19 @@ public class OwnerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_AddPropertyButtonActionPerformed
 
     private void ViewPropertiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPropertiesButtonActionPerformed
-        // TODO add your handling code here:
+        ISystemFacade facade = new SystemFacade(); 
+        HashMap<Integer,Property> listProperties = new HashMap<>();
+        listProperties = facade.propertiesByOwner(this.owner.getId());
+        
+        if (listProperties == null){  
+            JOptionPane.showMessageDialog(null, "Problem retrieving the properties"); 
+        }else if (listProperties.isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "You have no properties registered"); 
+        }else{  
+            this.dispose();
+            
+        }
+        
     }//GEN-LAST:event_ViewPropertiesButtonActionPerformed
 
     /**

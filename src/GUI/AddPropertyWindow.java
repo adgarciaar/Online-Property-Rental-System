@@ -42,9 +42,14 @@ public class AddPropertyWindow extends javax.swing.JFrame {
         HashMap<Integer,Location> listLocations;
         listLocations = facade.retrieveLocations();
         
-        if (listLocations == null || listLocations.isEmpty() == true){     
+        if (listLocations == null || listLocations.isEmpty() == true){ 
             
-            JOptionPane.showMessageDialog(null, "There is not locations registered. Properties can not be added");
+            if(listLocations == null){
+                JOptionPane.showMessageDialog(null, "Problem retrieving locations. Properties can not be added");
+            }else{
+                JOptionPane.showMessageDialog(null, "There is not locations registered. Properties can not be added");
+            }
+            
             this.dispose();
             this.OwnerWindow.setVisible(true);
             

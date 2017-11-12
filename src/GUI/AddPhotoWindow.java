@@ -63,7 +63,12 @@ public class AddPhotoWindow extends javax.swing.JFrame {
         
         if (listCountries == null || listCountries.isEmpty() == true){
             
-            JOptionPane.showMessageDialog(null, "There is not countries registered. Photos can not be added");
+            if(listCountries == null){
+                JOptionPane.showMessageDialog(null, "Problem retrieving countries. Photos can not be added");
+            }else{
+                JOptionPane.showMessageDialog(null, "There is not countries registered. Photos can not be added");
+            }
+            
             this.dispose();
             this.previousWindow.setVisible(true);
             
