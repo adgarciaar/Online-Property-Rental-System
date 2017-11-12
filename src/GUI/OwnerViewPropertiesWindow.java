@@ -13,20 +13,14 @@ import World.Property;
 import World.SystemFacade;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -330,12 +324,14 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void OrderByNumberRoomsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByNumberRoomsButtonActionPerformed
+        this.clean();
         ISystemFacade facade = new SystemFacade();         
         this.listProperties = facade.propertiesByOwner(this.owner.getId(),"NumberRooms");
         this.stablishListProperties();
     }//GEN-LAST:event_OrderByNumberRoomsButtonActionPerformed
 
     private void OrderByRentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByRentButtonActionPerformed
+        this.clean();
         ISystemFacade facade = new SystemFacade();         
         this.listProperties = facade.propertiesByOwner(this.owner.getId(),"Rent");
         this.stablishListProperties();
@@ -501,13 +497,8 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
         
         FilenameTextField.setText(photo.getFilename());
         
-        InputStream is = (InputStream) photo.getImage();
-        BufferedImage bufImage = null;
-        try {
-            bufImage = ImageIO.read(is);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Error: " + ex);
-        }
+        BufferedImage bufImage = (BufferedImage) photo.getImage();  
+        
         Icon icon = new ImageIcon(bufImage.getScaledInstance(389, 215, Image.SCALE_DEFAULT));        
         ImageLabel.setIcon(icon);   
         
