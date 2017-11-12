@@ -223,7 +223,7 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
                                     .addComponent(jLabel10)
                                     .addComponent(jLabel16)
                                     .addComponent(jLabel8))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(35, 44, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(ShowPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,7 +241,7 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
                                 .addComponent(ShowPropertyButton))
                             .addComponent(PhotosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(FilenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 35, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,18 +430,18 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
         
         PropertiesComboBox.removeAllItems();
         
-        Property property;
+        Property prop;
         
         Set set = this.listProperties.entrySet();        
         Iterator iterator = set.iterator();
 
         while(iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry)iterator.next();               
-            property = (Property) mentry.getValue();
-            PropertiesComboBox.addItem(property.getId()+". "+property.getType()
-                    +" located in "+LocationDAO.retrieveNameLocation(property.getIdLocation())
-                    +" with "+property.getNumber_rooms()+" rooms and rent of "
-                    +property.getRent());            
+            prop = (Property) mentry.getValue();
+            PropertiesComboBox.addItem(prop.getId()+". "+prop.getType()
+                    +" located in "+LocationDAO.retrieveNameLocation(prop.getIdLocation())
+                    +" with "+prop.getNumber_rooms()+" rooms and rent of "
+                    +prop.getRent());            
         }
     }
 
