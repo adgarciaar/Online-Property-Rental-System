@@ -38,7 +38,7 @@ public class CustomerWindow extends javax.swing.JFrame {
 
         WelcomeLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        AddToVisitingListButton = new javax.swing.JButton();
+        SearchPropertiesButton = new javax.swing.JButton();
         ViewAccountButton = new javax.swing.JButton();
         SignOutButton = new javax.swing.JButton();
         ViewVisitingListButton = new javax.swing.JButton();
@@ -49,10 +49,10 @@ public class CustomerWindow extends javax.swing.JFrame {
 
         jLabel1.setText("What do you want to do?");
 
-        AddToVisitingListButton.setText("Add property to visiting list");
-        AddToVisitingListButton.addActionListener(new java.awt.event.ActionListener() {
+        SearchPropertiesButton.setText("Search properties");
+        SearchPropertiesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddToVisitingListButtonActionPerformed(evt);
+                SearchPropertiesButtonActionPerformed(evt);
             }
         });
 
@@ -91,7 +91,7 @@ public class CustomerWindow extends javax.swing.JFrame {
                         .addContainerGap(343, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(AddToVisitingListButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SearchPropertiesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(ViewAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -109,7 +109,7 @@ public class CustomerWindow extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ViewVisitingListButton)
-                    .addComponent(AddToVisitingListButton))
+                    .addComponent(SearchPropertiesButton))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ViewAccountButton)
@@ -120,9 +120,10 @@ public class CustomerWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AddToVisitingListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToVisitingListButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AddToVisitingListButtonActionPerformed
+    private void SearchPropertiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchPropertiesButtonActionPerformed
+        this.dispose();
+        new CustomerSearchProperties(this.customer, this).setVisible(true);
+    }//GEN-LAST:event_SearchPropertiesButtonActionPerformed
 
     private void SignOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignOutButtonActionPerformed
         this.dispose();
@@ -175,7 +176,7 @@ public class CustomerWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddToVisitingListButton;
+    private javax.swing.JButton SearchPropertiesButton;
     private javax.swing.JButton SignOutButton;
     private javax.swing.JButton ViewAccountButton;
     private javax.swing.JButton ViewVisitingListButton;

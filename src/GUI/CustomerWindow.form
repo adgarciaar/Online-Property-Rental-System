@@ -35,7 +35,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="AddToVisitingListButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="SearchPropertiesButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="ViewAccountButton" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -59,7 +59,7 @@
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="ViewVisitingListButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="AddToVisitingListButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SearchPropertiesButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -82,12 +82,12 @@
         <Property name="text" type="java.lang.String" value="What do you want to do?"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="AddToVisitingListButton">
+    <Component class="javax.swing.JButton" name="SearchPropertiesButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add property to visiting list"/>
+        <Property name="text" type="java.lang.String" value="Search properties"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddToVisitingListButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SearchPropertiesButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="ViewAccountButton">
