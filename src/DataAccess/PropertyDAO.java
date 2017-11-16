@@ -42,6 +42,10 @@ public class PropertyDAO {
     public static final String DELETE_PROPERTY = "update Property set deletion_status"
             + " = 'Deleted' where idproperty = ?";
     
+    public static final String SEARCH_PROPERTIES_BY_CRITERIA = "select idproperty, "
+            + "type,address,number_rooms,rent,deletion_status,location_idlocation, "
+            + "owner_iduser from Property where deletion_status = 'Active'";
+    
     public static boolean deletePropertiesByOwner(int idOwner){
         
         Connection connection = null;       
@@ -255,7 +259,7 @@ public class PropertyDAO {
     }
     
     public static LinkedHashMap<Integer,Property> searchPropertiesByCriteria(String type,
-            String numberRooms, String minRent,String maxRent,HashMap<Integer,String> listSelectedLocations){
+            String numberRooms, String minRent,String maxRent,HashMap<Integer,String> listSelectedLocations) throws IOException{
         
         Connection connection = null;       
         PreparedStatement ps = null;
@@ -265,21 +269,60 @@ public class PropertyDAO {
            
             connection = DBConnection.getConnection();
             
-            String query = null;
+            String query = SEARCH_PROPERTIES_BY_CRITERIA;
             
-            /*if (order.compareTo("Owner") == 0){
-                query = SEARCH_PROPERTIES_BY_OWNER + "order by idproperty asc";
+            if (type != null){
+                query = query + " and type = ?";                               
             }else{
-                if (order.compareTo("NumberRooms") == 0){
-                    query = SEARCH_PROPERTIES_BY_OWNER + "order by number_rooms asc";
-                }else{
-                    query = SEARCH_PROPERTIES_BY_OWNER + "order by rent asc";
-                }                   
-            }*/
+                query = query + " and type = 'Apartment' or type = 'House' or type = ?";                
+            }
+            
+            if (numberRooms != null){
+                query = query + " and number_rooms = ?";                
+            }else{
+                query = query + " and number_rooms = ? or number_rooms = ANY(select number_rooms from property)";
+            }
+            
+            if (minRent != null && maxRent != null){
+                query = query + " and rent between = ? and ?";                
+            }else{
+                query = query + " and rent = ? or rent = ? or rent = ANY(select rent from property)"; 
+            }
+            
+            if(listSelectedLocations != null){
+                
+                int n = listSelectedLocations.size();
+                
+                for (int j=1; j<n; j++){         
+                    if (j == n-1){
+                        query = query + " and location_idlocation = ?";
+                    }else{
+                        query = query + " and location_idlocation = ? or ";
+                    }                                           
+                }                
+            }
             
             ps = connection.prepareStatement(query);
             
-            //ps.setInt(1, idOwner);
+            ps.setString(1, type);
+            ps.setInt(2, Integer.parseInt(numberRooms));
+            ps.setLong(3, Long.parseLong(minRent));
+            ps.setLong(4, Long.parseLong(maxRent));
+
+            int i = 4;
+            if(listSelectedLocations != null){
+                
+                Set set = listSelectedLocations.entrySet();        
+                Iterator iterator = set.iterator();
+
+                while(iterator.hasNext()) {
+                    
+                    Map.Entry mentry = (Map.Entry)iterator.next(); 
+                    i++;                    
+                    ps.setInt(i, (int) mentry.getValue());
+                }
+                
+            }
             
             rs = ps.executeQuery();
             
@@ -298,15 +341,14 @@ public class PropertyDAO {
                 property.setRent(rs.getLong("rent"));
                 property.setDeletion_status(rs.getString("deletion_status"));
                 property.setIdLocation(rs.getInt("location_idlocation"));
-                property.setIdOwner(rs.getInt("??"));
+                property.setIdOwner(rs.getInt("owner_iduser"));
                 
                 LinkedHashMap<Integer, Photo> listPhotos;
-                //listPhotos = PhotoDAO.retrievePhotos(property.getId());
+                listPhotos = PhotoDAO.retrievePhotos(property.getId());
                 
-                //property.setPhotos(listPhotos);
+                property.setPhotos(listPhotos);
                 
-                listProperties.put(property.getId(), property);
-                
+                listProperties.put(property.getId(), property);                
             }  
             
             rs.close();
