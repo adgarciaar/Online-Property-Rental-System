@@ -89,6 +89,8 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
         ShowPropertyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(995, 731));
+        setResizable(false);
 
         jLabel4.setText("Location");
 
@@ -270,7 +272,7 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(OrderByNumberRoomsButton)
                     .addComponent(OrderByRentButton))
-                .addGap(18, 42, Short.MAX_VALUE)
+                .addGap(18, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
