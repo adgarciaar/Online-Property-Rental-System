@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -251,6 +252,80 @@ public class PropertyDAO {
                 JOptionPane.showMessageDialog(null, "Error: " + ex);               
             }
         }
+    }
+    
+    public static LinkedHashMap<Integer,Property> searchPropertiesByCriteria(String type,
+            String numberRooms, String minRent,String maxRent,HashMap<Integer,String> listSelectedLocations){
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try{
+           
+            connection = DBConnection.getConnection();
+            
+            String query = null;
+            
+            /*if (order.compareTo("Owner") == 0){
+                query = SEARCH_PROPERTIES_BY_OWNER + "order by idproperty asc";
+            }else{
+                if (order.compareTo("NumberRooms") == 0){
+                    query = SEARCH_PROPERTIES_BY_OWNER + "order by number_rooms asc";
+                }else{
+                    query = SEARCH_PROPERTIES_BY_OWNER + "order by rent asc";
+                }                   
+            }*/
+            
+            ps = connection.prepareStatement(query);
+            
+            //ps.setInt(1, idOwner);
+            
+            rs = ps.executeQuery();
+            
+            LinkedHashMap<Integer,Property> listProperties = new LinkedHashMap<>();
+            
+            Property property;
+            
+            while (rs.next()){
+                
+                property = new Property();
+                
+                property.setId(rs.getInt("idproperty"));
+                property.setType(rs.getString("type"));
+                property.setAddress(rs.getString("address"));
+                property.setNumber_rooms(rs.getInt("number_rooms"));
+                property.setRent(rs.getLong("rent"));
+                property.setDeletion_status(rs.getString("deletion_status"));
+                property.setIdLocation(rs.getInt("location_idlocation"));
+                property.setIdOwner(rs.getInt("??"));
+                
+                LinkedHashMap<Integer, Photo> listPhotos;
+                //listPhotos = PhotoDAO.retrievePhotos(property.getId());
+                
+                //property.setPhotos(listPhotos);
+                
+                listProperties.put(property.getId(), property);
+                
+            }  
+            
+            rs.close();
+            
+            return listProperties;            
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
+            return null;    
+            
+        }finally{
+            try {
+                ps.close();
+                connection.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                           
+            }            
+        }       
+       
     }
     
 }
