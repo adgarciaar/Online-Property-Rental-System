@@ -9,6 +9,7 @@ import World.Customer;
 import World.ISystemFacade;
 import World.Location;
 import World.SystemFacade;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
     
     private final Customer customer;
     private final JFrame CustomerWindow;
+    private HashMap<Integer,String> listSelectedLocations;
 
     /**
      * Creates new form CustomerSearchProperties
@@ -31,6 +33,7 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
      * @param CustomerWindow
      */
     public CustomerSearchProperties(Customer customer, JFrame CustomerWindow) {
+        
         initComponents();
         this.customer = customer;
         this.CustomerWindow = CustomerWindow;
@@ -64,6 +67,9 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
                 LocationComboBox.addItem(location.getId()+". "+location.getName());            
             }
         }
+        
+        this.listSelectedLocations = new HashMap<>();
+        
     }
 
     /**
@@ -88,10 +94,11 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
         TypeComboBox = new javax.swing.JComboBox<>();
         AddButton = new javax.swing.JButton();
         RemoveButton = new javax.swing.JButton();
-        SelectedLocationsTextField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         SearchButton = new javax.swing.JButton();
         BackButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        SelectedLocationsTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +114,12 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
 
         jLabel6.setText("Location (s)");
 
+        LocationComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LocationComboBoxActionPerformed(evt);
+            }
+        });
+
         TypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Not specific", "House", "Apartment" }));
 
         AddButton.setText("Add");
@@ -117,15 +130,14 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
         });
 
         RemoveButton.setText("Remove");
+        RemoveButton.setEnabled(false);
         RemoveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RemoveButtonActionPerformed(evt);
             }
         });
 
-        SelectedLocationsTextField.setEnabled(false);
-
-        jLabel7.setText("Selected");
+        jLabel7.setText("Selected locations");
 
         SearchButton.setText("Search");
         SearchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +152,10 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
                 BackButtonActionPerformed(evt);
             }
         });
+
+        SelectedLocationsTextArea.setColumns(20);
+        SelectedLocationsTextArea.setRows(5);
+        jScrollPane1.setViewportView(SelectedLocationsTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,26 +172,30 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel6)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(TypeComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 177, Short.MAX_VALUE)
-                            .addComponent(MaximalRentTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(MinimalRentTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NumberRoomsTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LocationComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(SelectedLocationsTextField))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(AddButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(RemoveButton)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(TypeComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 177, Short.MAX_VALUE)
+                                    .addComponent(MaximalRentTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(MinimalRentTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(NumberRoomsTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LocationComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(AddButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(RemoveButton))
+                            .addComponent(jScrollPane1))))
                 .addGap(39, 39, 39))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SearchButton)
-                .addGap(121, 121, 121)
+                .addGap(86, 86, 86)
                 .addComponent(BackButton)
-                .addGap(191, 191, 191))
+                .addGap(226, 226, 226))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,15 +224,19 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
                     .addComponent(LocationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AddButton)
                     .addComponent(RemoveButton))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SelectedLocationsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SearchButton)
-                    .addComponent(BackButton))
-                .addGap(27, 27, 27))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 24, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SearchButton)
+                            .addComponent(BackButton))
+                        .addGap(27, 27, 27))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -223,10 +247,11 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
         int pointIndex = location.indexOf(".");             
         int idLocation = Integer.parseInt(location.substring(0, pointIndex)); 
         
-        String previousText = SelectedLocationsTextField.getText();
+        this.listSelectedLocations.remove(idLocation);
         
-        int numberIndex = location.indexOf(idLocation);  
-        
+        this.fillSelectedLocationsTextArea();
+        AddButton.setEnabled(true);
+        RemoveButton.setEnabled(false);
         
     }//GEN-LAST:event_RemoveButtonActionPerformed
 
@@ -245,17 +270,32 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
         
         String location = (String)LocationComboBox.getSelectedItem();              
         int pointIndex = location.indexOf(".");             
-        int idLocation = Integer.parseInt(location.substring(0, pointIndex)); 
+        int idLocation = Integer.parseInt(location.substring(0, pointIndex));
         
-        String previousText = SelectedLocationsTextField.getText();
+        this.listSelectedLocations.put(idLocation, location.substring(pointIndex, location.length()));
         
-        if (previousText.compareTo("") == 0){
-            SelectedLocationsTextField.setText(previousText+idLocation);
-        }else{
-            SelectedLocationsTextField.setText(previousText+" , "+idLocation);
-        }
+        this.fillSelectedLocationsTextArea();
+        AddButton.setEnabled(false);
+        RemoveButton.setEnabled(true);
         
     }//GEN-LAST:event_AddButtonActionPerformed
+
+    private void LocationComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocationComboBoxActionPerformed
+        String location = (String)LocationComboBox.getSelectedItem();              
+        int pointIndex = location.indexOf(".");             
+        int idLocation = Integer.parseInt(location.substring(0, pointIndex));
+        
+        if (this.listSelectedLocations != null){
+            if(this.listSelectedLocations.containsKey(idLocation) == true){
+                RemoveButton.setEnabled(true);
+                AddButton.setEnabled(false);
+            }else{
+                RemoveButton.setEnabled(false);
+                AddButton.setEnabled(true);
+            }
+        }       
+        
+    }//GEN-LAST:event_LocationComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,7 +405,7 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
                 }
             }
             
-            if(SelectedLocationsTextField.getText().compareTo("") != 0){
+            if(SelectedLocationsTextArea.getText().compareTo("") != 0){
                 selection = 1;
             }            
             
@@ -380,6 +420,31 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
             return false;
         }
     }
+    
+    private void fillSelectedLocationsTextArea(){
+        
+        SelectedLocationsTextArea.setText("");
+        
+        Set set = this.listSelectedLocations.entrySet();        
+        Iterator iterator = set.iterator();
+        
+        int key;
+        String location = "";
+        
+        while(iterator.hasNext()) {
+            
+            Map.Entry mentry = (Map.Entry)iterator.next(); 
+            key = (int) mentry.getKey();
+            location = location + Integer.toString(key)+(String) mentry.getValue();
+             
+            if (iterator.hasNext()==true){
+                location = location + " , ";
+                
+            }
+        }
+        SelectedLocationsTextArea.setText(location); 
+       
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton;
@@ -390,7 +455,7 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
     private javax.swing.JTextField NumberRoomsTextField;
     private javax.swing.JButton RemoveButton;
     private javax.swing.JButton SearchButton;
-    private javax.swing.JTextField SelectedLocationsTextField;
+    private javax.swing.JTextArea SelectedLocationsTextArea;
     private javax.swing.JComboBox<String> TypeComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -399,5 +464,6 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
