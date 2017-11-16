@@ -293,7 +293,7 @@ public class PropertyDAO {
                 
                 int n = listSelectedLocations.size();
                 
-                for (int j=1; j<n; j++){         
+                for (int j=0; j<n; j++){         
                     if (j == n-1){
                         query = query + " and location_idlocation = ?";
                     }else{

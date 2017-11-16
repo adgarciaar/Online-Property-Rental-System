@@ -13,7 +13,6 @@ import World.Property;
 import World.SystemFacade;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -30,7 +29,7 @@ import javax.swing.JOptionPane;
 public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
     
     private final Owner owner;
-    private HashMap<Integer,Property> listProperties;
+    private LinkedHashMap<Integer,Property> listProperties;
     private final JFrame OwnerWindow;
     private Property property;   
 
@@ -40,7 +39,7 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
      * @param listProperties
      * @param OwnerWindow
      */
-    public OwnerViewPropertiesWindow(Owner owner, HashMap<Integer,Property> listProperties, JFrame OwnerWindow) {
+    public OwnerViewPropertiesWindow(Owner owner, LinkedHashMap<Integer,Property> listProperties, JFrame OwnerWindow) {
         
         initComponents();
         this.owner = owner;

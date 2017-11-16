@@ -5,6 +5,7 @@
  */
 package World;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /**
@@ -30,5 +31,8 @@ public interface ISystemFacade {
     public LinkedHashMap<Integer,Property> propertiesByOwner(int idOwner, String order);
     
     public boolean deleteProperty(int idProperty);
+    
+    public LinkedHashMap<Integer,Property> propertiesByCriteria(String type,
+            String numberRooms, String minRent,String maxRent,HashMap<Integer,String> listSelectedLocations);
     
 }

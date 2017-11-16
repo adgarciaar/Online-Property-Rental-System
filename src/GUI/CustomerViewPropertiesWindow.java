@@ -5,17 +5,34 @@
  */
 package GUI;
 
+import World.Customer;
+import World.Property;
+import java.util.LinkedHashMap;
+import javax.swing.JFrame;
+
 /**
  *
  * @author adrian
  */
 public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
+    
+    private final Customer customer;
+    private LinkedHashMap<Integer,Property> listProperties;
+    private final JFrame OwnerWindow;
+    private Property property;   
 
     /**
      * Creates new form CustomerViewPropertiesWindow
+     * @param customer
+     * @param listProperties
+     * @param OwnerWindow
      */
-    public CustomerViewPropertiesWindow() {
+    public CustomerViewPropertiesWindow(Customer customer, LinkedHashMap<Integer,Property> listProperties, JFrame OwnerWindow) {
         initComponents();
+        this.customer = customer;
+        this.listProperties = listProperties;
+        this.OwnerWindow = OwnerWindow;
+        //ImageLabel.setText("");        
     }
 
     /**
@@ -73,7 +90,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerViewPropertiesWindow().setVisible(true);
+                //new CustomerViewPropertiesWindow().setVisible(true);
             }
         });
     }

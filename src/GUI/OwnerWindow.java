@@ -9,7 +9,7 @@ import World.ISystemFacade;
 import World.Owner;
 import World.Property;
 import World.SystemFacade;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -144,7 +144,7 @@ public class OwnerWindow extends javax.swing.JFrame {
     private void ViewPropertiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPropertiesButtonActionPerformed
        
         ISystemFacade facade = new SystemFacade(); 
-        HashMap<Integer,Property> listProperties;
+        LinkedHashMap<Integer,Property> listProperties;
         listProperties = facade.propertiesByOwner(this.owner.getId(),"Owner");
         
         if (listProperties == null){  

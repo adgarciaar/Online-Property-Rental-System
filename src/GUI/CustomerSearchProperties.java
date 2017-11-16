@@ -8,6 +8,7 @@ package GUI;
 import World.Customer;
 import World.ISystemFacade;
 import World.Location;
+import World.Property;
 import World.SystemFacade;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -256,7 +257,37 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
     }//GEN-LAST:event_RemoveButtonActionPerformed
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
+        
         if (this.validateSelection() == true){
+            
+            ISystemFacade facade = new SystemFacade(); 
+            LinkedHashMap<Integer,Property> listProperties;
+            
+            String type = null, numberRooms = null, minRent = null, maxRent = null;
+            
+            if ((String)TypeComboBox.getSelectedItem() != "Not specific"){
+                type = (String)TypeComboBox.getSelectedItem();
+            }
+            
+            if(NumberRoomsTextField.getText().compareTo("") != 0){
+                numberRooms = NumberRoomsTextField.getText();
+            }
+            
+            if(MinimalRentTextField.getText().compareTo("") != 0 && MaximalRentTextField.getText().compareTo("") !=0){
+                minRent = MinimalRentTextField.getText();
+                maxRent = MaximalRentTextField.getText();
+            }
+            
+            listProperties = facade.propertiesByCriteria(type, numberRooms, minRent, maxRent, this.listSelectedLocations);
+        
+            if (listProperties == null){  
+                JOptionPane.showMessageDialog(null, "Problem retrieving the properties"); 
+            }else if (listProperties.isEmpty() == true) {
+                JOptionPane.showMessageDialog(null, "No property found with this search criteria"); 
+            }else{  
+                this.dispose();
+                new CustomerViewPropertiesWindow(this.customer,listProperties,this).setVisible(true);
+            }
             
         }
     }//GEN-LAST:event_SearchButtonActionPerformed

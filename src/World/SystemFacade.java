@@ -12,6 +12,7 @@ import DataAccess.LocationDAO;
 import DataAccess.OwnerDAO;
 import DataAccess.PropertyDAO;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -94,6 +95,17 @@ public class SystemFacade implements ISystemFacade{
     @Override
     public boolean deleteProperty(int idProperty) {
         return PropertyDAO.deleteProperty(idProperty);
+    }
+
+    @Override
+    public LinkedHashMap<Integer, Property> propertiesByCriteria(String type, 
+            String numberRooms, String minRent, String maxRent, HashMap<Integer, String> listSelectedLocations) {
+        try {
+            return PropertyDAO.searchPropertiesByCriteria(type, numberRooms, minRent, maxRent, listSelectedLocations);
+        } catch (IOException ex) {
+            Logger.getLogger(SystemFacade.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
 }
