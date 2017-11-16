@@ -94,7 +94,7 @@
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace max="32767" attributes="0"/>
-                                                      <Component id="jTextField1" min="-2" pref="265" max="-2" attributes="0"/>
+                                                      <Component id="DateTextField" min="-2" pref="265" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" attributes="0">
                                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -115,7 +115,7 @@
                                           <Group type="102" attributes="0">
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jTextField2" alignment="1" min="-2" pref="265" max="-2" attributes="0"/>
+                                                  <Component id="CountryTextField" alignment="1" min="-2" pref="265" max="-2" attributes="0"/>
                                                   <Component id="ShowPhotoButton" alignment="1" min="-2" pref="174" max="-2" attributes="0"/>
                                                   <Component id="PhotosComboBox" alignment="1" min="-2" pref="174" max="-2" attributes="0"/>
                                                   <Component id="FilenameTextField" alignment="1" min="-2" pref="265" max="-2" attributes="0"/>
@@ -167,12 +167,12 @@
                       </Group>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="DateTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CountryTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -409,7 +409,7 @@
         <Property name="text" type="java.lang.String" value="Date"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="DateTextField">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -419,7 +419,7 @@
         <Property name="text" type="java.lang.String" value="Country"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="CountryTextField">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -436,7 +436,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="DescriptionTextArea">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>

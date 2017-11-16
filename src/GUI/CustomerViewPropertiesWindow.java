@@ -5,9 +5,18 @@
  */
 package GUI;
 
+import DataAccess.LocationDAO;
 import World.Customer;
+import World.Photo;
 import World.Property;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -18,21 +27,21 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     
     private final Customer customer;
     private LinkedHashMap<Integer,Property> listProperties;
-    private final JFrame OwnerWindow;
+    private final JFrame CustomerWindow;
     private Property property;   
 
     /**
      * Creates new form CustomerViewPropertiesWindow
      * @param customer
      * @param listProperties
-     * @param OwnerWindow
+     * @param CustomerWindow
      */
-    public CustomerViewPropertiesWindow(Customer customer, LinkedHashMap<Integer,Property> listProperties, JFrame OwnerWindow) {
+    public CustomerViewPropertiesWindow(Customer customer, LinkedHashMap<Integer,Property> listProperties, JFrame CustomerWindow) {
         initComponents();
         this.customer = customer;
         this.listProperties = listProperties;
-        this.OwnerWindow = OwnerWindow;
-        //ImageLabel.setText("");        
+        this.CustomerWindow = CustomerWindow;
+        ImageLabel.setText("");        
     }
 
     /**
@@ -71,12 +80,12 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         ShowPhotoButton = new javax.swing.JButton();
         FilenameTextField = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        DateTextField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        CountryTextField = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        DescriptionTextArea = new javax.swing.JTextArea();
         OrderByNumberRoomsButton1 = new javax.swing.JButton();
         LocationTextField = new javax.swing.JTextField();
         TypeTextField = new javax.swing.JTextField();
@@ -181,18 +190,18 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
 
         jLabel12.setText("Date");
 
-        jTextField1.setEnabled(false);
+        DateTextField.setEnabled(false);
 
         jLabel13.setText("Country");
 
-        jTextField2.setEnabled(false);
+        CountryTextField.setEnabled(false);
 
         jLabel14.setText("Description");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setEnabled(false);
-        jScrollPane1.setViewportView(jTextArea1);
+        DescriptionTextArea.setColumns(20);
+        DescriptionTextArea.setRows(5);
+        DescriptionTextArea.setEnabled(false);
+        jScrollPane1.setViewportView(DescriptionTextArea);
 
         OrderByNumberRoomsButton1.setText("Order by description");
         OrderByNumberRoomsButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +275,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(jLabel12)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(DateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                             .addComponent(jLabel16)
@@ -281,7 +290,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(CountryTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(ShowPhotoButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(PhotosComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(FilenameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -318,11 +327,11 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
                             .addComponent(jLabel10))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CountryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))
                         .addGap(25, 25, 25)
                         .addComponent(jLabel16)
@@ -376,7 +385,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         this.dispose();
-        this.OwnerWindow.setVisible(true);
+        this.CustomerWindow.setVisible(true);
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void ShowPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPropertyButtonActionPerformed
@@ -413,46 +422,120 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_OrderByNumberRoomsButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerViewPropertiesWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerViewPropertiesWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerViewPropertiesWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerViewPropertiesWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void stablishListProperties(){
+        
+        PropertiesComboBox.removeAllItems();
+        
+        Property prop;
+        
+        Set set = this.listProperties.entrySet();        
+        Iterator iterator = set.iterator();
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new CustomerViewPropertiesWindow().setVisible(true);
-            }
-        });
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();               
+            prop = (Property) mentry.getValue();
+            PropertiesComboBox.addItem(prop.getId()+". "+prop.getType()
+                    +" located in "+LocationDAO.retrieveNameLocation(prop.getIdLocation())
+                    +" with "+prop.getNumber_rooms()+" rooms and rent of "
+                    +prop.getRent());            
+        }
+    }
+    
+    private void clean(){
+        
+        TypeTextField.setText("");
+        LocationTextField.setText("");
+        PhotosComboBox.removeAllItems();
+        PhotosComboBox.setEnabled(false);
+        AddToVisitingListPropertyButton.setEnabled(false);
+        ShowPhotoButton.setEnabled(false);
+        ImageLabel.setIcon(null);  
+        FilenameTextField.setText("");
+        AddressTextField.setText("");
+        NumberRoomsTextField.setText("");
+        RentTextField.setText("");
+        DeletionStatusTextField.setText("");
+        ImageLabel.setIcon(null);  
+        DateTextField.setText("");
+        CountryTextField.setText("");
+        DescriptionTextArea.setText("");
+    }
+    
+    private void showProperty(){
+        
+        this.clean();
+        
+        String propertyData = (String)PropertiesComboBox.getSelectedItem(); 
+        
+        int pointIndex = propertyData.indexOf(".");        
+        
+        int idProperty = Integer.parseInt(propertyData.substring(0, pointIndex));
+        
+        this.property = this.listProperties.get(idProperty);
+        
+        TypeTextField.setText(this.property.getType());
+        AddressTextField.setText(this.property.getAddress());
+        LocationTextField.setText(LocationDAO.retrieveNameLocation(this.property.getIdLocation()));        
+        NumberRoomsTextField.setText(Integer.toString(this.property.getNumber_rooms()));
+        RentTextField.setText(Long.toString(this.property.getRent()));
+        DeletionStatusTextField.setText(this.property.getDeletion_status());
+        
+        LinkedHashMap<Integer, Photo> listPhotos;
+        listPhotos = this.property.getPhotos();
+        
+        Set set = listPhotos.entrySet();        
+        Iterator iterator = set.iterator();
+        
+        Photo photo;
+
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();               
+            photo = (Photo) mentry.getValue();  
+            PhotosComboBox.addItem(photo.getId()+". "+photo.getFilename());
+        }
+        
+        PhotosComboBox.setEnabled(true);
+        
+        ShowPhotoButton.setEnabled(true);    
+    }
+    
+    private void showPhoto(){
+        
+        ImageLabel.setIcon(null); 
+        
+        FilenameTextField.setText("");
+        DateTextField.setText("");
+        CountryTextField.setText("");
+        DescriptionTextArea.setText("");
+        
+        String photoData = (String)PhotosComboBox.getSelectedItem();
+        
+        int pointIndex = photoData.indexOf("."); 
+        
+        int idPhoto = Integer.parseInt(photoData.substring(0, pointIndex));
+        
+        LinkedHashMap<Integer, Photo> listPhotos;
+        listPhotos = this.property.getPhotos();
+        
+        Photo photo = listPhotos.get(idPhoto);
+        
+        FilenameTextField.setText(photo.getFilename());
+        
+        BufferedImage bufImage = (BufferedImage) photo.getImage();  
+        
+        Icon icon = new ImageIcon(bufImage.getScaledInstance(389, 215, Image.SCALE_DEFAULT));        
+        ImageLabel.setIcon(icon);   
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddToVisitingListPropertyButton;
     private javax.swing.JTextField AddressTextField;
     private javax.swing.JButton BackButton;
+    private javax.swing.JTextField CountryTextField;
+    private javax.swing.JTextField DateTextField;
     private javax.swing.JTextField DeletionStatusTextField;
+    private javax.swing.JTextArea DescriptionTextArea;
     private javax.swing.JTextField FilenameTextField;
     private javax.swing.JLabel ImageLabel;
     private javax.swing.JTextField LocationTextField;
@@ -482,8 +565,5 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
