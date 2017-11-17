@@ -41,7 +41,9 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         this.customer = customer;
         this.listProperties = listProperties;
         this.CustomerWindow = CustomerWindow;
-        ImageLabel.setText("");        
+        ImageLabel.setText("");   
+        
+        this.stablishListProperties();  
     }
 
     /**
@@ -72,8 +74,8 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        OrderByNumberRoomsButton = new javax.swing.JButton();
-        OrderByRentButton = new javax.swing.JButton();
+        OrderByCountryButton = new javax.swing.JButton();
+        OrderByDateButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         PhotosComboBox = new javax.swing.JComboBox<>();
@@ -86,12 +88,12 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         DescriptionTextArea = new javax.swing.JTextArea();
-        OrderByNumberRoomsButton1 = new javax.swing.JButton();
+        OrderByDescriptionButton = new javax.swing.JButton();
         LocationTextField = new javax.swing.JTextField();
         TypeTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(995, 731));
+        setPreferredSize(null);
 
         jLabel4.setText("Location");
 
@@ -153,17 +155,17 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
 
         jLabel9.setText("Property information");
 
-        OrderByNumberRoomsButton.setText("Order by country");
-        OrderByNumberRoomsButton.addActionListener(new java.awt.event.ActionListener() {
+        OrderByCountryButton.setText("Order by country");
+        OrderByCountryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderByNumberRoomsButtonActionPerformed(evt);
+                OrderByCountryButtonActionPerformed(evt);
             }
         });
 
-        OrderByRentButton.setText("Order by date");
-        OrderByRentButton.addActionListener(new java.awt.event.ActionListener() {
+        OrderByDateButton.setText("Order by date");
+        OrderByDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderByRentButtonActionPerformed(evt);
+                OrderByDateButtonActionPerformed(evt);
             }
         });
 
@@ -203,10 +205,10 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         DescriptionTextArea.setEnabled(false);
         jScrollPane1.setViewportView(DescriptionTextArea);
 
-        OrderByNumberRoomsButton1.setText("Order by description");
-        OrderByNumberRoomsButton1.addActionListener(new java.awt.event.ActionListener() {
+        OrderByDescriptionButton.setText("Order by description");
+        OrderByDescriptionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderByNumberRoomsButton1ActionPerformed(evt);
+                OrderByDescriptionButtonActionPerformed(evt);
             }
         });
 
@@ -267,11 +269,11 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
                                                 .addGap(57, 57, 57)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(OrderByNumberRoomsButton)
+                                                        .addComponent(OrderByCountryButton)
                                                         .addGap(12, 12, 12)
-                                                        .addComponent(OrderByRentButton)
+                                                        .addComponent(OrderByDateButton)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(OrderByNumberRoomsButton1))
+                                                        .addComponent(OrderByDescriptionButton))
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(jLabel12)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -318,9 +320,9 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(OrderByNumberRoomsButton)
-                            .addComponent(OrderByRentButton)
-                            .addComponent(OrderByNumberRoomsButton1))
+                            .addComponent(OrderByCountryButton)
+                            .addComponent(OrderByDateButton)
+                            .addComponent(OrderByDescriptionButton))
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(FilenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -389,26 +391,26 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void ShowPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPropertyButtonActionPerformed
-        //this.showProperty();
+        this.showProperty();
     }//GEN-LAST:event_ShowPropertyButtonActionPerformed
 
     private void PropertiesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PropertiesComboBoxActionPerformed
 
     }//GEN-LAST:event_PropertiesComboBoxActionPerformed
 
-    private void OrderByNumberRoomsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByNumberRoomsButtonActionPerformed
+    private void OrderByCountryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByCountryButtonActionPerformed
         /*this.clean();
         ISystemFacade facade = new SystemFacade();
         this.listProperties = facade.propertiesByOwner(this.owner.getId(),"NumberRooms");
         this.stablishListProperties();*/
-    }//GEN-LAST:event_OrderByNumberRoomsButtonActionPerformed
+    }//GEN-LAST:event_OrderByCountryButtonActionPerformed
 
-    private void OrderByRentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByRentButtonActionPerformed
+    private void OrderByDateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByDateButtonActionPerformed
         /*this.clean();
         ISystemFacade facade = new SystemFacade();
         this.listProperties = facade.propertiesByOwner(this.owner.getId(),"Rent");
         this.stablishListProperties();*/
-    }//GEN-LAST:event_OrderByRentButtonActionPerformed
+    }//GEN-LAST:event_OrderByDateButtonActionPerformed
 
     private void PhotosComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhotosComboBoxActionPerformed
 
@@ -418,9 +420,9 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         //this.showPhoto();
     }//GEN-LAST:event_ShowPhotoButtonActionPerformed
 
-    private void OrderByNumberRoomsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByNumberRoomsButton1ActionPerformed
+    private void OrderByDescriptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByDescriptionButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_OrderByNumberRoomsButton1ActionPerformed
+    }//GEN-LAST:event_OrderByDescriptionButtonActionPerformed
 
     private void stablishListProperties(){
         
@@ -540,9 +542,9 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     private javax.swing.JLabel ImageLabel;
     private javax.swing.JTextField LocationTextField;
     private javax.swing.JTextField NumberRoomsTextField;
-    private javax.swing.JButton OrderByNumberRoomsButton;
-    private javax.swing.JButton OrderByNumberRoomsButton1;
-    private javax.swing.JButton OrderByRentButton;
+    private javax.swing.JButton OrderByCountryButton;
+    private javax.swing.JButton OrderByDateButton;
+    private javax.swing.JButton OrderByDescriptionButton;
     private javax.swing.JComboBox<String> PhotosComboBox;
     private javax.swing.JComboBox<String> PropertiesComboBox;
     private javax.swing.JTextField RentTextField;

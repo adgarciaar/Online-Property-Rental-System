@@ -274,43 +274,51 @@ public class PropertyDAO {
             if (type != null){
                 query = query + " and type = ?";                               
             }else{
-                query = query + " and type = 'Apartment' or type = 'House' or type = ?";                
+                type = "";
+                query = query + " and (type = 'Apartment' or type = 'House' or type = ?)";                
             }
             
             if (numberRooms != null){
                 query = query + " and number_rooms = ?";                
             }else{
-                query = query + " and number_rooms = ? or number_rooms = ANY(select number_rooms from property)";
+                numberRooms = "1";
+                query = query + " and (number_rooms = ? or number_rooms = ANY(select number_rooms from property))";
             }
             
             if (minRent != null && maxRent != null){
-                query = query + " and rent between = ? and ?";                
+                query = query + " and (rent between = ? and ?)";                
             }else{
-                query = query + " and rent = ? or rent = ? or rent = ANY(select rent from property)"; 
+                minRent = "0";
+                maxRent = "1";
+                query = query + " and (rent = ? or rent = ? or rent = ANY(select rent from property))"; 
             }
             
-            if(listSelectedLocations != null){
+            System.out.println(query);
+            
+            if(listSelectedLocations.isEmpty() == false){
+                
+                query = query + " and (";
                 
                 int n = listSelectedLocations.size();
                 
                 for (int j=0; j<n; j++){         
                     if (j == n-1){
-                        query = query + " and location_idlocation = ?";
+                        query = query + " location_idlocation = ?)";
                     }else{
-                        query = query + " and location_idlocation = ? or ";
+                        query = query + " location_idlocation = ? or ";
                     }                                           
                 }                
             }
             
             ps = connection.prepareStatement(query);
-            
+                        
             ps.setString(1, type);
             ps.setInt(2, Integer.parseInt(numberRooms));
             ps.setLong(3, Long.parseLong(minRent));
             ps.setLong(4, Long.parseLong(maxRent));
 
             int i = 4;
-            if(listSelectedLocations != null){
+            if(listSelectedLocations.isEmpty() == false){
                 
                 Set set = listSelectedLocations.entrySet();        
                 Iterator iterator = set.iterator();

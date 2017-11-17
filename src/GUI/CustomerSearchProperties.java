@@ -278,6 +278,8 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
                 maxRent = MaximalRentTextField.getText();
             }
             
+            System.out.println(type+ " " +numberRooms+" "+ minRent +" "+ maxRent);
+            
             listProperties = facade.propertiesByCriteria(type, numberRooms, minRent, maxRent, this.listSelectedLocations);
         
             if (listProperties == null){  
