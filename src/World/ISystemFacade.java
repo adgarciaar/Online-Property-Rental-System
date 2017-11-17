@@ -39,4 +39,6 @@ public interface ISystemFacade {
     
     public String retrieveNameCountry(int idCountry);
     
+    public LinkedHashMap<Integer, Photo> retrievePhotos(int propertyId, String order);
+    
 }

@@ -10,6 +10,7 @@ import DataAccess.CountryDAO;
 import DataAccess.CustomerDAO;
 import DataAccess.LocationDAO;
 import DataAccess.OwnerDAO;
+import DataAccess.PhotoDAO;
 import DataAccess.PropertyDAO;
 import java.io.IOException;
 import java.util.HashMap;
@@ -116,6 +117,16 @@ public class SystemFacade implements ISystemFacade{
     @Override
     public String retrieveNameCountry(int idCountry) {
         return CountryDAO.retrieveNameCountry(idCountry);
+    }
+
+    @Override
+    public LinkedHashMap<Integer, Photo> retrievePhotos(int propertyId, String order) {
+        try {
+            return PhotoDAO.retrievePhotos(propertyId, order);
+        } catch (IOException ex) {
+            Logger.getLogger(SystemFacade.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
 }

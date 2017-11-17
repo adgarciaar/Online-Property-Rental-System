@@ -39,6 +39,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
      * @param CustomerWindow
      */
     public CustomerViewPropertiesWindow(Customer customer, LinkedHashMap<Integer,Property> listProperties, JFrame CustomerWindow) {
+        
         initComponents();
         this.customer = customer;
         this.listProperties = listProperties;
@@ -95,7 +96,6 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         TypeTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(null);
 
         jLabel4.setText("Location");
 
@@ -158,6 +158,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         jLabel9.setText("Property information");
 
         OrderByCountryButton.setText("Order by country");
+        OrderByCountryButton.setEnabled(false);
         OrderByCountryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OrderByCountryButtonActionPerformed(evt);
@@ -165,6 +166,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         });
 
         OrderByDateButton.setText("Order by date");
+        OrderByDateButton.setEnabled(false);
         OrderByDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OrderByDateButtonActionPerformed(evt);
@@ -208,6 +210,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         jScrollPane1.setViewportView(DescriptionTextArea);
 
         OrderByDescriptionButton.setText("Order by description");
+        OrderByDescriptionButton.setEnabled(false);
         OrderByDescriptionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OrderByDescriptionButtonActionPerformed(evt);
@@ -272,7 +275,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(OrderByCountryButton)
-                                                        .addGap(12, 12, 12)
+                                                        .addGap(18, 18, 18)
                                                         .addComponent(OrderByDateButton)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(OrderByDescriptionButton))
@@ -401,17 +404,21 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_PropertiesComboBoxActionPerformed
 
     private void OrderByCountryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByCountryButtonActionPerformed
-        /*this.clean();
+        this.cleanPhotoData();
         ISystemFacade facade = new SystemFacade();
-        this.listProperties = facade.propertiesByOwner(this.owner.getId(),"NumberRooms");
-        this.stablishListProperties();*/
+        LinkedHashMap<Integer, Photo> listPhotos;
+        listPhotos = facade.retrievePhotos(this.property.getId(), "Country");
+        this.property.setPhotos(listPhotos);
+        this.fillComboBoxPhotos();        
     }//GEN-LAST:event_OrderByCountryButtonActionPerformed
 
     private void OrderByDateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByDateButtonActionPerformed
-        /*this.clean();
+        this.cleanPhotoData();
         ISystemFacade facade = new SystemFacade();
-        this.listProperties = facade.propertiesByOwner(this.owner.getId(),"Rent");
-        this.stablishListProperties();*/
+        LinkedHashMap<Integer, Photo> listPhotos;
+        listPhotos = facade.retrievePhotos(this.property.getId(), "Date");
+        this.property.setPhotos(listPhotos);
+        this.fillComboBoxPhotos();
     }//GEN-LAST:event_OrderByDateButtonActionPerformed
 
     private void PhotosComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhotosComboBoxActionPerformed
@@ -423,7 +430,12 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_ShowPhotoButtonActionPerformed
 
     private void OrderByDescriptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByDescriptionButtonActionPerformed
-        // TODO add your handling code here:
+        this.cleanPhotoData();
+        ISystemFacade facade = new SystemFacade();
+        LinkedHashMap<Integer, Photo> listPhotos;
+        listPhotos = facade.retrievePhotos(this.property.getId(), "Description");
+        this.property.setPhotos(listPhotos);
+        this.fillComboBoxPhotos();
     }//GEN-LAST:event_OrderByDescriptionButtonActionPerformed
 
     private void stablishListProperties(){
@@ -485,6 +497,18 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         RentTextField.setText(Long.toString(this.property.getRent()));
         DeletionStatusTextField.setText(this.property.getDeletion_status());
         
+        this.fillComboBoxPhotos();
+        
+        PhotosComboBox.setEnabled(true);
+        
+        ShowPhotoButton.setEnabled(true);    
+        
+        OrderByCountryButton.setEnabled(true);
+        OrderByDateButton.setEnabled(true);
+        OrderByDescriptionButton.setEnabled(true);
+    }
+    
+    private void fillComboBoxPhotos(){
         LinkedHashMap<Integer, Photo> listPhotos;
         listPhotos = this.property.getPhotos();
         
@@ -498,15 +522,11 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
             photo = (Photo) mentry.getValue();  
             PhotosComboBox.addItem(photo.getId()+". "+photo.getFilename());
         }
-        
-        PhotosComboBox.setEnabled(true);
-        
-        ShowPhotoButton.setEnabled(true);    
     }
     
     private void showPhoto(){
         
-        ImageLabel.setIcon(null); 
+        this.cleanPhotoData();
         
         FilenameTextField.setText("");
         DateTextField.setText("");
@@ -535,6 +555,17 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         Icon icon = new ImageIcon(bufImage.getScaledInstance(389, 215, Image.SCALE_DEFAULT));        
         ImageLabel.setIcon(icon);   
         
+    }
+    
+    private void cleanPhotoData(){
+        OrderByCountryButton.setEnabled(false);
+        OrderByDateButton.setEnabled(false);
+        OrderByDescriptionButton.setEnabled(false);
+        ImageLabel.setIcon(null);         
+        FilenameTextField.setText("");
+        DateTextField.setText("");
+        CountryTextField.setText("");
+        DescriptionTextArea.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

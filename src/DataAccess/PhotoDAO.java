@@ -33,7 +33,11 @@ public class PhotoDAO {
     
     public static final String RETRIEVE_PHOTOS = "select idphoto,filename,image, "
             + "description,datephoto,country_idcountry,property_idproperty from "
-            + "Photo where property_idproperty = ? order by idphoto asc";
+            + "Photo where property_idproperty = ? ";
+    
+    public static final String RETRIEVE_PHOTOS_BY_ORDER = "select idphoto,filename,image, "
+            + "description,datephoto,country_idcountry,property_idproperty from "
+            + "Photo where property_idproperty = ? ";
     
     public static boolean uploadPhoto(Photo photo){
         
@@ -74,7 +78,7 @@ public class PhotoDAO {
         
     }
     
-    public static LinkedHashMap<Integer, Photo> retrievePhotos(int propertyId) throws IOException{
+    public static LinkedHashMap<Integer, Photo> retrievePhotos(int propertyId, String order) throws IOException{
         
         Connection connection = null;       
         PreparedStatement ps = null;
@@ -83,9 +87,25 @@ public class PhotoDAO {
         LinkedHashMap<Integer,Photo> listPhotos = new LinkedHashMap<>();
         
         try{
+            
+            String query = RETRIEVE_PHOTOS;
+            
+            if (order.compareTo("Id") == 0){
+                query = query + "order by idphoto asc";
+            }else{            
+                if (order.compareTo("Date") == 0){
+                    query = query + "order by date asc";
+                }else{
+                    if (order.compareTo("Country") == 0){
+                        query = query + "order by country_idcountry asc";
+                    }else{
+                        query = query + "order by description asc";
+                    }
+                }
+            }
            
             connection = DBConnection.getConnection();
-            ps = connection.prepareStatement(RETRIEVE_PHOTOS);        
+            ps = connection.prepareStatement(query);        
             ps.setInt(1, propertyId);
             
             rs = ps.executeQuery();

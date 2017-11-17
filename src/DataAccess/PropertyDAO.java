@@ -198,7 +198,7 @@ public class PropertyDAO {
                 property.setIdOwner(idOwner);
                 
                 LinkedHashMap<Integer, Photo> listPhotos;
-                listPhotos = PhotoDAO.retrievePhotos(property.getId());
+                listPhotos = PhotoDAO.retrievePhotos(property.getId(),"Id");
                 
                 property.setPhotos(listPhotos);
                 
@@ -354,7 +354,7 @@ public class PropertyDAO {
                 property.setIdOwner(rs.getInt("owner_iduser"));
                 
                 LinkedHashMap<Integer, Photo> listPhotos;
-                listPhotos = PhotoDAO.retrievePhotos(property.getId());
+                listPhotos = PhotoDAO.retrievePhotos(property.getId(),"Id");
                 
                 property.setPhotos(listPhotos);
                 
