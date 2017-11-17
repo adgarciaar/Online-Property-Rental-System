@@ -94,7 +94,7 @@ public class PhotoDAO {
                 query = query + "order by idphoto asc";
             }else{            
                 if (order.compareTo("Date") == 0){
-                    query = query + "order by date asc";
+                    query = query + "order by datephoto asc";
                 }else{
                     if (order.compareTo("Country") == 0){
                         query = query + "order by country_idcountry asc";
