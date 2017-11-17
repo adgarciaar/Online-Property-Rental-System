@@ -310,6 +310,8 @@ public class PropertyDAO {
             
             //System.out.println(query);
             
+            query = query + " order by idproperty asc";
+            
             ps = connection.prepareStatement(query);
                         
             ps.setString(1, type);
@@ -327,7 +329,7 @@ public class PropertyDAO {
                     
                     Map.Entry mentry = (Map.Entry)iterator.next(); 
                     i++;                    
-                    ps.setInt(i, (int) mentry.getValue());
+                    ps.setInt(i, (int) mentry.getKey());
                 }
                 
             }

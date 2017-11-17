@@ -107,5 +107,15 @@ public class SystemFacade implements ISystemFacade{
             return null;
         }
     }
+
+    @Override
+    public String retrieveNameLocation(int idLocation) {
+        return LocationDAO.retrieveNameLocation(idLocation);
+    }
+
+    @Override
+    public String retrieveNameCountry(int idCountry) {
+        return CountryDAO.retrieveNameCountry(idCountry);
+    }
     
 }

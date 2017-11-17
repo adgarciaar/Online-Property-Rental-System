@@ -427,7 +427,8 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
         
         TypeComboBox.setSelectedItem(this.property.getType());
         AddressTextField.setText(this.property.getAddress());
-        LocationComboBox.addItem(LocationDAO.retrieveNameLocation(this.property.getIdLocation()));        
+        ISystemFacade facade = new SystemFacade();   
+        LocationComboBox.addItem(facade.retrieveNameLocation(this.property.getIdLocation()));        
         NumberRoomsTextField.setText(Integer.toString(this.property.getNumber_rooms()));
         RentTextField.setText(Long.toString(this.property.getRent()));
         DeletionStatusTextField.setText(this.property.getDeletion_status());

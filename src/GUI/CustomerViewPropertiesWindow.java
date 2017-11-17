@@ -7,8 +7,10 @@ package GUI;
 
 import DataAccess.LocationDAO;
 import World.Customer;
+import World.ISystemFacade;
 import World.Photo;
 import World.Property;
+import World.SystemFacade;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
@@ -477,7 +479,8 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         
         TypeTextField.setText(this.property.getType());
         AddressTextField.setText(this.property.getAddress());
-        LocationTextField.setText(LocationDAO.retrieveNameLocation(this.property.getIdLocation()));        
+        ISystemFacade facade = new SystemFacade(); 
+        LocationTextField.setText(facade.retrieveNameLocation(this.property.getIdLocation()));        
         NumberRoomsTextField.setText(Integer.toString(this.property.getNumber_rooms()));
         RentTextField.setText(Long.toString(this.property.getRent()));
         DeletionStatusTextField.setText(this.property.getDeletion_status());
@@ -522,6 +525,10 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         Photo photo = listPhotos.get(idPhoto);
         
         FilenameTextField.setText(photo.getFilename());
+        DateTextField.setText(photo.getDatephoto());
+        ISystemFacade facade = new SystemFacade(); 
+        CountryTextField.setText(facade.retrieveNameCountry(photo.getCountryId()));
+        DescriptionTextArea.setText(photo.getDescription());
         
         BufferedImage bufImage = (BufferedImage) photo.getImage();  
         

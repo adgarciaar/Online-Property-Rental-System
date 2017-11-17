@@ -22,6 +22,9 @@ public class CountryDAO {
     public static final String SEARCH_COUNTRIES = "select idcountry, name from "
             + "Country order by idcountry asc";
     
+    public static final String RETRIEVE_NAME_COUNTRY= "select name from "
+            + "Country where idcountry = ?";
+    
     public static LinkedHashMap<Integer, Country> retrieveCountries(){
         
         Connection connection = null;       
@@ -65,6 +68,44 @@ public class CountryDAO {
                 JOptionPane.showMessageDialog(null, "Error: " + ex);                           
             }            
         }
+    }
+    
+    public static String retrieveNameCountry(int idCountry){
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try{
+           
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement(RETRIEVE_NAME_COUNTRY);     
+            ps.setInt(1, idCountry);
+            
+            rs = ps.executeQuery();
+
+            String nameLocation = null;      
+            
+            while (rs.next()){  
+                nameLocation =rs.getString("name");
+            }   
+            
+            rs.close();     
+            
+            return nameLocation;
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
+            return null;
+        }finally{
+            try {
+                ps.close();
+                connection.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                           
+            }            
+        }
+        
     }
     
 }

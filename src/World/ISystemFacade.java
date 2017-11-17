@@ -35,4 +35,8 @@ public interface ISystemFacade {
     public LinkedHashMap<Integer,Property> propertiesByCriteria(String type,
             String numberRooms, String minRent,String maxRent,HashMap<Integer,String> listSelectedLocations);
     
+    public String retrieveNameLocation(int idLocation);
+    
+    public String retrieveNameCountry(int idCountry);
+    
 }
