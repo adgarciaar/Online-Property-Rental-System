@@ -397,8 +397,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddToVisitingListPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToVisitingListPropertyButtonActionPerformed
-
-        
+        AddToVisitingListPropertyButton.setEnabled(false);
     }//GEN-LAST:event_AddToVisitingListPropertyButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
@@ -523,6 +522,8 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         OrderByCountryButton.setEnabled(true);
         OrderByDateButton.setEnabled(true);
         OrderByDescriptionButton.setEnabled(true);
+        
+        AddToVisitingListPropertyButton.setEnabled(true);
     }
     
     private void fillComboBoxPhotos(){
