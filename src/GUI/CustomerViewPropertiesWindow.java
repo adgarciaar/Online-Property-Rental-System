@@ -417,7 +417,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_PhotosComboBoxActionPerformed
 
     private void ShowPhotoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPhotoButtonActionPerformed
-        //this.showPhoto();
+        this.showPhoto();
     }//GEN-LAST:event_ShowPhotoButtonActionPerformed
 
     private void OrderByDescriptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByDescriptionButtonActionPerformed

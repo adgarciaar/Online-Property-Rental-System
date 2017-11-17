@@ -291,9 +291,7 @@ public class PropertyDAO {
                 minRent = "0";
                 maxRent = "1";
                 query = query + " and (rent = ? or rent = ? or rent = ANY(select rent from property))"; 
-            }
-            
-            System.out.println(query);
+            }           
             
             if(listSelectedLocations.isEmpty() == false){
                 
@@ -309,6 +307,8 @@ public class PropertyDAO {
                     }                                           
                 }                
             }
+            
+            //System.out.println(query);
             
             ps = connection.prepareStatement(query);
                         
