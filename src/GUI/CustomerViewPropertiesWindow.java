@@ -538,31 +538,40 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         
         this.fillComboBoxPhotos();
         
-        PhotosComboBox.setEnabled(true);
-        
-        ShowPhotoButton.setEnabled(true);    
-        
-        OrderByCountryButton.setEnabled(true);
-        OrderByDateButton.setEnabled(true);
-        OrderByDescriptionButton.setEnabled(true);
-        
         AddToVisitingListPropertyButton.setEnabled(true);
     }
     
     private void fillComboBoxPhotos(){
+        
         LinkedHashMap<Integer, Photo> listPhotos;
         listPhotos = this.property.getPhotos();
         
-        Set set = listPhotos.entrySet();        
-        Iterator iterator = set.iterator();
-        
-        Photo photo;
+        if(listPhotos.isEmpty() == true){
+            ShowPhotoButton.setEnabled(false);
+            PhotosComboBox.setEnabled(false);
+            OrderByCountryButton.setEnabled(false);
+            OrderByDateButton.setEnabled(false);
+            OrderByDescriptionButton.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "This property does not have photos related");
+        }else{
+            Set set = listPhotos.entrySet();        
+            Iterator iterator = set.iterator();
 
-        while(iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry)iterator.next();               
-            photo = (Photo) mentry.getValue();  
-            PhotosComboBox.addItem(photo.getId()+". "+photo.getFilename());
-        }
+            Photo photo;
+
+            while(iterator.hasNext()) {
+                Map.Entry mentry = (Map.Entry)iterator.next();               
+                photo = (Photo) mentry.getValue();  
+                PhotosComboBox.addItem(photo.getId()+". "+photo.getFilename());
+            }
+            
+            PhotosComboBox.setEnabled(true);        
+            ShowPhotoButton.setEnabled(true);
+            OrderByCountryButton.setEnabled(true);
+            OrderByDateButton.setEnabled(true);
+            OrderByDescriptionButton.setEnabled(true);
+        }    
+        
     }
     
     private void showPhoto(){

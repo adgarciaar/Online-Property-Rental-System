@@ -483,10 +483,6 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
         
         this.fillComboBoxPhotos();
         
-        PhotosComboBox.setEnabled(true);
-        
-        ShowPhotoButton.setEnabled(true); 
-        
         RentPropertyButton.setEnabled(true);
         
         this.fillVisitPhotos();
@@ -494,19 +490,29 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
     }
     
     private void fillComboBoxPhotos(){
+        
         LinkedHashMap<Integer, Photo> listPhotos;
         listPhotos = this.property.getPhotos();
         
-        Set set = listPhotos.entrySet();        
-        Iterator iterator = set.iterator();
-        
-        Photo photo;
+        if(listPhotos.isEmpty() == true){
+            ShowPhotoButton.setEnabled(false);
+            PhotosComboBox.setEnabled(false);
+        }else{
+            Set set = listPhotos.entrySet();        
+            Iterator iterator = set.iterator();
 
-        while(iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry)iterator.next();               
-            photo = (Photo) mentry.getValue();  
-            PhotosComboBox.addItem(photo.getId()+". "+photo.getFilename());
+            Photo photo;
+
+            while(iterator.hasNext()) {
+                Map.Entry mentry = (Map.Entry)iterator.next();               
+                photo = (Photo) mentry.getValue();  
+                PhotosComboBox.addItem(photo.getId()+". "+photo.getFilename());
+            }
+            
+            PhotosComboBox.setEnabled(true);        
+            ShowPhotoButton.setEnabled(true); 
         }
+        
     }
     
     private void showPhoto(){
@@ -551,6 +557,7 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
     }
     
     private void fillVisitPhotos(){
+        
         ISystemFacade facade = new SystemFacade(); 
         
         LinkedHashMap<Integer, Visit> listVisits;

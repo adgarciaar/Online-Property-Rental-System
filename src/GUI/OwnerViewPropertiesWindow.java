@@ -442,20 +442,25 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
         LinkedHashMap<Integer, Photo> listPhotos;
         listPhotos = this.property.getPhotos();
         
-        Set set = listPhotos.entrySet();        
-        Iterator iterator = set.iterator();
-        
-        Photo photo;
+        if(listPhotos.isEmpty() == true){
+            ShowPhotoButton.setEnabled(false);
+            PhotosComboBox.setEnabled(false);
+        }else{
+            Set set = listPhotos.entrySet();        
+            Iterator iterator = set.iterator();
 
-        while(iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry)iterator.next();               
-            photo = (Photo) mentry.getValue();  
-            PhotosComboBox.addItem(photo.getId()+". "+photo.getFilename());
-        }
-        
-        PhotosComboBox.setEnabled(true);
-        
-        ShowPhotoButton.setEnabled(true);    
+            Photo photo;
+
+            while(iterator.hasNext()) {
+                Map.Entry mentry = (Map.Entry)iterator.next();               
+                photo = (Photo) mentry.getValue();  
+                PhotosComboBox.addItem(photo.getId()+". "+photo.getFilename());
+            }
+            
+            PhotosComboBox.setEnabled(true);        
+            ShowPhotoButton.setEnabled(true);  
+        }    
+          
     }
     
     private void showPhoto(){

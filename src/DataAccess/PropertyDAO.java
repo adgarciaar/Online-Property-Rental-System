@@ -206,6 +206,10 @@ public class PropertyDAO {
                 LinkedHashMap<Integer, Photo> listPhotos;
                 listPhotos = PhotoDAO.retrievePhotos(property.getId(),"Id");
                 
+                if(listPhotos == null){
+                    listPhotos = new LinkedHashMap<>();
+                }
+                
                 property.setPhotos(listPhotos);
                 
                 listProperties.put(property.getId(), property);
@@ -360,6 +364,10 @@ public class PropertyDAO {
                 LinkedHashMap<Integer, Photo> listPhotos;
                 listPhotos = PhotoDAO.retrievePhotos(property.getId(),"Id");
                 
+                if(listPhotos == null){
+                    listPhotos = new LinkedHashMap<>();
+                }
+                
                 property.setPhotos(listPhotos);
                 
                 listProperties.put(property.getId(), property);                
@@ -419,6 +427,10 @@ public class PropertyDAO {
                 
                 LinkedHashMap<Integer, Photo> listPhotos;
                 listPhotos = PhotoDAO.retrievePhotos(property.getId(),"Id");
+                
+                if(listPhotos == null){
+                    listPhotos = new LinkedHashMap<>();
+                }
                 
                 property.setPhotos(listPhotos);
                 
