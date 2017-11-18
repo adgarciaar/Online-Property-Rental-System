@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
  *
  * @author adrian
  */
-public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
+public class ViewVisitingListWindow extends javax.swing.JFrame {
     
     private final Customer customer;
     private LinkedHashMap<Integer,Property> listProperties;
@@ -40,7 +40,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
      * @param listProperties
      * @param CustomerWindow
      */
-    public CustomerViewPropertiesWindow(Customer customer, LinkedHashMap<Integer,Property> listProperties, JFrame CustomerWindow) {
+    public ViewVisitingListWindow(Customer customer, LinkedHashMap<Integer,Property> listProperties, JFrame CustomerWindow) {
         
         initComponents();
         this.customer = customer;
@@ -62,7 +62,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        AddToVisitingListPropertyButton = new javax.swing.JButton();
+        RentPropertyButton = new javax.swing.JButton();
         BackButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -80,8 +80,6 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        OrderByCountryButton = new javax.swing.JButton();
-        OrderByDateButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         PhotosComboBox = new javax.swing.JComboBox<>();
@@ -94,20 +92,18 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         DescriptionTextArea = new javax.swing.JTextArea();
-        OrderByDescriptionButton = new javax.swing.JButton();
         LocationTextField = new javax.swing.JTextField();
         TypeTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1014, 943));
 
         jLabel4.setText("Location");
 
-        AddToVisitingListPropertyButton.setText("Add to visiting list");
-        AddToVisitingListPropertyButton.setEnabled(false);
-        AddToVisitingListPropertyButton.addActionListener(new java.awt.event.ActionListener() {
+        RentPropertyButton.setText("Rent property");
+        RentPropertyButton.setEnabled(false);
+        RentPropertyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddToVisitingListPropertyButtonActionPerformed(evt);
+                RentPropertyButtonActionPerformed(evt);
             }
         });
 
@@ -141,7 +137,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("View properties");
+        jLabel1.setText("Properties in my visiting list");
 
         jLabel2.setText("Type");
 
@@ -160,22 +156,6 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         jLabel8.setText("Photos of the property");
 
         jLabel9.setText("Property information");
-
-        OrderByCountryButton.setText("Order by country");
-        OrderByCountryButton.setEnabled(false);
-        OrderByCountryButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderByCountryButtonActionPerformed(evt);
-            }
-        });
-
-        OrderByDateButton.setText("Order by date");
-        OrderByDateButton.setEnabled(false);
-        OrderByDateButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderByDateButtonActionPerformed(evt);
-            }
-        });
 
         jLabel10.setText("Filename");
 
@@ -212,14 +192,6 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         DescriptionTextArea.setRows(5);
         DescriptionTextArea.setEnabled(false);
         jScrollPane1.setViewportView(DescriptionTextArea);
-
-        OrderByDescriptionButton.setText("Order by description");
-        OrderByDescriptionButton.setEnabled(false);
-        OrderByDescriptionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderByDescriptionButtonActionPerformed(evt);
-            }
-        });
 
         LocationTextField.setEnabled(false);
 
@@ -261,18 +233,18 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(76, 76, 76)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(CountryTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(FilenameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(PhotosComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jLabel8)
-                                                    .addComponent(ShowPhotoButton, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                                                .addComponent(jLabel8)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(PhotosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(OrderByDateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(OrderByCountryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(OrderByDescriptionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                                .addComponent(ShowPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(CountryTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(FilenameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(75, 75, 75)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,7 +280,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(281, 281, 281)
-                                .addComponent(AddToVisitingListPropertyButton)))
+                                .addComponent(RentPropertyButton)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -324,21 +296,13 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
                     .addComponent(ShowPropertyButton))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(PhotosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ShowPhotoButton))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(OrderByCountryButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(OrderByDateButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(OrderByDescriptionButton)))
-                        .addGap(28, 28, 28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(PhotosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ShowPhotoButton))
+                        .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(FilenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
@@ -358,7 +322,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
                             .addComponent(ImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(77, Short.MAX_VALUE))
+                        .addContainerGap(80, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jLabel9)
@@ -388,7 +352,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
                             .addComponent(DeletionStatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AddToVisitingListPropertyButton)
+                            .addComponent(RentPropertyButton)
                             .addComponent(BackButton))
                         .addGap(25, 25, 25))))
         );
@@ -396,7 +360,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AddToVisitingListPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToVisitingListPropertyButtonActionPerformed
+    private void RentPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentPropertyButtonActionPerformed
         
         if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
         
@@ -421,7 +385,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
             }
         
         }
-    }//GEN-LAST:event_AddToVisitingListPropertyButtonActionPerformed
+    }//GEN-LAST:event_RentPropertyButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         this.dispose();
@@ -436,28 +400,6 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
 
     }//GEN-LAST:event_PropertiesComboBoxActionPerformed
 
-    private void OrderByCountryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByCountryButtonActionPerformed
-        this.cleanPhotoData();
-        PhotosComboBox.removeAllItems();        
-        
-        ISystemFacade facade = new SystemFacade();
-        LinkedHashMap<Integer, Photo> listPhotos;
-        listPhotos = facade.retrievePhotos(this.property.getId(), "Country");
-        this.property.setPhotos(listPhotos);
-        this.fillComboBoxPhotos();        
-    }//GEN-LAST:event_OrderByCountryButtonActionPerformed
-
-    private void OrderByDateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByDateButtonActionPerformed
-        this.cleanPhotoData();
-        PhotosComboBox.removeAllItems();        
-        
-        ISystemFacade facade = new SystemFacade();
-        LinkedHashMap<Integer, Photo> listPhotos;
-        listPhotos = facade.retrievePhotos(this.property.getId(), "Date");
-        this.property.setPhotos(listPhotos);
-        this.fillComboBoxPhotos();
-    }//GEN-LAST:event_OrderByDateButtonActionPerformed
-
     private void PhotosComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhotosComboBoxActionPerformed
 
     }//GEN-LAST:event_PhotosComboBoxActionPerformed
@@ -465,17 +407,6 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     private void ShowPhotoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPhotoButtonActionPerformed
         this.showPhoto();
     }//GEN-LAST:event_ShowPhotoButtonActionPerformed
-
-    private void OrderByDescriptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderByDescriptionButtonActionPerformed
-        this.cleanPhotoData();
-        PhotosComboBox.removeAllItems();        
-        
-        ISystemFacade facade = new SystemFacade();
-        LinkedHashMap<Integer, Photo> listPhotos;
-        listPhotos = facade.retrievePhotos(this.property.getId(), "Description");
-        this.property.setPhotos(listPhotos);
-        this.fillComboBoxPhotos();
-    }//GEN-LAST:event_OrderByDescriptionButtonActionPerformed
 
     private void stablishListProperties(){
         
@@ -502,7 +433,7 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         LocationTextField.setText("");
         PhotosComboBox.removeAllItems();
         PhotosComboBox.setEnabled(false);
-        AddToVisitingListPropertyButton.setEnabled(false);
+        RentPropertyButton.setEnabled(false);
         ShowPhotoButton.setEnabled(false);
         ImageLabel.setIcon(null);  
         FilenameTextField.setText("");
@@ -540,13 +471,9 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         
         PhotosComboBox.setEnabled(true);
         
-        ShowPhotoButton.setEnabled(true);    
+        ShowPhotoButton.setEnabled(true); 
         
-        OrderByCountryButton.setEnabled(true);
-        OrderByDateButton.setEnabled(true);
-        OrderByDescriptionButton.setEnabled(true);
-        
-        AddToVisitingListPropertyButton.setEnabled(true);
+        RentPropertyButton.setEnabled(true);
     }
     
     private void fillComboBoxPhotos(){
@@ -607,7 +534,6 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddToVisitingListPropertyButton;
     private javax.swing.JTextField AddressTextField;
     private javax.swing.JButton BackButton;
     private javax.swing.JTextField CountryTextField;
@@ -618,11 +544,9 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     private javax.swing.JLabel ImageLabel;
     private javax.swing.JTextField LocationTextField;
     private javax.swing.JTextField NumberRoomsTextField;
-    private javax.swing.JButton OrderByCountryButton;
-    private javax.swing.JButton OrderByDateButton;
-    private javax.swing.JButton OrderByDescriptionButton;
     private javax.swing.JComboBox<String> PhotosComboBox;
     private javax.swing.JComboBox<String> PropertiesComboBox;
+    private javax.swing.JButton RentPropertyButton;
     private javax.swing.JTextField RentTextField;
     private javax.swing.JButton ShowPhotoButton;
     private javax.swing.JButton ShowPropertyButton;

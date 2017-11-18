@@ -131,7 +131,8 @@ public class CustomerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_SignOutButtonActionPerformed
 
     private void ViewVisitingListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewVisitingListButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        //new ViewVisitingListWindow(this.customer, this).setVisible(true);
     }//GEN-LAST:event_ViewVisitingListButtonActionPerformed
 
     private void ViewAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAccountButtonActionPerformed

@@ -3,9 +3,6 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1014, 943]"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -65,19 +62,20 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="CountryTextField" alignment="1" min="-2" pref="265" max="-2" attributes="0"/>
-                                          <Component id="FilenameTextField" alignment="1" min="-2" pref="265" max="-2" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="PhotosComboBox" max="32767" attributes="0"/>
-                                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="ShowPhotoButton" alignment="0" pref="171" max="32767" attributes="0"/>
-                                              </Group>
+                                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="PhotosComboBox" min="-2" pref="171" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="OrderByDateButton" max="32767" attributes="0"/>
-                                                  <Component id="OrderByCountryButton" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="OrderByDescriptionButton" max="32767" attributes="0"/>
+                                              <Component id="ShowPhotoButton" min="-2" pref="171" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="CountryTextField" alignment="1" min="-2" pref="265" max="-2" attributes="0"/>
+                                                  <Component id="FilenameTextField" alignment="1" min="-2" pref="265" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -130,7 +128,7 @@
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
-                              <Component id="AddToVisitingListPropertyButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="RentPropertyButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -153,24 +151,14 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="40" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="PhotosComboBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="ShowPhotoButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="OrderByCountryButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="OrderByDateButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="OrderByDescriptionButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <EmptySpace pref="48" max="32767" attributes="0"/>
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="PhotosComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ShowPhotoButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="FilenameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -195,7 +183,7 @@
                           <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                           <Component id="ImageLabel" min="-2" pref="215" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="77" max="32767" attributes="0"/>
+                      <EmptySpace pref="80" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
@@ -232,7 +220,7 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="AddToVisitingListPropertyButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="RentPropertyButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="BackButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -248,13 +236,13 @@
         <Property name="text" type="java.lang.String" value="Location"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="AddToVisitingListPropertyButton">
+    <Component class="javax.swing.JButton" name="RentPropertyButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add to visiting list"/>
+        <Property name="text" type="java.lang.String" value="Rent property"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddToVisitingListPropertyButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RentPropertyButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BackButton">
@@ -316,7 +304,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="View properties"/>
+        <Property name="text" type="java.lang.String" value="Properties in my visiting list"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -361,24 +349,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Property information"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="OrderByCountryButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Order by country"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OrderByCountryButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="OrderByDateButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Order by date"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OrderByDateButtonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
@@ -459,15 +429,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="OrderByDescriptionButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Order by description"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OrderByDescriptionButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="LocationTextField">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
