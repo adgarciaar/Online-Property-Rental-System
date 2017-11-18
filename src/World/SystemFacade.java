@@ -134,5 +134,15 @@ public class SystemFacade implements ISystemFacade{
     public boolean scheduleVisit(Visit visit) {
         return VisitDAO.scheduleVisit(visit);
     }
+
+    @Override
+    public boolean searchVisitsByCustomerProperty(int idCustomer, int idProperty) {
+        return VisitDAO.searchVisitsByCustomerProperty(idCustomer, idProperty);
+    }
+
+    @Override
+    public boolean validateRentCostumer(int idCustomer, int idProperty) {
+        return CustomerDAO.validateRentCostumer(idCustomer, idProperty);
+    }
     
 }

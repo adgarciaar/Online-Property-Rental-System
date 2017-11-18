@@ -399,10 +399,17 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddToVisitingListPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToVisitingListPropertyButtonActionPerformed
-        this.setVisible(false);
-        this.cleanPhotoData();
-        this.clean();
-        new AddToVisitingList(this.property, this.customer, this).setVisible(true);
+        ISystemFacade facade = new SystemFacade();
+        boolean b = true;
+        b = facade.searchVisitsByCustomerProperty(this.customer.getId(), this.property.getId());
+        b = facade.validateRentCostumer(this.customer.getId(), this.property.getId());
+        
+        if (b == true){
+            this.setVisible(false);
+            this.cleanPhotoData();
+            this.clean();
+            new AddToVisitingList(this.property, this.customer, this).setVisible(true);
+        }        
     }//GEN-LAST:event_AddToVisitingListPropertyButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed

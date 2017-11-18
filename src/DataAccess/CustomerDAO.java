@@ -37,6 +37,11 @@ public class CustomerDAO {
     public static final String DELETE_CUSTOMER = "update Customer set "
             + "deletion_status = 'Deleted' where iduser = ?";
     
+    public static final String VALIDATE_CUSTOMER_RENT = "select case when count(*)=0 "
+            + "then 'false' else 'true' end as confirmation from customer "
+            + "where iduser = ? and maximum_rent >= (select rent from property where idproperty = ?)";
+    
+    
     public static Customer searchCustomer(String username, String password){
         
         Connection connection = null;       
@@ -208,6 +213,51 @@ public class CustomerDAO {
                 JOptionPane.showMessageDialog(null, "Error: " + ex);               
             }
         }         
+    }
+    
+    public static boolean validateRentCostumer(int idCustomer, int idProperty){
+               
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;   
+        
+        try{
+            connection = DBConnection.getConnection();
+            
+            ps = connection.prepareStatement(VALIDATE_CUSTOMER_RENT);
+                      
+            ps.setInt(1, idCustomer);
+            ps.setInt(2, idProperty);
+            
+            rs = ps.executeQuery();
+            
+            String b = null;
+            
+            while (rs.next()){            
+                b = rs.getString("confirmation");
+            }
+            
+            rs.close();
+            
+            if(b.compareTo("true") == 0){                
+                return true;
+            }else{
+                return false;
+            }           
+                    
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex); 
+            return false;
+            
+        }finally{
+            try{
+                ps.close();
+                connection.close();
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error: " + ex);               
+            }
+        }
+        
     }
     
 }

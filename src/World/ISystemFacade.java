@@ -43,4 +43,8 @@ public interface ISystemFacade {
     
     public boolean scheduleVisit(Visit visit);
     
+    public boolean searchVisitsByCustomerProperty(int idCustomer, int idProperty);
+    
+    public boolean validateRentCostumer(int idCustomer, int idProperty);
+    
 }
