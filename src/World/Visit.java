@@ -28,11 +28,10 @@ public class Visit {
         this.status = status;
     }
 
-    public Visit(int idCustomer, int idProperty, String dateTime) {
+    public Visit(int idCustomer, int idProperty) {
         this.idCustomer = idCustomer;
         this.idProperty = idProperty;
-        this.dateTime = dateTime;
-    }    
+    }
 
     public int getIdCustomer() {
         return idCustomer;

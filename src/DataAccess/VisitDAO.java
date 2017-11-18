@@ -20,7 +20,7 @@ public class VisitDAO {
     
     public static final String SCHEDULE_VISIT = "insert into visit (customer_iduser, "
             + "property_idproperty, datetimevisit, comments, status) values "
-            + "(?, ?, TO_DATE(?, 'dd/mm/yyyy hh24:mi:ss'), NULL, 'Scheduled')";
+            + "(?, ?, NULL, NULL, 'Scheduled')";
     
     public static final String NUMBER_VISITS_BY_CUSTOMER_PROPERTY = "select count(*) "
             + "from visit where customer_iduser = ? and property_idproperty = ? "
@@ -38,7 +38,6 @@ public class VisitDAO {
                       
             ps.setInt(1, visit.getIdCustomer());
             ps.setInt(2, visit.getIdProperty());
-            ps.setString(3, visit.getDateTime());
             
             ps.executeUpdate();
             

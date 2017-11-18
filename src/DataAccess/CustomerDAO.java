@@ -242,6 +242,7 @@ public class CustomerDAO {
             if(b.compareTo("true") == 0){                
                 return true;
             }else{
+                JOptionPane.showMessageDialog(null, "The rent of this property exceeds your maximum rent registered");
                 return false;
             }           
                     

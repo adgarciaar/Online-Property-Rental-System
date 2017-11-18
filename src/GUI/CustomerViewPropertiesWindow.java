@@ -11,6 +11,7 @@ import World.ISystemFacade;
 import World.Photo;
 import World.Property;
 import World.SystemFacade;
+import World.Visit;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
@@ -399,17 +400,30 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddToVisitingListPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToVisitingListPropertyButtonActionPerformed
-        ISystemFacade facade = new SystemFacade();
-        boolean b = true;
-        b = facade.searchVisitsByCustomerProperty(this.customer.getId(), this.property.getId());
-        b = facade.validateRentCostumer(this.customer.getId(), this.property.getId());
         
-        if (b == true){
-            this.setVisible(false);
-            this.cleanPhotoData();
-            this.clean();
-            new AddToVisitingList(this.property, this.customer, this).setVisible(true);
-        }        
+        if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        
+            ISystemFacade facade = new SystemFacade();
+            boolean b = true;
+            
+            if (facade.searchVisitsByCustomerProperty(this.customer.getId(), this.property.getId()) == false){
+                b = false;
+            }
+            if (facade.validateRentCostumer(this.customer.getId(), this.property.getId()) == false){
+                b = false;
+            }
+
+            if (b == true){            
+
+                Visit visit = new Visit(this.customer.getId(),this.property.getId());
+
+                if(facade.scheduleVisit(visit) == true){
+                    this.cleanPhotoData();
+                    this.clean();
+                }
+            }
+        
+        }
     }//GEN-LAST:event_AddToVisitingListPropertyButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
