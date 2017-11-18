@@ -94,6 +94,7 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
         DescriptionTextArea = new javax.swing.JTextArea();
         LocationTextField = new javax.swing.JTextField();
         TypeTextField = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -197,6 +198,8 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
 
         TypeTextField.setEnabled(false);
 
+        jLabel15.setText("Your visit historial on this property");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,7 +222,8 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
                                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(jLabel3))
-                                                    .addComponent(jLabel11)))
+                                                    .addComponent(jLabel11)
+                                                    .addComponent(jLabel15)))
                                             .addComponent(jLabel2))
                                         .addGap(57, 57, 57)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -350,6 +354,8 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(DeletionStatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(RentPropertyButton)
@@ -557,6 +563,7 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

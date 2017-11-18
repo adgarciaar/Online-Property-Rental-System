@@ -46,6 +46,12 @@ public class PropertyDAO {
             + "type,address,number_rooms,rent,deletion_status,location_idlocation, "
             + "owner_iduser from Property where deletion_status = 'Active'";
     
+    public static final String SEARCH_PROPERTIES_FROM_VISITING_LIST = "select "
+            + "distinct idproperty,type,address,number_rooms,rent,deletion_status,location_idlocation,owner_iduser "
+            + "from Property inner join Visit on Property.idproperty = Visit.Property_idproperty "
+            + "where deletion_status = 'Active' and Visit.Customer_iduser = ? "
+            + "order by idproperty asc";
+    
     public static boolean deletePropertiesByOwner(int idOwner){
         
         Connection connection = null;       
@@ -308,8 +314,6 @@ public class PropertyDAO {
                 }                
             }
             
-            //System.out.println(query);
-            
             query = query + " order by idproperty asc";
             
             ps = connection.prepareStatement(query);
@@ -359,6 +363,67 @@ public class PropertyDAO {
                 property.setPhotos(listPhotos);
                 
                 listProperties.put(property.getId(), property);                
+            }  
+            
+            rs.close();
+            
+            return listProperties;            
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
+            return null;    
+            
+        }finally{
+            try {
+                ps.close();
+                connection.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                           
+            }            
+        }       
+       
+    }
+    
+    public static LinkedHashMap<Integer,Property> searchPropertiesFromVisitingList(int idCustomer) throws IOException{
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try{
+           
+            connection = DBConnection.getConnection();
+            
+            ps = connection.prepareStatement(SEARCH_PROPERTIES_FROM_VISITING_LIST);
+            
+            ps.setInt(1, idCustomer);
+            
+            rs = ps.executeQuery();
+            
+            LinkedHashMap<Integer,Property> listProperties = new LinkedHashMap<>();
+            
+            Property property;
+            
+            while (rs.next()){
+                
+                property = new Property();
+                
+                property.setId(rs.getInt("idproperty"));
+                property.setType(rs.getString("type"));
+                property.setAddress(rs.getString("address"));
+                property.setNumber_rooms(rs.getInt("number_rooms"));
+                property.setRent(rs.getLong("rent"));
+                property.setDeletion_status(rs.getString("deletion_status"));
+                property.setIdLocation(rs.getInt("location_idlocation"));
+                property.setIdOwner(rs.getInt("owner_iduser"));
+                
+                LinkedHashMap<Integer, Photo> listPhotos;
+                listPhotos = PhotoDAO.retrievePhotos(property.getId(),"Id");
+                
+                property.setPhotos(listPhotos);
+                
+                listProperties.put(property.getId(), property);
+                
             }  
             
             rs.close();

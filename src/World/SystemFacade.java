@@ -144,5 +144,15 @@ public class SystemFacade implements ISystemFacade{
     public boolean validateRentCostumer(int idCustomer, int idProperty) {
         return CustomerDAO.validateRentCostumer(idCustomer, idProperty);
     }
+
+    @Override
+    public LinkedHashMap<Integer, Property> searchPropertiesFromVisitingList(int idCustomer) {
+        try {
+            return PropertyDAO.searchPropertiesFromVisitingList(idCustomer);
+        } catch (IOException ex) {
+            Logger.getLogger(SystemFacade.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
     
 }

@@ -47,4 +47,6 @@ public interface ISystemFacade {
     
     public boolean validateRentCostumer(int idCustomer, int idProperty);
     
+    public LinkedHashMap<Integer,Property> searchPropertiesFromVisitingList(int idCustomer);
+    
 }

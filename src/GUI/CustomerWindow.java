@@ -6,7 +6,12 @@
 package GUI;
 
 import World.Customer;
+import World.ISystemFacade;
+import World.Property;
+import World.SystemFacade;
+import java.util.LinkedHashMap;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +24,8 @@ public class CustomerWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form UserWindow
+     * @param customer
+     * @param LoginWindow
      */
     public CustomerWindow(Customer customer, JFrame LoginWindow) {
         initComponents();
@@ -131,8 +138,21 @@ public class CustomerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_SignOutButtonActionPerformed
 
     private void ViewVisitingListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewVisitingListButtonActionPerformed
-        this.dispose();
-        //new ViewVisitingListWindow(this.customer, this).setVisible(true);
+        
+        ISystemFacade facade = new SystemFacade(); 
+        LinkedHashMap<Integer,Property> listProperties;
+        
+        listProperties = facade.searchPropertiesFromVisitingList(this.customer.getId());
+        
+        if (listProperties == null){  
+            JOptionPane.showMessageDialog(null, "Problem retrieving the properties"); 
+        }else if (listProperties.isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "Your visiting list is empty"); 
+        }else{  
+            this.dispose();
+            new ViewVisitingListWindow(this.customer,listProperties, this).setVisible(true);
+        }
+        
     }//GEN-LAST:event_ViewVisitingListButtonActionPerformed
 
     private void ViewAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAccountButtonActionPerformed
