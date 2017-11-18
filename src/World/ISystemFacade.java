@@ -41,4 +41,6 @@ public interface ISystemFacade {
     
     public LinkedHashMap<Integer, Photo> retrievePhotos(int propertyId, String order);
     
+    public boolean scheduleVisit(Visit visit);
+    
 }

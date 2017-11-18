@@ -20,6 +20,7 @@ import java.util.Set;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,7 +45,8 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         this.customer = customer;
         this.listProperties = listProperties;
         this.CustomerWindow = CustomerWindow;
-        ImageLabel.setText("");   
+        ImageLabel.setText("");
+        this.property = null;
         
         this.stablishListProperties();  
     }
@@ -397,7 +399,10 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddToVisitingListPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToVisitingListPropertyButtonActionPerformed
-        AddToVisitingListPropertyButton.setEnabled(false);
+        this.setVisible(false);
+        this.cleanPhotoData();
+        this.clean();
+        new AddToVisitingList(this.property, this.customer, this).setVisible(true);
     }//GEN-LAST:event_AddToVisitingListPropertyButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed

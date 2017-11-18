@@ -12,6 +12,7 @@ import DataAccess.LocationDAO;
 import DataAccess.OwnerDAO;
 import DataAccess.PhotoDAO;
 import DataAccess.PropertyDAO;
+import DataAccess.VisitDAO;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -127,6 +128,11 @@ public class SystemFacade implements ISystemFacade{
             Logger.getLogger(SystemFacade.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+
+    @Override
+    public boolean scheduleVisit(Visit visit) {
+        return VisitDAO.scheduleVisit(visit);
     }
     
 }

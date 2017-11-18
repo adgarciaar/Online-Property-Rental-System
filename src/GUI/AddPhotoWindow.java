@@ -325,7 +325,7 @@ public class AddPhotoWindow extends javax.swing.JFrame {
                     
                     if (dateText.compareTo(dateobj) > 0) {                                         
                         b = false;
-                        JOptionPane.showMessageDialog(null, "Date is incorrect");       
+                        JOptionPane.showMessageDialog(null, "Invalid date");       
                     }
                 } catch (ParseException ex) {
                     Logger.getLogger(AddPhotoWindow.class.getName()).log(Level.SEVERE, null, ex);
