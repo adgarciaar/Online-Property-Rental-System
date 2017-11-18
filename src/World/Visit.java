@@ -11,6 +11,7 @@ package World;
  */
 public class Visit {
     
+    private int id;
     private int idCustomer;
     private int idProperty;
     private String dateTime;
@@ -20,7 +21,13 @@ public class Visit {
     public Visit() {
     }
 
-    public Visit(int idCustomer, int idProperty, String dateTime, String comments, String status) {
+    public Visit(int idCustomer, int idProperty) {
+        this.idCustomer = idCustomer;
+        this.idProperty = idProperty;
+    }
+
+    public Visit(int id, int idCustomer, int idProperty, String dateTime, String comments, String status) {
+        this.id = id;
         this.idCustomer = idCustomer;
         this.idProperty = idProperty;
         this.dateTime = dateTime;
@@ -28,9 +35,12 @@ public class Visit {
         this.status = status;
     }
 
-    public Visit(int idCustomer, int idProperty) {
-        this.idCustomer = idCustomer;
-        this.idProperty = idProperty;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getIdCustomer() {

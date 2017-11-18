@@ -49,4 +49,6 @@ public interface ISystemFacade {
     
     public LinkedHashMap<Integer,Property> searchPropertiesFromVisitingList(int idCustomer);
     
+    public LinkedHashMap<Integer, Visit> retrieveVisits(int idCustomer, int idProperty);
+    
 }

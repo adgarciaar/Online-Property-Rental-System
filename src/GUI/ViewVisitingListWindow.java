@@ -95,6 +95,7 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
         LocationTextField = new javax.swing.JTextField();
         TypeTextField = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        VisitComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -200,6 +201,8 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
 
         jLabel15.setText("Your visit historial on this property");
 
+        VisitComboBox.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -232,7 +235,10 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
                                             .addComponent(AddressTextField)
                                             .addComponent(DeletionStatusTextField)
                                             .addComponent(LocationTextField)
-                                            .addComponent(TypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(TypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addComponent(VisitComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(76, 76, 76)
@@ -298,9 +304,9 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
                     .addComponent(PropertiesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(ShowPropertyButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -328,7 +334,6 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
                             .addComponent(ImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(80, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
                         .addComponent(jLabel9)
                         .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -354,8 +359,10 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(DeletionStatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
+                        .addGap(63, 63, 63)
                         .addComponent(jLabel15)
+                        .addGap(18, 18, 18)
+                        .addComponent(VisitComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(RentPropertyButton)
@@ -451,6 +458,7 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
         DateTextField.setText("");
         CountryTextField.setText("");
         DescriptionTextArea.setText("");
+        VisitComboBox.removeAllItems();
     }
     
     private void showProperty(){
@@ -480,6 +488,9 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
         ShowPhotoButton.setEnabled(true); 
         
         RentPropertyButton.setEnabled(true);
+        
+        this.fillVisitPhotos();
+        VisitComboBox.setEnabled(true);
     }
     
     private void fillComboBoxPhotos(){
@@ -538,6 +549,30 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
         CountryTextField.setText("");
         DescriptionTextArea.setText("");
     }
+    
+    private void fillVisitPhotos(){
+        ISystemFacade facade = new SystemFacade(); 
+        
+        LinkedHashMap<Integer, Visit> listVisits;
+        listVisits = facade.retrieveVisits(this.customer.getId(), this.property.getId());
+        
+        Set set = listVisits.entrySet();        
+        Iterator iterator = set.iterator();
+        
+        Visit visit;
+
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();               
+            visit = (Visit) mentry.getValue();  
+            if(visit.getDateTime() == null){
+                VisitComboBox.addItem(visit.getId()+". "+visit.getStatus()+" but waiting for date assignation");
+            }else{
+                VisitComboBox.addItem(visit.getId()+". "+visit.getStatus()+" in "+visit.getDateTime());
+            }
+            
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AddressTextField;
@@ -557,6 +592,7 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
     private javax.swing.JButton ShowPhotoButton;
     private javax.swing.JButton ShowPropertyButton;
     private javax.swing.JTextField TypeTextField;
+    private javax.swing.JComboBox<String> VisitComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

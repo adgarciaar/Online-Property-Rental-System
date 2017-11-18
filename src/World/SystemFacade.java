@@ -154,5 +154,10 @@ public class SystemFacade implements ISystemFacade{
             return null;
         }
     }
+
+    @Override
+    public LinkedHashMap<Integer, Visit> retrieveVisits(int idCustomer, int idProperty) {
+        return VisitDAO.retrieveVisits(idCustomer, idProperty);
+    }
     
 }
