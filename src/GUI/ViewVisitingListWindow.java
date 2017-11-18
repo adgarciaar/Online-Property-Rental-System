@@ -237,8 +237,8 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
                                             .addComponent(LocationTextField)
                                             .addComponent(TypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(23, 23, 23)
-                                        .addComponent(VisitComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(38, 38, 38)
+                                        .addComponent(VisitComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(76, 76, 76)
@@ -291,8 +291,7 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(281, 281, 281)
                                 .addComponent(RentPropertyButton)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,30 +373,8 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RentPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentPropertyButtonActionPerformed
-        
-        if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-        
-            ISystemFacade facade = new SystemFacade();
-            boolean b = true;
-            
-            if (facade.searchVisitsByCustomerProperty(this.customer.getId(), this.property.getId()) == false){
-                b = false;
-            }
-            if (facade.validateRentCostumer(this.customer.getId(), this.property.getId()) == false){
-                b = false;
-            }
-
-            if (b == true){            
-
-                Visit visit = new Visit(this.customer.getId(),this.property.getId());
-
-                if(facade.scheduleVisit(visit) == true){
-                    this.cleanPhotoData();
-                    this.clean();
-                }
-            }
-        
-        }
+        this.setVisible(false);
+        new RentPropertyWindow(this.customer, this.property, this).setVisible(true);
     }//GEN-LAST:event_RentPropertyButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
