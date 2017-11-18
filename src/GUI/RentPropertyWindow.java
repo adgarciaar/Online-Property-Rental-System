@@ -5,8 +5,13 @@
  */
 package GUI;
 
+import World.CreditCard;
 import World.Customer;
+import World.ISystemFacade;
 import World.Property;
+import World.Rent;
+import World.RentRequest;
+import World.SystemFacade;
 import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -192,9 +197,37 @@ public class RentPropertyWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void SendFormButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendFormButtonActionPerformed
-        if(validateFields() == true){
-            if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
         
+        if(validateFields() == true){
+            
+            if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                
+                boolean b = true;
+                
+                ISystemFacade facade = new SystemFacade(); 
+                
+                CreditCard creditCard = new CreditCard();
+                
+                if (facade.addCreditCard(creditCard)){
+                    b = false;
+                }
+                
+                RentRequest rentRequest = new RentRequest();
+                
+                if (facade.addRentRequest(rentRequest)){
+                    b = false;
+                }
+                
+                Rent rent = new Rent();
+                
+                if (facade.addRent(rent)){
+                    b = false;
+                }
+                
+                if (b == false){
+                    JOptionPane.showMessageDialog(null, "There was a problem in the process. Please contact Adrian or Daniela");
+                }
+                
             }
         }       
     }//GEN-LAST:event_SendFormButtonActionPerformed

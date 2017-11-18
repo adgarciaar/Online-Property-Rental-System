@@ -51,4 +51,10 @@ public interface ISystemFacade {
     
     public LinkedHashMap<Integer, Visit> retrieveVisits(int idCustomer, int idProperty);
     
+    public boolean addCreditCard(CreditCard creditCard);
+    
+    public boolean addRentRequest(RentRequest rentRequest);
+    
+    public boolean addRent(Rent rent);
+    
 }

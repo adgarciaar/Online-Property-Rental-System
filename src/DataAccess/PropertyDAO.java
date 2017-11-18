@@ -52,6 +52,9 @@ public class PropertyDAO {
             + "where deletion_status = 'Active' and Visit.Customer_iduser = ? "
             + "order by idproperty asc";
     
+    public static final String GET_RENT_PROPERTY = "select rent from Property where idproperty = ?";
+    
+    
     public static boolean deletePropertiesByOwner(int idOwner){
         
         Connection connection = null;       
@@ -445,6 +448,46 @@ public class PropertyDAO {
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error: " + ex);
             return null;    
+            
+        }finally{
+            try {
+                ps.close();
+                connection.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                           
+            }            
+        }       
+       
+    }
+    
+    public static long getRentProperty(int idProperty){
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try{
+           
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement(GET_RENT_PROPERTY);
+            
+            ps.setInt(1, idProperty);
+            
+            rs = ps.executeQuery();
+            
+            long rent = 0;
+            
+            while (rs.next()){            
+                rent = rs.getLong("rent");
+            }            
+            
+            rs.close();
+            
+            return rent;
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
+            return 0;    
             
         }finally{
             try {

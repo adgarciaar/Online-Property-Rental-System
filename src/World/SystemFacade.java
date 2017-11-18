@@ -7,11 +7,14 @@ package World;
 
 import DataAccess.AgentDAO;
 import DataAccess.CountryDAO;
+import DataAccess.CreditCardDAO;
 import DataAccess.CustomerDAO;
 import DataAccess.LocationDAO;
 import DataAccess.OwnerDAO;
 import DataAccess.PhotoDAO;
 import DataAccess.PropertyDAO;
+import DataAccess.RentDAO;
+import DataAccess.RentRequestDAO;
 import DataAccess.VisitDAO;
 import java.io.IOException;
 import java.util.HashMap;
@@ -158,6 +161,21 @@ public class SystemFacade implements ISystemFacade{
     @Override
     public LinkedHashMap<Integer, Visit> retrieveVisits(int idCustomer, int idProperty) {
         return VisitDAO.retrieveVisits(idCustomer, idProperty);
+    }
+
+    @Override
+    public boolean addCreditCard(CreditCard creditCard) {
+        return CreditCardDAO.addCreditCard(creditCard);
+    }
+
+    @Override
+    public boolean addRentRequest(RentRequest rentRequest) {
+        return RentRequestDAO.addRentRequest(rentRequest);
+    }
+
+    @Override
+    public boolean addRent(Rent rent) {
+        return RentDAO.addRent(rent);
     }
     
 }
