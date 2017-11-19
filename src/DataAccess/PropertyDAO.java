@@ -323,8 +323,6 @@ public class PropertyDAO {
             
             query = query + " order by idproperty asc";
             
-            System.out.println(query);
-            
             ps = connection.prepareStatement(query);
                         
             ps.setString(1, type);
