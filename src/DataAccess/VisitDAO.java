@@ -49,7 +49,7 @@ public class VisitDAO {
             
             connection.commit();
             
-            JOptionPane.showMessageDialog(null, "The visit was scheduled successfully");
+            JOptionPane.showMessageDialog(null, "The visit was scheduled successfully. In the next days an agent will confirm the date of visit");
             return true;
                     
         }catch (SQLException ex) {

@@ -376,6 +376,7 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
         this.setVisible(false);
         this.cleanPhotoData();
         this.clean();
+        this.VisitComboBox.setEnabled(false);
         new RentPropertyWindow(this.customer, this.property, this).setVisible(true);
     }//GEN-LAST:event_RentPropertyButtonActionPerformed
 
