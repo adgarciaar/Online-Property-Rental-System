@@ -248,6 +248,7 @@ public class RentPropertyWindow extends javax.swing.JFrame {
                 if (b == false){
                     JOptionPane.showMessageDialog(null, "There was a problem in the process. Please contact Adrian or Daniela");
                 }else{
+                    JOptionPane.showMessageDialog(null, "Process done successfully");
                     this.dispose();
                     this.PreviousWindow.setVisible(true);
                 }
