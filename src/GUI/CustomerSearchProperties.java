@@ -156,6 +156,7 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
 
         SelectedLocationsTextArea.setColumns(20);
         SelectedLocationsTextArea.setRows(5);
+        SelectedLocationsTextArea.setEnabled(false);
         jScrollPane1.setViewportView(SelectedLocationsTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -395,9 +396,11 @@ public class CustomerSearchProperties extends javax.swing.JFrame {
                         MaximalRentTextField.getText().compareTo("") == 0) ||
                         (MinimalRentTextField.getText().compareTo("") == 0 &&
                         MaximalRentTextField.getText().compareTo("") != 0) ){
+                    
                     JOptionPane.showMessageDialog(null, "If you want to use "
                             + "rent like a criteria, is neccesary write an "
                             + "minimal and maximal desired rent ");
+                    return false;
                 }
             }
             

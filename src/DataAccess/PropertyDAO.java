@@ -299,7 +299,7 @@ public class PropertyDAO {
             }
             
             if (minRent != null && maxRent != null){
-                query = query + " and (rent between = ? and ?)";                
+                query = query + " and (rent between ? and ?)";                
             }else{
                 minRent = "0";
                 maxRent = "1";
@@ -314,14 +314,16 @@ public class PropertyDAO {
                 
                 for (int j=0; j<n; j++){         
                     if (j == n-1){
-                        query = query + " location_idlocation = ?)";
+                        query = query + "location_idlocation = ?)";
                     }else{
-                        query = query + " location_idlocation = ? or ";
+                        query = query + "location_idlocation = ? or ";
                     }                                           
                 }                
             }
             
             query = query + " order by idproperty asc";
+            
+            System.out.println(query);
             
             ps = connection.prepareStatement(query);
                         
