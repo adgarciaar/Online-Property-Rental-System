@@ -41,7 +41,7 @@ public class CustomerDAO {
             + "then 'false' else 'true' end as confirmation from customer "
             + "where iduser = ? and maximum_rent >= (select rent from property where idproperty = ?)";
     
-    public static final String UPDATE_EMAIL = "update Customer set email = ? where iduser = ?";
+    public static final String UPDATE_EMAIL = "update Customer set email_address = ? where iduser = ?";
     
     
     public static Customer searchCustomer(String username, String password){

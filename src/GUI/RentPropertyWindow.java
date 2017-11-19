@@ -312,7 +312,7 @@ public class RentPropertyWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "You have to select the month of the expiry date");
         }        
         
-        if ((String)MonthComboBox.getSelectedItem() == "Year"){
+        if ((String)YearComboBox.getSelectedItem() == "Year"){
             b = false;
             JOptionPane.showMessageDialog(null, "You have to select the year of the expiry date");
         }
