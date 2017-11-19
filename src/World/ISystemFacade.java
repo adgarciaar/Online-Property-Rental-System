@@ -57,4 +57,8 @@ public interface ISystemFacade {
     
     public boolean addRent(Rent rent);
     
+    public boolean updateEmail(int idCustomer, String email);
+    
+    public int getLastIdRentRequest(int idCustomer, int idProperty);
+    
 }

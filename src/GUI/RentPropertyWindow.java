@@ -45,6 +45,8 @@ public class RentPropertyWindow extends javax.swing.JFrame {
             YearComboBox.addItem(Integer.toString(year+i));
         }
         
+        EmailTextField.setText(this.customer.getEmail());
+        
     }
 
     /**
@@ -126,10 +128,7 @@ public class RentPropertyWindow extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4))
-                                .addGap(134, 134, 134)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(EmailTextField)
-                                    .addComponent(TypeCCComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(SendFormButton)
@@ -146,7 +145,9 @@ public class RentPropertyWindow extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                                                 .addComponent(YearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(NameHolderTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(CCTextField, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                            .addComponent(CCTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(EmailTextField)
+                                            .addComponent(TypeCCComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(72, 72, 72)
                                         .addComponent(CancelButton)
@@ -206,26 +207,49 @@ public class RentPropertyWindow extends javax.swing.JFrame {
                 
                 ISystemFacade facade = new SystemFacade(); 
                 
+                facade.updateEmail(this.customer.getId(), EmailTextField.getText());
+                
                 CreditCard creditCard = new CreditCard();
                 
-                if (facade.addCreditCard(creditCard)){
+                creditCard.setType((String)TypeCCComboBox.getSelectedItem());
+                creditCard.setNumber(Long.parseLong(CCTextField.getText()));
+                creditCard.setNameHolder(NameHolderTextField.getText());
+                creditCard.setExpiryMonth( Integer.parseInt( (String)MonthComboBox.getSelectedItem() ) );
+                creditCard.setExpiryYear(Integer.parseInt( (String)YearComboBox.getSelectedItem() ) );
+                
+                if (facade.addCreditCard(creditCard) == false){
                     b = false;
                 }
                 
                 RentRequest rentRequest = new RentRequest();
                 
-                if (facade.addRentRequest(rentRequest)){
+                rentRequest.setCardNumber(creditCard.getNumber());
+                rentRequest.setDuration(1);
+                rentRequest.setIdCustomer(this.customer.getId());
+                rentRequest.setIdProperty(this.property.getId());
+                
+                if (facade.addRentRequest(rentRequest) == false){
                     b = false;
                 }
                 
+                rentRequest.setId(facade.getLastIdRentRequest(this.customer.getId(), this.property.getId()));
+                
                 Rent rent = new Rent();
                 
-                if (facade.addRent(rent)){
+                rent.setDuration(rentRequest.getDuration());
+                rent.setIdCustomer(this.customer.getId());
+                rent.setIdProperty(this.property.getId());
+                rent.setIdRentRequest(rentRequest.getId());
+                
+                if (facade.addRent(rent) == false){
                     b = false;
                 }
                 
                 if (b == false){
                     JOptionPane.showMessageDialog(null, "There was a problem in the process. Please contact Adrian or Daniela");
+                }else{
+                    this.dispose();
+                    this.PreviousWindow.setVisible(true);
                 }
                 
             }

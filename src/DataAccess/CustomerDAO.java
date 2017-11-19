@@ -41,6 +41,8 @@ public class CustomerDAO {
             + "then 'false' else 'true' end as confirmation from customer "
             + "where iduser = ? and maximum_rent >= (select rent from property where idproperty = ?)";
     
+    public static final String UPDATE_EMAIL = "update Customer set email = ? where iduser = ?";
+    
     
     public static Customer searchCustomer(String username, String password){
         
@@ -259,6 +261,38 @@ public class CustomerDAO {
             }
         }
         
+    }   
+    
+    public static boolean updateEmail(int idCustomer, String email){
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        
+        try{
+            connection = DBConnection.getConnection();
+            
+            ps = connection.prepareStatement(UPDATE_EMAIL);            
+                      
+            ps.setString(1, email);    
+            ps.setInt(2, idCustomer);
+            
+            ps.executeUpdate();
+            
+            connection.commit();            
+            
+            return true;
+                    
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex); 
+            return false;
+        }finally{
+            try{
+                ps.close();
+                connection.close();
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error: " + ex);               
+            }
+        }         
     }
     
 }

@@ -177,5 +177,15 @@ public class SystemFacade implements ISystemFacade{
     public boolean addRent(Rent rent) {
         return RentDAO.addRent(rent);
     }
+
+    @Override
+    public boolean updateEmail(int idCustomer, String email) {
+        return CustomerDAO.updateEmail(idCustomer, email);
+    }
+
+    @Override
+    public int getLastIdRentRequest(int idCustomer, int idProperty) {
+        return RentRequestDAO.getLastIdRentRequest(idCustomer, idProperty);
+    }
     
 }

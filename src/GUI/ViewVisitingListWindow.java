@@ -374,6 +374,8 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
 
     private void RentPropertyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentPropertyButtonActionPerformed
         this.setVisible(false);
+        this.cleanPhotoData();
+        this.clean();
         new RentPropertyWindow(this.customer, this.property, this).setVisible(true);
     }//GEN-LAST:event_RentPropertyButtonActionPerformed
 
