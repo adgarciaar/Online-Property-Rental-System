@@ -471,8 +471,8 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
         
         RentPropertyButton.setEnabled(true);
         
-        this.fillVisitPhotos();
-        VisitComboBox.setEnabled(true);
+        this.fillVisitComboBox();
+        
     }
     
     private void fillComboBoxPhotos(){
@@ -548,27 +548,34 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
         DescriptionTextArea.setText("");
     }
     
-    private void fillVisitPhotos(){
+    private void fillVisitComboBox(){
         
         ISystemFacade facade = new SystemFacade(); 
         
         LinkedHashMap<Integer, Visit> listVisits;
         listVisits = facade.retrieveVisits(this.customer.getId(), this.property.getId());
         
-        Set set = listVisits.entrySet();        
-        Iterator iterator = set.iterator();
-        
-        Visit visit;
-
-        while(iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry)iterator.next();               
-            visit = (Visit) mentry.getValue();  
-            if(visit.getDateTime() == null){
-                VisitComboBox.addItem(visit.getId()+". "+visit.getStatus()+" but waiting for date assignation");
-            }else{
-                VisitComboBox.addItem(visit.getId()+". "+visit.getStatus()+" in "+visit.getDateTime());
-            }
+        if(listVisits == null){
+            JOptionPane.showMessageDialog(null, "Problem retrieving the visit historial");
+            VisitComboBox.setEnabled(false);
+        }else{ 
             
+            Set set = listVisits.entrySet();        
+            Iterator iterator = set.iterator();
+
+            Visit visit;
+
+            while(iterator.hasNext()) {
+                Map.Entry mentry = (Map.Entry)iterator.next();               
+                visit = (Visit) mentry.getValue();  
+                if(visit.getDateTime() == null){
+                    VisitComboBox.addItem(visit.getId()+". "+visit.getStatus()+" but waiting for date assignation");
+                }else{
+                    VisitComboBox.addItem(visit.getId()+". "+visit.getStatus()+" in "+visit.getDateTime());
+                }
+                VisitComboBox.setEnabled(true);
+            }
+        
         }
         
     }
