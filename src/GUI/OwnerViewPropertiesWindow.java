@@ -386,8 +386,14 @@ public class OwnerViewPropertiesWindow extends javax.swing.JFrame {
         while(iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry)iterator.next();               
             prop = (Property) mentry.getValue();
+            
+            String nameLocation = LocationDAO.retrieveNameLocation(prop.getIdLocation());
+            if (nameLocation == null){
+                nameLocation = "Problem retrieving location";
+            }
+            
             PropertiesComboBox.addItem(prop.getId()+". "+prop.getType()
-                    +" located in "+LocationDAO.retrieveNameLocation(prop.getIdLocation())
+                    +" located in "+nameLocation
                     +" with "+prop.getNumber_rooms()+" rooms and rent of "
                     +prop.getRent());            
         }

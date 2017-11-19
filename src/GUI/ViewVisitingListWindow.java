@@ -413,8 +413,14 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
         while(iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry)iterator.next();               
             prop = (Property) mentry.getValue();
+            
+            String nameLocation = LocationDAO.retrieveNameLocation(prop.getIdLocation());
+            if (nameLocation == null){
+                nameLocation = "Problem retrieving location";
+            }
+            
             PropertiesComboBox.addItem(prop.getId()+". "+prop.getType()
-                    +" located in "+LocationDAO.retrieveNameLocation(prop.getIdLocation())
+                    +" located in "+nameLocation
                     +" with "+prop.getNumber_rooms()+" rooms and rent of "
                     +prop.getRent());            
         }
@@ -518,7 +524,13 @@ public class ViewVisitingListWindow extends javax.swing.JFrame {
         FilenameTextField.setText(photo.getFilename());
         DateTextField.setText(photo.getDatephoto());
         ISystemFacade facade = new SystemFacade(); 
-        CountryTextField.setText(facade.retrieveNameCountry(photo.getCountryId()));
+        
+        String nameCountry  = facade.retrieveNameCountry(photo.getCountryId());
+        if(nameCountry == null){
+            nameCountry = "Problem retrieving the name country";
+        }
+        
+        CountryTextField.setText(nameCountry);
         DescriptionTextArea.setText(photo.getDescription());
         
         BufferedImage bufImage = (BufferedImage) photo.getImage();  
