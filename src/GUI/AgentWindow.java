@@ -6,7 +6,12 @@
 package GUI;
 
 import World.Agent;
+import World.ISystemFacade;
+import World.Property;
+import World.SystemFacade;
+import java.util.LinkedHashMap;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,6 +45,7 @@ public class AgentWindow extends javax.swing.JFrame {
         WelcomeLabel = new javax.swing.JLabel();
         CreateAccountButton = new javax.swing.JButton();
         SignOutButton = new javax.swing.JButton();
+        PendientesAprobacionButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +65,13 @@ public class AgentWindow extends javax.swing.JFrame {
             }
         });
 
+        PendientesAprobacionButton.setText("Ver propiedades pendientes de aprobación");
+        PendientesAprobacionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PendientesAprobacionButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,23 +79,27 @@ public class AgentWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(CreateAccountButton)
-                        .addGap(45, 45, 45)
-                        .addComponent(SignOutButton))
-                    .addComponent(WelcomeLabel))
-                .addContainerGap(59, Short.MAX_VALUE))
+                    .addComponent(WelcomeLabel)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(CreateAccountButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SignOutButton))
+                        .addComponent(PendientesAprobacionButton)))
+                .addGap(43, 51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(WelcomeLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CreateAccountButton)
                     .addComponent(SignOutButton))
-                .addGap(56, 56, 56))
+                .addGap(36, 36, 36)
+                .addComponent(PendientesAprobacionButton)
+                .addGap(48, 48, 48))
         );
 
         pack();
@@ -98,9 +115,26 @@ public class AgentWindow extends javax.swing.JFrame {
         this.LoginWindow.setVisible(true);
     }//GEN-LAST:event_SignOutButtonActionPerformed
 
+    private void PendientesAprobacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PendientesAprobacionButtonActionPerformed
+        ISystemFacade facade = new SystemFacade(); 
+        
+        LinkedHashMap<Integer,Property> listProperties;
+        listProperties = facade.buscarPropiedadesPorAprobar();
+        
+        if (listProperties == null){  
+            JOptionPane.showMessageDialog(null, "Problema trayendo las propiedades"); 
+        }else if (listProperties.isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "No hay propiedades pendientes de aprobacion"); 
+        }else{  
+            this.dispose();
+            new VerPendientesAprobacionWindow(this.agent,listProperties,this).setVisible(true);
+        }
+    }//GEN-LAST:event_PendientesAprobacionButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreateAccountButton;
+    private javax.swing.JButton PendientesAprobacionButton;
     private javax.swing.JButton SignOutButton;
     private javax.swing.JLabel WelcomeLabel;
     // End of variables declaration//GEN-END:variables

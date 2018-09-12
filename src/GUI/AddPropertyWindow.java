@@ -202,7 +202,7 @@ public class AddPropertyWindow extends javax.swing.JFrame {
             property = new Property((String)TypeComboBox.getSelectedItem(),
                     AddressTextField.getText(),
                     Integer.parseInt(NumberRoomsTextField.getText()),
-                    Long.parseLong(RentTextField.getText()),"Active",
+                    Long.parseLong(RentTextField.getText()),"pendiente de aprobacion",
                     idLocation,this.owner.getId());
 
             new AddPhotoWindow(property, this.OwnerWindow, 1).setVisible(true);

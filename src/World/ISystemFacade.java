@@ -61,4 +61,10 @@ public interface ISystemFacade {
     
     public int getLastIdRentRequest(int idCustomer, int idProperty);
     
+    public LinkedHashMap<Integer,Property> buscarPropiedadesPorAprobar();
+    
+    public String traerNombrePropietario(int idPropietario);
+    
+    public boolean activarPropiedadPendiente(int idPropiedad);
+    
 }

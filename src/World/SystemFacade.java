@@ -187,5 +187,25 @@ public class SystemFacade implements ISystemFacade{
     public int getLastIdRentRequest(int idCustomer, int idProperty) {
         return RentRequestDAO.getLastIdRentRequest(idCustomer, idProperty);
     }
+
+    @Override
+    public LinkedHashMap<Integer, Property> buscarPropiedadesPorAprobar() {
+        try {
+            return PropertyDAO.buscarPropiedadesPorAprobar();
+        } catch (IOException ex) {
+            Logger.getLogger(SystemFacade.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    @Override
+    public String traerNombrePropietario(int idPropietario) {
+        return OwnerDAO.traerNombrePropietario(idPropietario);
+    }
+
+    @Override
+    public boolean activarPropiedadPendiente(int idPropiedad) {
+        return PropertyDAO.activarPropiedadPendiente(idPropiedad);
+    }
     
 }

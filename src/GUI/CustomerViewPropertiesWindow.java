@@ -485,12 +485,14 @@ public class CustomerViewPropertiesWindow extends javax.swing.JFrame {
         
         Set set = this.listProperties.entrySet();        
         Iterator iterator = set.iterator();
+        
+        ISystemFacade facade = new SystemFacade(); 
 
         while(iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry)iterator.next();               
             prop = (Property) mentry.getValue();
             
-            String nameLocation = LocationDAO.retrieveNameLocation(prop.getIdLocation());
+            String nameLocation = facade.retrieveNameLocation(prop.getIdLocation());
             if (nameLocation == null){
                 nameLocation = "Problem retrieving location";
             }

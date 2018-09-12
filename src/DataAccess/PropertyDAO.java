@@ -30,7 +30,7 @@ public class PropertyDAO {
     
     public static final String ADD_PROPERTY = "insert into property (type,address,"
             + "number_rooms,rent,deletion_status,location_idlocation,owner_iduser) "
-            + "values (?, ?, ?, ?, 'Active', ?, ?)";
+            + "values (?, ?, ?, ?, 'pendiente de aprobacion', ?, ?)";
     
     public static final String SEARCH_LAST_ADDED_PROPERTY = "select MAX(idproperty) "
             + "from Property";
@@ -53,6 +53,13 @@ public class PropertyDAO {
             + "order by idproperty asc";
     
     public static final String GET_RENT_PROPERTY = "select rent from Property where idproperty = ?";
+    
+    public static final String BUSCAR_PROPIEDADES_POR_APROBAR = "select idproperty, "
+            + "type,address,number_rooms,rent,deletion_status,location_idlocation, owner_iduser "
+            + "from Property where deletion_status = 'pendiente de aprobacion' ";
+    
+    public static final String ACTIVAR_PROPIEDAD_PENDIENTE = "update Property set deletion_status"
+            + " = 'Active' where idproperty = ?";
     
     
     public static boolean deletePropertiesByOwner(int idOwner){
@@ -498,6 +505,102 @@ public class PropertyDAO {
             }            
         }       
        
+    }
+    
+    public static LinkedHashMap<Integer,Property> buscarPropiedadesPorAprobar() throws IOException{
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try{
+           
+            connection = DBConnection.getConnection();
+            
+            ps = connection.prepareStatement(BUSCAR_PROPIEDADES_POR_APROBAR);
+            
+            rs = ps.executeQuery();
+            
+            LinkedHashMap<Integer,Property> listProperties = new LinkedHashMap<>();
+            
+            Property property;
+            
+            while (rs.next()){
+                
+                property = new Property();
+                
+                property.setId(rs.getInt("idproperty"));
+                property.setType(rs.getString("type"));
+                property.setAddress(rs.getString("address"));
+                property.setNumber_rooms(rs.getInt("number_rooms"));
+                property.setRent(rs.getLong("rent"));
+                property.setDeletion_status(rs.getString("deletion_status"));
+                property.setIdLocation(rs.getInt("location_idlocation"));
+                property.setIdOwner(rs.getInt("owner_iduser"));
+                
+                LinkedHashMap<Integer, Photo> listPhotos;
+                listPhotos = PhotoDAO.retrievePhotos(property.getId(),"Id");
+                
+                if(listPhotos == null){
+                    listPhotos = new LinkedHashMap<>();
+                }
+                
+                property.setPhotos(listPhotos);
+                
+                listProperties.put(property.getId(), property);
+                
+            }  
+            
+            rs.close();
+            
+            return listProperties;            
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
+            return null;    
+            
+        }finally{
+            try {
+                ps.close();
+                connection.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                           
+            }            
+        }       
+       
+    }
+    
+    public static boolean activarPropiedadPendiente(int idPropiedad){
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;   
+        
+        try{
+            connection = DBConnection.getConnection();
+            
+            ps = connection.prepareStatement(ACTIVAR_PROPIEDAD_PENDIENTE);
+                      
+            ps.setInt(1, idPropiedad);                
+            
+            ps.executeUpdate();
+            
+            connection.commit();
+            
+            JOptionPane.showMessageDialog(null, "La propiedad fue activada correctamente"); 
+            return true;
+                    
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex);             
+            return false;
+        }finally{
+            try{
+                ps.close();
+                connection.close();
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error: " + ex);               
+            }
+        }
     }
     
 }

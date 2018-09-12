@@ -37,6 +37,9 @@ public class OwnerDAO {
     public static final String DELETE_OWNER = "update Property_Owner set "
             + "deletion_status = 'Deleted' where iduser = ?";
     
+    public static final String TRAER_NOMBRE_PROPIETARIO = "select name from "
+            + "Property_Owner where iduser = ?";
+    
     public static Owner searchOwner(String username, String password){
         
         Connection connection = null;       
@@ -213,6 +216,44 @@ public class OwnerDAO {
         }else{
             return false;
         }
+    }
+    
+    public static String traerNombrePropietario(int idPropietario){
+        
+        Connection connection = null;       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try{
+           
+            connection = DBConnection.getConnection();
+            ps = connection.prepareStatement(TRAER_NOMBRE_PROPIETARIO);     
+            ps.setInt(1, idPropietario);
+            
+            rs = ps.executeQuery();
+
+            String nombrePropietario = null;      
+            
+            while (rs.next()){  
+                nombrePropietario = rs.getString("name");
+            }   
+            
+            rs.close();     
+            
+            return nombrePropietario;
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error: " + ex);
+            return null;
+        }finally{
+            try {
+                ps.close();
+                connection.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex);                           
+            }            
+        }
+        
     }
     
 }
